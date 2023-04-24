@@ -1,4 +1,4 @@
-# spotifyClone
+# Description:
 It is a clone of the spotify website
 ## Tools used:
 - **reactjs** as js framework
