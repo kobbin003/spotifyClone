@@ -1,58 +1,92 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
+import {
+	SideBar,
+	Icon,
+	LogoHeader,
+	Section,
+	UnorderedList,
+	Footer,
+	FooterSection,
+	Language,
+	FooterContainer,
+} from "./style";
 
-const Button = styled.button`
-	background: transparent;
-	border-radius: 3px;
-	border: 2px solid palevioletred;
-	color: palevioletred;
-	margin: 0 1em;
-	padding: 0.25em 1em;
-`;
-const SideBar = styled.div`
-	position: absolute;
-	height: 100vh;
-	width: 20wh;
-	left: 0;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: space-evenly;
-	background: #000000;
-`;
-const UnorderedList = styled.ul`
-	list-style: none;
-`;
 const Sidebar = () => {
 	return (
+		// <Button primary="#007bff">Primary Button</Button>
+
 		<SideBar>
-			<section>Logo</section>
-			<section>
+			<LogoHeader>
+				<Icon
+					src="/icons/spotify.svg"
+					spotify
+				></Icon>
+				<span>Spotify</span>
+			</LogoHeader>
+			<Section>
 				<UnorderedList>
 					<li>
-						<Button>Home</Button>
+						<Icon src="/icons/home.svg"></Icon>
+						<span>Home</span>
 					</li>
-					<li>Search</li>
-					<li>Your Library</li>
+					<li>
+						<Icon src="/icons/search.svg"></Icon>
+						<span>Search</span>
+					</li>
+					<li>
+						<Icon src="/icons/library.svg"></Icon>
+						<span>Your Library</span>
+					</li>
+					<li>
+						<Icon src="/icons/add-playlist.svg"></Icon>
+						<span>Create Playlist</span>
+					</li>
+					<li>
+						<Icon src="/icons/heartsquare.svg"></Icon>
+						<span>Liked songs</span>
+					</li>
 				</UnorderedList>
-			</section>
-			<section>
-				<UnorderedList>
-					<li>Create Playlist</li>
-					<li>Liked songs</li>
-				</UnorderedList>
-			</section>
-			<section>
-				<UnorderedList>
-					<li>Legal</li>
-					<li>Privacy Center</li>
-					<li>Privacy Policy</li>
-					<li>Cookies</li>
-					<li>About Ads</li>
-					<li>Cookies</li>
-				</UnorderedList>
-			</section>
+			</Section>
+			<FooterContainer>
+				<Footer>
+					<UnorderedList>
+						<FooterSection>
+							<li>
+								<span>Legal</span>
+							</li>
+							<li>
+								<span>Privacy Center</span>
+							</li>
+						</FooterSection>
+						<FooterSection>
+							<li>
+								<span>Privacy Policy</span>
+							</li>
+							<li>
+								<span>Cookies</span>
+							</li>
+							<li>
+								<span>About Ads</span>
+							</li>
+						</FooterSection>
+						<FooterSection>
+							<li>
+								<span>Cookies</span>
+							</li>
+						</FooterSection>
+					</UnorderedList>
+				</Footer>
+				<Language>
+					<button>
+						<Icon
+							src="/public/icons/globe.svg"
+							globe
+						/>
+						<span>English</span>
+					</button>
+				</Language>
+			</FooterContainer>
 		</SideBar>
 	);
 };
