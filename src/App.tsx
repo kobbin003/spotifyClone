@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+// import "./App.css";
 import useFetch from "./hooks/useFetch";
 import Sidebar from "./components/sidebar/Sidebar";
 import styled from "styled-components";
+import NavBar from "./components/NavBar/NavBar";
+import { AppLayout } from "./App_style";
 
 function App() {
 	// const url = "https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb";
@@ -12,9 +14,10 @@ function App() {
 	// data && console.log(data);
 	// const Container = styled.div``;
 	return (
-		<>
+		<AppLayout>
 			<Sidebar></Sidebar>
-		</>
+			<NavBar></NavBar>
+		</AppLayout>
 	);
 }
 

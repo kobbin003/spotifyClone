@@ -80,7 +80,7 @@ const Sidebar = () => {
 				<Language>
 					<button>
 						<Icon
-							src="/public/icons/globe.svg"
+							src="/icons/globe.svg"
 							globe
 						/>
 						<span>English</span>

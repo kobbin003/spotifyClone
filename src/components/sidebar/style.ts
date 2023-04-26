@@ -23,11 +23,13 @@ export const Icon = styled.img<IconProp>`
 	padding-right: ${(props) => (props.spotify ? "0.2em" : "0.9em")};
 `;
 export const SideBar = styled.div`
-	position: absolute;
+	position: relative;
 	height: 100vh;
 	width: 250px;
-	left: 0;
-	top: 0;
+	/* left: 0;
+	top: 0; */
+	grid-column: 1/2;
+	grid-row: 1/4;
 	background: #000000;
 	line-height: 1.7rem;
 	color: #d3d3d3;
