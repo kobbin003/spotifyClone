@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 // import "./App.css";
 import useFetch from "./hooks/useFetch";
-import Sidebar from "./components/sidebar/Sidebar";
-import styled from "styled-components";
-import NavBar from "./components/NavBar/NavBar";
-import { AppLayout } from "./App_style";
-
+import { GridItem, LoggedInAppLayout, LoggedOutAppLayout } from "./App.style";
+import LoggedInPage from "./components/pages/LoggedInPage";
+import LoggedOutPage from "./components/pages/LoggedOutPage";
 function App() {
 	// const url = "https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb";
 	// const accessToken =
@@ -13,11 +11,20 @@ function App() {
 	// const [data, error, isLoading] = useFetch(url, accessToken);
 	// data && console.log(data);
 	// const Container = styled.div``;
+	const [isLoggedIn, setisLoggedIn] = useState(true);
 	return (
-		<AppLayout>
-			<Sidebar></Sidebar>
-			<NavBar></NavBar>
-		</AppLayout>
+		// {isLoggedIn?}
+		<>
+			{isLoggedIn ? (
+				<LoggedInAppLayout>
+					<LoggedInPage></LoggedInPage>
+				</LoggedInAppLayout>
+			) : (
+				<LoggedOutAppLayout>
+					<LoggedOutPage></LoggedOutPage>
+				</LoggedOutAppLayout>
+			)}
+		</>
 	);
 }
 
