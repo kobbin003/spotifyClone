@@ -12,31 +12,21 @@ import {
 	UnorderedList,
 } from "./style";
 
-const Sidebar = () => {
-	const [width, setWidth] = useState(14.5);
-	const [isDraggable, setIsDraggable] = useState(false);
-	// const handleMouseDown = () => {
-	// 	!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
-	// 	console.log("mouse enter", isDraggable);
-	// };
-	const handleClick = () => {
-		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
-		console.log("mouse enter", isDraggable);
-	};
-	const handleMouseMove = (e: any) => {
-		if (isDraggable) {
-			const newWidth = e.clientX / 16;
-			setWidth(newWidth);
-			console.log("mouse move", isDraggable, e);
-		}
-	};
-	// const handleMouseUp = () => {
-	// 	setIsDraggable(false);
-	// 	console.log("Mouse leave", isDraggable);
-	// };
+export type sideBarProps = {
+	width: number;
+	widthHandleDragger: number;
+	handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	handleMouseMove: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+const Sidebar = ({
+	width,
+	widthHandleDragger,
+	handleClick,
+	handleMouseMove,
+}: sideBarProps): JSX.Element => {
 	return (
 		<>
-			<Container width={`${width}`}>
+			<Container width={width}>
 				<Home>
 					<UnorderedList>
 						<li>
@@ -56,10 +46,10 @@ const Sidebar = () => {
 							<a href="">Your Library</a>
 							<CreatePlaylist>
 								<button>
-									<img src="/public/icons/AddLibrary/add.svg" />
+									<img src="/icons/AddLibrary/add.svg" />
 								</button>
 								<button>
-									<img src="/public/icons/AddLibrary/right-arrow.svg" />
+									<img src="/icons/AddLibrary/right-arrow.svg" />
 								</button>
 							</CreatePlaylist>
 						</li>
@@ -80,10 +70,9 @@ const Sidebar = () => {
 					</ActionCards>
 				</Library>
 				<DraggableHandle
-					// left={`${width}`}
-					// onMouseDown={handleMouseDown}
-					onMouseMove={handleMouseMove}
 					onClick={handleClick}
+					onMouseMove={handleMouseMove}
+					widthHandleDragger={widthHandleDragger}
 				>
 					<div></div>
 					<Dragger>
@@ -97,6 +86,5 @@ const Sidebar = () => {
 		</>
 	);
 };
-// #4b49492c
 
-export default Sidebar;
+export { Sidebar as default };

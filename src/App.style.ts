@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const LoggedInAppLayout = styled.div`
-	display: grid;
-	grid-template-rows: 100vh;
-	grid-template-columns: minmax(20px, auto) auto;
-	column-gap: 100px;
-	background-color: var(--black-darkest);
+	/* display: flex; */
+	/* overflow-x: hidden; */
+
+	/* width: 600px; */
 `;
 export const LoggedOutAppLayout = styled.div`
 	display: grid;

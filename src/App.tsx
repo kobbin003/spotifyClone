@@ -13,18 +13,18 @@ function App() {
 	// const Container = styled.div``;
 	const [isLoggedIn, setisLoggedIn] = useState(true);
 	return (
-		// {isLoggedIn?}
-		<>
-			{isLoggedIn ? (
-				<LoggedInAppLayout>
-					<LoggedInPage></LoggedInPage>
-				</LoggedInAppLayout>
-			) : (
-				<LoggedOutAppLayout>
-					<LoggedOutPage></LoggedOutPage>
-				</LoggedOutAppLayout>
-			)}
-		</>
+		<></>
+		// <>
+		// 	{isLoggedIn ? (
+		// 		<LoggedInAppLayout>
+		// 			<LoggedInPage></LoggedInPage>
+		// 		</LoggedInAppLayout>
+		// 	) : (
+		// 		<LoggedOutAppLayout>
+		// 			<LoggedOutPage></LoggedOutPage>
+		// 		</LoggedOutAppLayout>
+		// 	)}
+		// </>
 	);
 }
 

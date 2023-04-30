@@ -1,8 +1,13 @@
 import styled from "styled-components";
-
-export const Container = styled.section<{ width: string }>`
+import { sideBarProps } from "./Sidebar";
+export type DraggableProps = {
+	widthHandleDragger: number;
+	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	onMouseMove: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+export const Container = styled.section<{ width: number }>`
 	width: ${(prop) => prop.width}rem;
-	background-color: var(--black-darkest);
+	/* background-color: var(--black-darkest); */
 	position: fixed;
 	height: 100vh;
 	top: 0;
@@ -11,20 +16,22 @@ export const Container = styled.section<{ width: string }>`
 	display: flex;
 	flex-direction: column;
 	min-width: 15em;
+	max-width: 60vw;
 	color: var(--font-grey);
 `;
 
-export const DraggableHandle = styled.div<{ left?: string }>`
+export const DraggableHandle = styled.button<DraggableProps>`
+	border: none;
 	position: absolute;
 	top: 0;
-	right: -25px;
-	width: 50px;
+	right: -${(prop) => prop.widthHandleDragger / 2}em;
+	width: ${(prop) => prop.widthHandleDragger}em;
 	background-color: transparent;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: -5;
+	/* z-index: -5; */
 	div:nth-child(1) {
 		height: 100%;
 		background-color: transparent;

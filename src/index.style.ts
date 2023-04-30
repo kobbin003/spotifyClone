@@ -57,12 +57,7 @@ export const GlobalStyle = createGlobalStyle`
 * {
 	margin: 0;
 	padding: 0;
-	/* font-family: "Times New Roman", Times, serif; */
-	/* font-family: "Nunito Sans", sans-serif; */
 	font-family: "MyFont", "Times New Roman";
-	/* color: #ffffff; */
-	/* font-weight: 200; */
-	/* font-size: xx-small; */
 }
 :root {
 	font-size: 16px;
