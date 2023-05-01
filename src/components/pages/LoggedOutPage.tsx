@@ -7,6 +7,7 @@ export const LoremIpsum = styled.div`
 	grid-column: 2/3;
 	grid-row: 2/3;
 `;
+
 const LoggedOutPage = () => {
 	return (
 		<>

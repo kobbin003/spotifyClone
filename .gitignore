@@ -22,3 +22,4 @@ src/styled-system-trial.tsx
 *.njsproj
 *.sln
 *.sw?
+.env
