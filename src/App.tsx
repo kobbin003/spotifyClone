@@ -16,6 +16,7 @@ function App() {
 	const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
 	const [data, error, isLoading] = useGetAccessToken();
 	console.log(data, error, isLoading);
+
 	const handleOnClickLogin = (
 		e: React.MouseEvent<HTMLAnchorElement>,
 		isLoggedIn: boolean
