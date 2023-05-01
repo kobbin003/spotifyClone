@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+	id="app"
+	lang="en"
+	dir="ltr"
+>
+	<head>
+		<meta charset="utf-8" />
+		<title>Login - Spotify</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no"
+		/>
+		<base href="/" />
+		<link
+			rel="icon"
+			href="https://accounts.scdn.co/sso/images/favicon.ace4d8543bbb017893402a1e9d1ac1fa.ico"
+		/>
+		<link
+			rel="preload"
+			href="https://encore.scdn.co/1.2.3/CircularSpotify-UI-Latin-OS2v3-Light.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="true"
+		/>
+		<link
+			rel="preload"
+			href="https://encore.scdn.co/1.2.3/CircularSpotify-UI-Latin-OS2v3-Book.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="true"
+		/>
+		<link
+			rel="preload"
+			href="https://encore.scdn.co/1.2.3/CircularSpotify-UI-Latin-OS2v3-Bold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="true"
+		/>
+		<link
+			rel="preload"
+			href="https://encore.scdn.co/1.2.3/CircularSpotify-UI-Latin-OS2v3-Black.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="true"
+		/>
+		<script
+			defer
+			src="https://accounts.scdn.co/sso/js/indexReact.9e070543b49bf8bfd635.js"
+			sp-bootstrap
+		></script>
+		<meta
+			id="bootstrap-data"
+			sp-bootstrap-data='{" phoneFeatureEnabled":true,"
+      previewEnabled":false," user":false," tpaState":"
+      AQClaGm3S9lTrujOHsGaCQ0C1Ylvza5RhaaP+pt/mSAJHsmqHt6XWZmttFoAVP7EQHANcNzFcnUl0cez+ntQDmYNULSMHOtS2rBf64m8U4hxXvSD6/LLOwRLVq2tXtlQZntfPa34LSeFAETXpGEHWjC53eM3DnDO2n9nHymTInd2UbHPBCMWled+uSvCrQDhCwEmPCgwDtqlIraKGoEav0GBVojKQ6wdvl+Z/Fj7PPP8T796caneTHEr6cTb3bFw+ZpIPDuP1oVkay1B1KpUnzlJ/2Bh4ffvseCUN3eZNgc4oexuScgPzrjBwU4NSp94WYBCRqwp86mkQdjd1cnM65Gtyv21c6rk4kGTI+YPtXFGYCmr8ghh73zvNid5i079VM+tHDVum9isrmtD5VMPt4sSniywJcvcdaisjmUoHMWS60GZokmINkgasAjoxcOg/3aMSyaBHY6fogG6mF692ZCMyUhMdEa/OX1srmF48HlWrM7KxXKgQOMTQ83BJ/lW1uRV","
+      geoLocationCountryCode":" IN"," state":""," flowId":"
+      f352d479-3702-4e13-a38e-6aaa9b369325:1682950114"," BON":[" 0","
+      0",1890937713]}'
+			sp-component="login"
+			sp-translations-data="eyJlcnJvclRpdGxlIjoiRXJyb3IiLCJsb2dpblRpdGxlIjoiTG9naW4iLCJmb3Jnb3RZb3VyUGFzc3dvcmRVc2VybmFtZSI6IkZvcmdvdCB5b3VyIHBhc3N3b3JkPyIsImRvbnRIYXZlQW5BY2NvdW50IjoiRG9uJ3QgaGF2ZSBhbiBhY2NvdW50PyIsImlucHV0VXNlcm5hbWUiOiJFbWFpbCBhZGRyZXNzIG9yIHVzZXJuYW1lIiwiaW5wdXRFbWFpbE9yVXNlcm5hbWUiOiJFbWFpbCBvciB1c2VybmFtZSIsImlucHV0UGFzc3dvcmQiOiJQYXNzd29yZCIsImNoZWNrYm94UmVtZW1iZXJNZSI6IlJlbWVtYmVyIG1lIiwiZXJyb3JGb3JtRGVmYXVsdCI6Ik9vcHMhIFNvbWV0aGluZyB3ZW50IHdyb25nLCBwbGVhc2UgdHJ5IGFnYWluIG9yIGNoZWNrIG91dCBvdXIgPGhlbHBMaW5rPmhlbHAgYXJlYTwvaGVscExpbms+IiwiZXJyb3JJbnZhbGlkQ3JlZGVudGlhbHMiOiJJbmNvcnJlY3QgdXNlcm5hbWUgb3IgcGFzc3dvcmQuIiwiZXJyb3JVbmtub3duIjoiT29wcyEgU29tZXRoaW5nIHdlbnQgd3JvbmcsIHBsZWFzZSB0cnkgYWdhaW4gb3IgY2hlY2sgb3V0IG91ciA8aGVscExpbms+aGVscCBhcmVhPC9oZWxwTGluaz4iLCJlcnJvclRyYW5zaWVudCI6IkFuIGVycm9yIGhhcyBvY2N1cnJlZCBwcm9jZXNzaW5nIHlvdXIgbG9naW4uIFBsZWFzZSB0cnkgYWdhaW4uIiwiZXJyb3JGYWNlYm9va0FjY291bnQiOiJZb3UgZG8gbm90IGhhdmUgYSBTcG90aWZ5IGFjY291bnQgY29ubmVjdGVkIHRvIHlvdXIgRmFjZWJvb2sgYWNjb3VudC4gSWYgeW91IGhhdmUgYSBTcG90aWZ5IGFjY291bnQsIHBsZWFzZSBsb2cgaW4gd2l0aCB5b3VyIFNwb3RpZnkgY3JlZGVudGlhbHMuIElmIHlvdSBkbyBub3QgaGF2ZSBhIFNwb3RpZnkgYWNjb3VudCwgPGxpbmtXaXRoSHJlZj5zaWduIHVwPC9saW5rV2l0aEhyZWY+LiIsImVycm9yU2VydmVyRXJyb3IiOiJBbiBlcnJvciBoYXMgb2NjdXJyZWQgcHJvY2Vzc2luZyB5b3VyIHJlcXVlc3QuIFBsZWFzZSB0cnkgYWdhaW4uIiwiZXJyb3JVc2VybmFtZVJlcXVpcmVkIjoiUGxlYXNlIGVudGVyIHlvdXIgU3BvdGlmeSB1c2VybmFtZSBvciBlbWFpbCBhZGRyZXNzLiIsImVycm9yVXNlcm5hbWVJbnZhbGlkQ2hhcmFjdGVycyI6IkZvcmJpZGRlbiBjaGFyYWN0ZXIocykge2ZvcmJpZGRlbkNoYXJzfSBpbiB1c2VybmFtZS4iLCJlcnJvclBhc3N3b3JkUmVxdWlyZWQiOiJQbGVhc2UgZW50ZXIgeW91ciBwYXNzd29yZC4iLCJsb2dJbiI6IkxvZyBJbiIsImxvZ0luVG9TcG90aWZ5IjoiTG9nIGluIHRvIFNwb3RpZnkiLCJzaWduVXBGb3JTcG90aWZ5IjoiU2lnbiB1cCBmb3IgU3BvdGlmeSIsIm9yIjoib3IiLCJsb2dpblRvQ29udGludWUiOiJUbyBjb250aW51ZSwgbG9nIGluIHRvIFNwb3RpZnkuIiwiZXJyb3JWYWxpZGF0aW9uSW52YWxpZENvZGUiOiJUaGlzIGNvZGUgaXMgaW52YWxpZC4gQ2hlY2sgdGhlIFNNUyBhbmQgdHJ5IGFnYWluLiIsImVycm9yU3VibWl0VG9va1Rvb0xvbmdUb0NyZWF0ZSI6Ikl0IHRvb2sgdG9vIGxvbmcgdG8gY29tcGxldGUgeW91ciByZXF1ZXN0LiBUcnkgYWdhaW4uIiwiZXJyb3JBcHBsZUFjY291bnQiOiJZb3UgZG8gbm90IGhhdmUgYSBTcG90aWZ5IGFjY291bnQgY29ubmVjdGVkIHRvIHlvdXIgQXBwbGUgSUQuIElmIHlvdSBoYXZlIGEgU3BvdGlmeSBhY2NvdW50LCBwbGVhc2UgdHJ5IGxvZyBpbiB3aXRoIHlvdXIgU3BvdGlmeSBlbWFpbCBvciB1c2VybmFtZS4gSWYgeW91IGRvIG5vdCBoYXZlIGEgU3BvdGlmeSBhY2NvdW50LCBwbGVhc2Ugc2lnbiB1cC4iLCJjb250aW51ZVdpdGhBcHBsZSI6IkNvbnRpbnVlIHdpdGggQXBwbGUiLCJjb250aW51ZVdpdGhGYWNlYm9vayI6IkNvbnRpbnVlIHdpdGggRmFjZWJvb2siLCJjb250aW51ZVdpdGhQaG9uZU51bWJlciI6IkNvbnRpbnVlIHdpdGggcGhvbmUgbnVtYmVyIiwiY29udGludWVXaXRoR29vZ2xlIjoiQ29udGludWUgd2l0aCBHb29nbGUiLCJlcnJvckdvb2dsZUFjY291bnQiOiJZb3UgZG8gbm90IGhhdmUgYSBTcG90aWZ5IGFjY291bnQgY29ubmVjdGVkIHRvIHlvdXIgR29vZ2xlIEFjY291bnQuIElmIHlvdSBoYXZlIGEgU3BvdGlmeSBhY2NvdW50LCBwbGVhc2UgdHJ5IGxvZyBpbiB3aXRoIHlvdXIgU3BvdGlmeSBlbWFpbCBvciB1c2VybmFtZS4gSWYgeW91IGRvIG5vdCBoYXZlIGEgU3BvdGlmeSBhY2NvdW50LCBwbGVhc2Ugc2lnbiB1cC4ifQ=="
+		/>
+	</head>
+	<body>
+		<div id="root" />
+	</body>
+</html>

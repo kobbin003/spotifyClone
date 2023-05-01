@@ -4,6 +4,7 @@ import useFetch from "./hooks/useFetch";
 import { GridItem, LoggedInAppLayout, LoggedOutAppLayout } from "./App.style";
 import LoggedInPage from "./components/pages/LoggedInPage";
 import LoggedOutPage from "./components/pages/LoggedOutPage";
+import StyledComp from "./styled-system-trial";
 function App() {
 	// const url = "https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb";
 	// const accessToken =
@@ -13,7 +14,7 @@ function App() {
 	// const Container = styled.div``;
 	const [isLoggedIn, setisLoggedIn] = useState(true);
 	return (
-		<></>
+		<StyledComp></StyledComp>
 		// <>
 		// 	{isLoggedIn ? (
 		// 		<LoggedInAppLayout>
