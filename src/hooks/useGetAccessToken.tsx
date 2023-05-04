@@ -14,8 +14,13 @@ const useGetAccessToken = (): [
 	const [isLoading, setIsLoading] = useState(true);
 	const clientId = import.meta.env.VITE_CLIENT_ID;
 	const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
-	console.log(clientId, clientSecret);
-	const url = `https://accounts.spotify.com/api/token?grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`;
+	const grantType = "client_credentials";
+	const queryParams = new URLSearchParams({
+		grant_type: "client_credentials",
+		client_id: clientId,
+		client_secret: clientSecret,
+	});
+	const url = `https://accounts.spotify.com/api/token?${queryParams}`;
 	// const authOptions = {
 	// 	headers: {
 	// 		"Content-Type": "application/x-www-form-urlencoded",
@@ -30,7 +35,7 @@ const useGetAccessToken = (): [
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
-			Authorization: `Basic${`${clientId}:${clientSecret}`}`,
+			// Authorization: `Basic${`${clientId}:${clientSecret}`}`,
 		},
 		json: true,
 	};

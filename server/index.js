@@ -2,13 +2,22 @@ import express from "express";
 import crypto from "node:crypto";
 import fetch from "node-fetch";
 import * as dotenv from "dotenv";
-import { fetchData } from "./utils.js";
+import { fetchData } from "./utils/fetchData.js";
+import { fetchToken } from "./utils/fetchToken.js";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { getTopSearch } from "./utils/getTopSearch.js";
 
-dotenv.config();
 const app = express();
 const port = 7000;
 
-const client_id = process.env.VITE_CLIENT_ID;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, ".env") });
+
+const client_id = process.env.CLIENT_ID;
+// const client_secret = process.env.CLIENT_SECRET;
+
 const redirect_uri = "http://localhost:7000/token";
 
 app.get("/", (req, res) => {
@@ -37,8 +46,7 @@ app.get("/token", async (req, res) => {
 		redirect_uri,
 		grant_type: "authorization_code",
 	});
-
-	const data = await fetchData("POST", queryParams);
+	const data = await fetchToken("POST", queryParams);
 	console.log("token", data);
 	res.send(data);
 });
@@ -50,11 +58,24 @@ app.get("/refreshToken", async (req, res) => {
 		grant_type: "refresh_token",
 		refresh_token: refreshToken,
 	});
-	const data = await fetchData("POST", queryParams);
+
+	const data = await fetchToken("POST", queryParams);
 	console.log("refreshtoken", data);
 	res.send(data);
 });
-
+app.get("/topsearch", async (req, res) => {
+	const { q, type, limit = 10, offset = 0 } = req.query;
+	const queryParams = new URLSearchParams({
+		q,
+		type,
+		limit,
+		offset,
+	});
+	const url = `https://api.spotify.com/v1/search?${queryParams}`;
+	const data = await fetchData("GET", url);
+	const topItem = getTopSearch(data);
+	res.send(topItem);
+});
 app.listen(port, () => {
 	console.log(`server running on ${port}`);
 });
