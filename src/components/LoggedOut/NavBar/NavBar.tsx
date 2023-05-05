@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import styled from "styled-components";
+import { MouseEvent } from "react";
 import {
 	NavArrowIcon,
 	LoginLink,
@@ -10,10 +9,13 @@ import {
 	FixedContainer,
 	InnerContainer,
 } from "./style";
-import { authContext } from "../../../context/authContext";
+import { authorize } from "../../../utils/authorize";
 const NavBar = () => {
-	const { handleOnClickLogin } = useContext(authContext);
-	// console.log(handleOnClickLogin);
+	const handleLogin = (e: MouseEvent<HTMLAnchorElement>) => {
+		e.preventDefault();
+		authorize();
+		// console.log("log in");
+	};
 	return (
 		<Container>
 			<FixedContainer>
@@ -35,7 +37,8 @@ const NavBar = () => {
 					<SignUpLink href="">Sign up</SignUpLink>
 					<LoginLink
 						href=""
-						onClick={(e) => handleOnClickLogin(e, true)}
+						// onClick={(e) => handleOnClickLogin(e, true)}
+						onClick={handleLogin}
 					>
 						Log in
 					</LoginLink>

@@ -41,7 +41,7 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 					<UpgradeLink href="">Upgrade</UpgradeLink>
 					<InstallAppLink href="">
 						<Icon
-							src="/public/icons/navBar/download.svg"
+							src="/icons/navBar/download.svg"
 							globe
 						></Icon>
 						<span>Install App</span>

@@ -12,5 +12,5 @@ export const getTopSearch = (data) => {
 	return currentPopular;
 };
 
-const top = getTopSearch(data);
-console.log(top);
+// const top = getTopSearch(data);
+// console.log(top);
