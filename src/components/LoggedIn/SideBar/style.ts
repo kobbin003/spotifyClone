@@ -7,7 +7,7 @@ export type DraggableProps = {
 };
 export const Container = styled.section<{ width: number }>`
 	width: ${(prop) => prop.width}rem;
-	/* background-color: var(--black-darkest); */
+	background-color: var(--black-darkest);
 	position: fixed;
 	height: 100vh;
 	top: 0;

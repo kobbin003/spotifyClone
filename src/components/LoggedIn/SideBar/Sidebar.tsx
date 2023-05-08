@@ -11,6 +11,7 @@ import {
 	Library,
 	UnorderedList,
 } from "./style";
+import { Link } from "react-router-dom";
 
 export type sideBarProps = {
 	width: number;
@@ -31,11 +32,11 @@ const Sidebar = ({
 					<UnorderedList>
 						<li>
 							<Icon src="/icons/home.svg"></Icon>
-							<a href="">Home</a>
+							<Link to="/me/home">Home</Link>
 						</li>
 						<li>
 							<Icon src="/icons/search.svg"></Icon>
-							<a href="">Search</a>
+							<Link to="/me/search">Search</Link>
 						</li>
 					</UnorderedList>
 				</Home>

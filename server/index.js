@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { getTopSearch } from "./utils/getTopSearch.js";
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 // app.use(
 // 	"/api",
 // 	createProxyMiddleware({ target: "http://localhost:7000", changeOrigin: true })
@@ -35,7 +35,8 @@ const redirect_uri = "http://localhost:5173/token";
 
 app.get("/authorize", function (req, res) {
 	const state = crypto.randomBytes(16).toString("hex");
-	const scope = "user-read-private user-read-email";
+	const scope =
+		"user-read-private user-read-email user-library-read user-library-modify user-read-recently-played user-top-read user-read-playback-position user-follow-read user-follow-modify playlist-modify-public playlist-modify-private playlist-read-collaborative playlist-read-private user-modify-playback-state user-read-currently-playing user-read-playback-state ugc-image-upload";
 
 	const searchParams = new URLSearchParams({
 		response_type: "code",
@@ -44,10 +45,11 @@ app.get("/authorize", function (req, res) {
 		scope,
 		state,
 	});
+	const requestReceivedFrom = req.headers.origin;
+
+	// console.log(requestReceivedFrom, req.headers);
+	res.set("Access-Control-Allow-Origin", "*");
 	res.redirect("https://accounts.spotify.com/authorize?" + searchParams);
-	// proxy(req, res, function () {
-	// 	res.redirect("https://accounts.spotify.com/authorize?" + searchParams);
-	// });
 	// res.send({ mas: "hello" });
 });
 // the authorise sends the code & state as params in the callback route(i.e /token).
@@ -61,6 +63,7 @@ app.get("/token", async (req, res) => {
 	});
 	const data = await fetchToken("POST", queryParams);
 	console.log("token", data);
+	res.set("Access-Control-Allow-Origin", "http://localhost:5173");
 	res.send(data);
 	// res.send({ code });
 });

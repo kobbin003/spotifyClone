@@ -11,6 +11,7 @@ import {
 	FooterContainer,
 	Container,
 } from "./style";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
 	return (

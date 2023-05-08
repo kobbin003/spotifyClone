@@ -7,13 +7,14 @@ import {
 	Container,
 	NavigatePageSection,
 	FixedContainer,
-	InnerContainer,
 } from "./style";
-import { authorize } from "../../../utils/authorize";
+import { authorize, authorizeFromBackEnd } from "../../../utils/authorize";
+import { useNavigate } from "react-router-dom";
 const NavBar = () => {
 	const handleLogin = (e: MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 		authorize();
+		// authorizeFromBackEnd();
 		// console.log("log in");
 	};
 	return (

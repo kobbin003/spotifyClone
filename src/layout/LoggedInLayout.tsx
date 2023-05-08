@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import Sidebar from "../LoggedIn/SideBar/Sidebar";
-import MainContent from "../LoggedIn/MainContent/MainContent";
-import { Container } from "./LoggedInPage.style";
+import React, { useEffect, useState } from "react";
+import Sidebar from "../components/LoggedIn/SideBar/Sidebar";
+import MainContent from "../components/LoggedIn/MainContent/MainContent";
+import { Container } from "./LoggedInLayout.style";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const widthHandleDragger: number = 2;
-const LoggedInPage: React.FC = () => {
+const LoggedInLayout: React.FC = () => {
+	const navigate = useNavigate();
 	const [width, setWidth] = useState(14.5);
 	const [isDraggable, setIsDraggable] = useState(false);
 
@@ -19,6 +21,10 @@ const LoggedInPage: React.FC = () => {
 			console.log("mouse move", isDraggable, e);
 		}
 	};
+	useEffect(() => {
+		console.log("navigating to loggedin");
+		navigate("/me");
+	}, []);
 	return (
 		<Container>
 			<Sidebar
@@ -34,5 +40,5 @@ const LoggedInPage: React.FC = () => {
 		</Container>
 	);
 };
-export default LoggedInPage;
+export default LoggedInLayout;
 // #4b49492c

@@ -25,6 +25,6 @@ export const Emptydiv = styled.div`
 	z-index: 10;
 `;
 
-export const LoremIpsum = styled.p`
+export const Content = styled.main`
 	/* z-index: -10; */
 `;
