@@ -115,11 +115,12 @@ export const Section = styled.section`
 export const FooterContainer = styled.div`
 	position: absolute;
 	bottom: 0;
+	padding-bottom: 5em;
 	& > *:nth-child(2) {
 		padding-top: 1em;
 	}
 	@media screen and (max-width: 786px) {
-		padding-bottom: 7em;
+		padding-bottom: 6em;
 	}
 `;
 export const Footer = styled.footer`
@@ -140,7 +141,7 @@ export const FooterSection = styled.div`
 `;
 
 export const Language = styled.div`
-	height: 120px;
+	/* height: 120px; */
 	button {
 		display: inline-flex;
 		justify-content: center;

@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/LoggedIn/SideBar/Sidebar";
 import MainContent from "../components/LoggedIn/MainContent/MainContent";
 import { Container } from "./LoggedInLayout.style";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { useGetAccessToken } from "../hooks/useGetAccessToken";
+import { TokenData, ErrorData } from "../hooks/useGetAccessToken";
+// import { getItemLocalStorageTruthy } from "../utils/parseString";
 const widthHandleDragger: number = 2;
 const LoggedInLayout: React.FC = () => {
 	const navigate = useNavigate();
 	const [width, setWidth] = useState(14.5);
 	const [isDraggable, setIsDraggable] = useState(false);
-
+	const [code, setCode] = useState<string | null>();
+	const { data, error, isLoading } = useGetAccessToken(code || "");
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
 		console.log("mouse enter", isDraggable);
@@ -21,10 +24,12 @@ const LoggedInLayout: React.FC = () => {
 			console.log("mouse move", isDraggable, e);
 		}
 	};
+	console.log("code", code);
+	useEffect(() => {}, []);
 	useEffect(() => {
-		console.log("navigating to loggedin");
-		navigate("/me");
-	}, []);
+		setCode(localStorage.getItem("code"));
+		console.log("loggedinlayout", code);
+	}, [localStorage.getItem("code")]);
 	return (
 		<Container>
 			<Sidebar

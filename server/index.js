@@ -48,7 +48,7 @@ app.get("/authorize", function (req, res) {
 	const requestReceivedFrom = req.headers.origin;
 
 	// console.log(requestReceivedFrom, req.headers);
-	res.set("Access-Control-Allow-Origin", "*");
+	// res.set("Access-Control-Allow-Origin", "*");
 	res.redirect("https://accounts.spotify.com/authorize?" + searchParams);
 	// res.send({ mas: "hello" });
 });

@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
 		element: <LoggedInLayout />,
 		children: [
 			{
-				path: "home",
+				index: true,
 				element: <Home />,
 			},
 			{

@@ -8,9 +8,11 @@ type FetchState<T, U> = {
 export const useFetchToken = <T, U extends {}>(
 	queryParams: URLSearchParams
 ): FetchState<T, U> => {
+	console.log("useFetchToken");
 	const [data, setData] = useState<T | U | null>();
 	const [error, setError] = useState<Error | null>();
 	const [isLoading, setIsLoading] = useState(true);
+
 	const client_id = import.meta.env.VITE_CLIENT_ID;
 	const client_secret = import.meta.env.VITE_CLIENT_SECRET;
 	const payload = client_id + ":" + client_secret;
