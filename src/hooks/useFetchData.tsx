@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useGetRefreshToken from "./useGetRefreshToken";
-// type AnyObject = {
-// 	[key: string]: any;
-// };
+
 type FetchDataState<T, U> = {
 	data: T | null;
 	error: U | null;

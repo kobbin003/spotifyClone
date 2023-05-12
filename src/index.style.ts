@@ -65,6 +65,8 @@ export const GlobalStyle = createGlobalStyle`
 	--black-darker: #101010;
 	--black-dark: #121212;
 	--greyest:#242424;
+	--profile-dropdown:#282828;
+	--profile-dropdown-font:#f3f3f3;
     --font-grey: #d3d3d3;
     --font-white: #ffffff;
 	--font-black:#000000;

@@ -5,20 +5,26 @@ import {
 	Container,
 	NavigatePageSection,
 	FixedContainer,
-	InnerContainer,
 	ProfileContainer,
 	UpgradeLink,
 	InstallAppLink,
 	ProfileButton,
 	Icon,
+	DropDown,
 } from "./navBar.style";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
 };
 const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
+	const [dropDownVisibility, setDropDownVisibility] = useState<
+		"visible" | "hidden"
+	>("hidden");
+	const handleProfileClick = () => {
+		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
+	};
 	return (
-		<Container>
+		<>
 			<FixedContainer
 				left={left}
 				widthHandleDragger={widthHandleDragger}
@@ -47,13 +53,21 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 						<span>Install App</span>
 					</InstallAppLink>
 					<ProfileButton>
-						<Icon src="/icons/navBar/profile.svg"></Icon>
+						<Icon
+							profile
+							src="/icons/navBar/profile.svg"
+							onClick={handleProfileClick}
+						></Icon>
 					</ProfileButton>
 				</ProfileContainer>
 			</FixedContainer>
-		</Container>
+			<DropDown dropDownVisibility={dropDownVisibility}>
+				<a href="">Profile</a>
+				<a href="">Logout</a>
+			</DropDown>
+		</>
 		// <h1>navbar</h1>
 	);
 };
-
+// #d1cbcb5f
 export default NavBar;

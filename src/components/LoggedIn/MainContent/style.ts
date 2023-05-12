@@ -3,11 +3,12 @@ export const Container = styled.main<{
 	left: number;
 	widthHandleDragger: number;
 }>`
-	/* height: 1000px; */
+	height: 100px;
 	background: var(--black-darkest);
+	background: goldenrod;
 	position: relative;
-	width: 500px;
-	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger + 1}em);
+	/* width: 500px; */
+	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
 	left: ${(prop) => prop.left + prop.widthHandleDragger / 2}em;
 	display: flex;
 	flex-direction: column;
@@ -24,7 +25,6 @@ export const Emptydiv = styled.div`
 	height: 50px;
 	z-index: 10;
 `;
-
 export const Content = styled.main`
 	/* z-index: -10; */
 `;

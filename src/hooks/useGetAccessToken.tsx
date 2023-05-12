@@ -15,14 +15,19 @@ export type ErrorData = {
 };
 export const useGetAccessToken = (code: string) => {
 	const [codeState, setCodeState] = useState<string>(code);
-	//! done this(codeState) because i want to useFetch,
-	//! WHEN code(argument) changes
-	//! WHICH changes on storage event in LoggedInLayout.tsx
-	//! BECAUSE it cannot use hook inside useEffect in LoggedInLayout.tsx
+	// DONE THIS(codeState) because i want to useFetch,
+	// WHEN code(argument) changes
+	// WHICH changes on storage event in LoggedInLayout.tsx
+	// BECAUSE it cannot use hook inside useEffect in LoggedInLayout.tsx
 	console.log("useGetAccesstoken", codeState);
 
-	// if (codeState === "") return {}; // forfeit useFetchToken if code ==== ""
-
+	// FORFEIT useFetchToken if "accesstoken" already stored
+	// OR ELSE it will print invalid authorization code
+	// SINCE one code can generate only one access_token.
+	if (localStorage.getItem("accessToken")) {
+		console.log("access token found!");
+		return {};
+	}
 	const redirect_uri = "http://localhost:5173/callback";
 	const queryParams = new URLSearchParams({
 		code: codeState,
@@ -33,24 +38,21 @@ export const useGetAccessToken = (code: string) => {
 		queryParams
 	);
 	// set LocalStorage item:
-
-	useEffect(() => {
-		console.log("getaccesstoken", code);
-		setCodeState(code);
+	// 		//! TYPE ASSERTIONS
+	if (data && (data as TokenData)?.access_token) {
 		console.log("DATA", data, error);
-	}, [code]);
+		localStorage.setItem("accessToken", (data as TokenData).access_token);
+		localStorage.setItem("refreshToken", (data as TokenData).access_token);
+	} else if ((data as ErrorData)?.error) {
+		console.log("ERROR", data, error);
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("refreshToken");
+	}
 	useEffect(() => {
-		// 		//! TYPE ASSERTIONS
-		if (data && (data as TokenData)?.access_token) {
-			console.log("DATA", data, error);
-			localStorage.setItem("accessToken", (data as TokenData).access_token);
-			localStorage.setItem("refreshToken", (data as TokenData).access_token);
-		} else if ((data as ErrorData)?.error) {
-			console.log("ERROR", data, error);
-			localStorage.removeItem("accessToken");
-			localStorage.removeItem("refreshToken");
-		}
-	}, [data]);
-	console.log("DATA OUT COMPONENT", data, error);
+		// console.log("getaccesstoken", code);
+		setCodeState(code);
+		// console.log("DATA", data, error);
+	}, [code]);
+	// console.log("DATA OUT COMPONENT", data, error);
 	return { data, error, isLoading };
 };

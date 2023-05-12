@@ -1,7 +1,10 @@
 import styled from "styled-components";
 export const Container = styled.div`
+	/** // ? NO NEED OF CONTAINER. 
+	//?  SINCE all the child element are fixed  */
 	position: relative;
-	height: 50px;
+	/* height: 100vh; */
+	width: 100%;
 	background: yellow;
 `;
 export const FixedContainer = styled.div<{
@@ -9,22 +12,24 @@ export const FixedContainer = styled.div<{
 	widthHandleDragger: number;
 }>`
 	position: fixed;
-	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger / 2}em);
-	height: 50px;
+	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
+	/* height: 50px; */
+	height: calc(50 / 16 * 1em);
 	background-color: var(--black-dark);
+	/* background-color: pink; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 `;
-export const InnerContainer = styled.div`
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background-color: #101010;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
+// export const InnerContainer = styled.div`
+// 	position: relative;
+// 	width: 100%;
+// 	height: 100%;
+// 	background-color: #101010;
+// 	display: flex;
+// 	justify-content: space-between;
+// 	align-items: center;
+// `;
 export const NavigatePageSection = styled.section`
 	position: relative;
 	height: 100%;
@@ -57,6 +62,7 @@ type IconProp = {
 	readonly spotify?: boolean;
 	readonly globe?: boolean;
 	readonly big?: boolean;
+	readonly profile?: boolean;
 };
 
 export const Icon = styled.img<IconProp>`
@@ -67,6 +73,8 @@ export const Icon = styled.img<IconProp>`
 			return "1.1em";
 		} else if (props.big) {
 			return "1.8em";
+		} else if (props.profile) {
+			return "1.5em";
 		} else return "1.6em";
 	}};
 	width: ${(props) => {
@@ -76,9 +84,29 @@ export const Icon = styled.img<IconProp>`
 			return "1.1em";
 		} else if (props.big) {
 			return "1.8em";
+		} else if (props.profile) {
+			return "1.5em";
 		} else return "1.6em";
 	}};
-	padding-right: ${(props) => (props.spotify ? "0.2em" : "0.9em")};
+	padding-right: ${(props) => {
+		if (props.spotify) {
+			return "0.2em";
+		} else if (props.profile) {
+			return "0";
+		} else {
+			return "0.9em";
+		}
+	}};
+`;
+
+export const ProfileContainer = styled.div`
+	position: relative; //?
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	font-size: 0.9rem;
+	/* padding-right: 1em; //? */
 `;
 
 export const ButtonLink = styled.a`
@@ -88,35 +116,24 @@ export const ButtonLink = styled.a`
 	font-weight: 600;
 	text-decoration: none;
 	border-radius: 30px 30px 30px 30px;
-	font-size: 0.9rem;
-`;
-
-export const ProfileContainer = styled.div`
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50px;
-	font-size: 0.9rem;
-	padding-right: 3em; //?
+	font-size: 0.9em;
+	height: 10px;
+	transform: scale(0.95);
 `;
 
 export const UpgradeLink = styled(ButtonLink)`
-	font-size: 0.3rem;
+	font-size: 0.8rem;
 	background: #ffffff;
 	color: #000000;
-	padding: 1em 2.5em;
-	margin-right: 2em;
+	/* color: white; */
+	padding: 0.75em 1em;
+	margin-right: 0.3em;
 `;
 
 export const InstallAppLink = styled(ButtonLink)`
 	background: #000000;
 	color: #ffffff;
-	padding: 0.5em;
-	/* display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	border: none; */
+	padding: 0.7em 0.65em;
 	& img {
 		padding-right: 0.1em;
 	}
@@ -128,8 +145,62 @@ export const InstallAppLink = styled(ButtonLink)`
 `;
 
 export const ProfileButton = styled.button`
-	width: auto;
+	/* width: auto; */
+	display: inline-block;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
+	margin-left: 0.2em;
+	margin-right: 1em;
+	/* img {
+		position: relative;
+		left: 10px;
+	} */
+`;
+
+export const DropDown = styled.div<{
+	dropDownVisibility: "hidden" | "visible";
+}>`
+	position: fixed;
+	/* height: 200px;
+	width: 200px; */
+	background-color: var(--profile-dropdown);
+
+	right: 2em;
+	top: 3.5em;
+	/* padding-right: 1em; */
+	/* 
+	 */
+	border-radius: 5px 5px 5px 5px;
+	/* margin: 1em; */
+	/* padding: 0em 0.8em 0.8em; */
+	visibility: ${(prop) => prop.dropDownVisibility};
+	display: flex;
+	flex-direction: column;
+	a {
+		text-decoration: none;
+		display: inline-block;
+		border-radius: 2px;
+		color: var(--profile-dropdown-font);
+		font-weight: 500;
+		font-size: 0.8rem;
+		/* transform: scale(0.99, 1); */
+		padding-right: 3em;
+		padding-left: 1em;
+		padding-top: 0.35em;
+		padding-bottom: 0.35em;
+		margin: 0 0.4em;
+		&:first-child {
+			margin-top: 0.4em;
+		}
+		&:last-child {
+			border-top: 1px solid #d1cbcb5f;
+			margin-bottom: 0.4em;
+		}
+		&:hover {
+			/* filter: brightness(150%); */
+			background-color: #d1cbcb5f;
+			/** set on hover background & padding */
+		}
+	}
 `;

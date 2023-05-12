@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// T- data, U-error{error:stirng, error_description:string}
 type FetchState<T, U> = {
 	data: T | U | null;
 	error: Error | null;

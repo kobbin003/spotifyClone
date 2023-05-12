@@ -12,21 +12,18 @@ type prop = {
 };
 const MainContent = ({ left, widthHandleDragger }: prop) => {
 	return (
-		<>
-			{/* <Emptydiv></Emptydiv> */}
-			<Container
+		<Container
+			left={left}
+			widthHandleDragger={widthHandleDragger}
+		>
+			<NavBar
 				left={left}
 				widthHandleDragger={widthHandleDragger}
-			>
-				<NavBar
-					left={left}
-					widthHandleDragger={widthHandleDragger}
-				></NavBar>
-				<Content>
-					<Outlet />
-				</Content>
-			</Container>
-		</>
+			></NavBar>
+			<Content>
+				<Outlet />
+			</Content>
+		</Container>
 	);
 };
 

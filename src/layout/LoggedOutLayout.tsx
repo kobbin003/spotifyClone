@@ -40,8 +40,4 @@ const LoggedOutLayout = () => {
 		</LoggedOutAppContainer>
 	);
 };
-// const useTrial = () => {
-// 	const [first, setFirst] = useState("second");
-// 	return first;
-// };
 export default LoggedOutLayout;
