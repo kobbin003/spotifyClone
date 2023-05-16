@@ -29,6 +29,7 @@ const LoggedInLayout: React.FC = () => {
 		setCode(localStorage.getItem("code"));
 		console.log("loggedinlayout", code);
 	}, [localStorage.getItem("code")]);
+
 	return (
 		<Container>
 			<Sidebar

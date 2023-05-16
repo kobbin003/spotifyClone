@@ -3,7 +3,6 @@ export const Container = styled.div`
 	/** // ? NO NEED OF CONTAINER. 
 	//?  SINCE all the child element are fixed  */
 	position: relative;
-	/* height: 100vh; */
 	width: 100%;
 	background: yellow;
 `;
@@ -13,23 +12,14 @@ export const FixedContainer = styled.div<{
 }>`
 	position: fixed;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
-	/* height: 50px; */
 	height: calc(50 / 16 * 1em);
 	background-color: var(--black-dark);
-	/* background-color: pink; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 3;
 `;
-// export const InnerContainer = styled.div`
-// 	position: relative;
-// 	width: 100%;
-// 	height: 100%;
-// 	background-color: #101010;
-// 	display: flex;
-// 	justify-content: space-between;
-// 	align-items: center;
-// `;
+
 export const NavigatePageSection = styled.section`
 	position: relative;
 	height: 100%;
