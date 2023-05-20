@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/LoggedIn/SideBar/Sidebar";
 import MainContent from "../components/LoggedIn/MainContent/MainContent";
 import { Container } from "./LoggedInLayout.style";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetAccessToken } from "../hooks/useGetAccessToken";
-import useGetRefreshToken from "../hooks/useGetRefreshToken";
+import { ErrorBoundary } from "react-error-boundary";
+import { errorBoundaryFallback } from "./errorBoundaryFallback";
 // import { TokenData, ErrorData } from "../hooks/useGetAccessToken";
 const widthHandleDragger: number = 2;
+
 const LoggedInLayout: React.FC = () => {
 	const navigate = useNavigate();
 	const [width, setWidth] = useState(14.5);
@@ -34,24 +36,26 @@ const LoggedInLayout: React.FC = () => {
 		// console.log("loggedinlayout", code);
 	}, [localStorage.getItem("code")]);
 	return (
-		<Container>
-			<Sidebar
-				width={width}
-				handleClick={handleClick}
-				handleMouseMove={handleMouseMove}
-				widthHandleDragger={widthHandleDragger}
-			></Sidebar>
-			{isLoading ? (
-				<h1>Loading....</h1>
-			) : (
-				data && (
-					<MainContent
-						left={width}
-						widthHandleDragger={widthHandleDragger}
-					></MainContent>
-				)
-			)}
-		</Container>
+		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
+			<Container>
+				<Sidebar
+					width={width}
+					handleClick={handleClick}
+					handleMouseMove={handleMouseMove}
+					widthHandleDragger={widthHandleDragger}
+				></Sidebar>
+				{isLoading ? (
+					<h1>Loading....</h1>
+				) : (
+					data && (
+						<MainContent
+							left={width}
+							widthHandleDragger={widthHandleDragger}
+						></MainContent>
+					)
+				)}
+			</Container>
+		</ErrorBoundary>
 	);
 };
 export default LoggedInLayout;

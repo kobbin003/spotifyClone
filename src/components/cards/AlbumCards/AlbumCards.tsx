@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import styled from "styled-components";
 const Card = styled.a`
 	height: fit-content;
@@ -110,11 +110,22 @@ const AlbumCards = ({
 	width,
 }: AlbumCardProps) => {
 	const releaseYear = releaseDate.split("-")[0];
+	// const handleError = (e: SyntheticEvent<HTMLImageElement>) => {
+	// 	console.log("image error");
+	// 	e.currentTarget.src = src;
+	// };
+	// const handleLoad = (e: SyntheticEvent<HTMLImageElement>) => {
+	// 	console.log("image loaded");
+	// };
 	return (
 		<Card href="">
 			<ImageContainer>
 				<SpotifyPlay src="/public/icons/spotify_play.svg" />
-				<img src={src} />
+				<img
+					src={src}
+					// onError={handleError}
+					// onLoad={handleLoad}
+				/>
 			</ImageContainer>
 			<div>
 				<h4>

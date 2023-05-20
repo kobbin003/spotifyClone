@@ -14,7 +14,7 @@ export type ErrorData = {
 	error_dscription: string;
 };
 export const useGetAccessToken = (code: string) => {
-	const [codeState, setCodeState] = useState<string>(code);
+	// const [codeState, setCodeState] = useState<string>(code);
 	// DONE THIS(codeState) because i want to useFetch,
 	// WHEN code(argument) changes
 	// WHICH changes on storage event in LoggedInLayout.tsx
@@ -35,7 +35,7 @@ export const useGetAccessToken = (code: string) => {
 	}
 	const redirect_uri = "http://localhost:5173/callback";
 	const queryParams = new URLSearchParams({
-		code: codeState,
+		code,
 		redirect_uri,
 		grant_type: "authorization_code",
 	});
