@@ -9,6 +9,7 @@ export const Container = styled.div`
 export const FixedContainer = styled.div`
 	position: fixed;
 	width: calc(100% - 250px);
+	min-width: 350px;
 	height: 50px;
 	background-color: #101010;
 	display: flex;

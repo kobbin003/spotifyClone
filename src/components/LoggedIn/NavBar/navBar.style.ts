@@ -13,6 +13,7 @@ export const FixedContainer = styled.div<{
 	position: fixed;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
 	height: calc(50 / 16 * 1em);
+	min-width: 350px;
 	background-color: var(--black-dark);
 	display: flex;
 	justify-content: space-between;
@@ -52,7 +53,7 @@ type IconProp = {
 	readonly spotify?: boolean;
 	readonly globe?: boolean;
 	readonly big?: boolean;
-	readonly profile?: boolean;
+	readonly user?: boolean;
 };
 
 export const Icon = styled.img<IconProp>`
@@ -63,9 +64,11 @@ export const Icon = styled.img<IconProp>`
 			return "1.1em";
 		} else if (props.big) {
 			return "1.8em";
-		} else if (props.profile) {
+		} else if (props.user) {
 			return "1.5em";
-		} else return "1.6em";
+		} else {
+			return "1.6em";
+		}
 	}};
 	width: ${(props) => {
 		if (props.spotify) {
@@ -74,14 +77,16 @@ export const Icon = styled.img<IconProp>`
 			return "1.1em";
 		} else if (props.big) {
 			return "1.8em";
-		} else if (props.profile) {
+		} else if (props.user) {
 			return "1.5em";
-		} else return "1.6em";
+		} else {
+			return "1.6em";
+		}
 	}};
 	padding-right: ${(props) => {
 		if (props.spotify) {
 			return "0.2em";
-		} else if (props.profile) {
+		} else if (props.user) {
 			return "0";
 		} else {
 			return "0.9em";

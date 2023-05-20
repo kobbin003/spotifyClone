@@ -12,6 +12,7 @@ import {
 	Icon,
 	DropDown,
 } from "./navBar.style";
+import { useNavigate } from "react-router-dom";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
@@ -20,8 +21,15 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
-	const handleProfileClick = () => {
+	const navigate = useNavigate();
+	const handleDropDownMenu = () => {
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
+	};
+	const handleLogOut = () => {
+		// ! remove access_token & refresh_token
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("refreshToken");
+		navigate("/");
 	};
 	return (
 		<>
@@ -54,16 +62,21 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 					</InstallAppLink>
 					<ProfileButton>
 						<Icon
-							profile
 							src="/icons/navBar/profile.svg"
-							onClick={handleProfileClick}
+							user
+							onClick={handleDropDownMenu}
 						></Icon>
 					</ProfileButton>
 				</ProfileContainer>
 			</FixedContainer>
 			<DropDown dropDownVisibility={dropDownVisibility}>
 				<a href="">Profile</a>
-				<a href="">Logout</a>
+				<a
+					href=""
+					onClick={handleLogOut}
+				>
+					Logout
+				</a>
 			</DropDown>
 		</>
 		// <h1>navbar</h1>

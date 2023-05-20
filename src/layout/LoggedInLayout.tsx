@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/LoggedIn/SideBar/Sidebar";
 import MainContent from "../components/LoggedIn/MainContent/MainContent";
 import { Container } from "./LoggedInLayout.style";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGetAccessToken } from "../hooks/useGetAccessToken";
-import { TokenData, ErrorData } from "../hooks/useGetAccessToken";
+import useGetRefreshToken from "../hooks/useGetRefreshToken";
+// import { TokenData, ErrorData } from "../hooks/useGetAccessToken";
 const widthHandleDragger: number = 2;
 const LoggedInLayout: React.FC = () => {
 	const navigate = useNavigate();
 	const [width, setWidth] = useState(14.5);
 	const [isDraggable, setIsDraggable] = useState(false);
-	const [code, setCode] = useState<string | null>();
-	useGetAccessToken(code || "");
+	const [code, setCode] = useState<string | null>(localStorage.getItem("code"));
+	const { data, error, isLoading } = useGetAccessToken(code || "");
+	// useGetRefreshToken(false);
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
 		console.log("mouse enter", isDraggable);
@@ -23,13 +25,14 @@ const LoggedInLayout: React.FC = () => {
 			console.log("mouse move", isDraggable, e);
 		}
 	};
-	console.log("code", code);
+	// console.log("loggedin", { data, error, isLoading });
 
 	useEffect(() => {
-		setCode(localStorage.getItem("code"));
-		console.log("loggedinlayout", code);
+		if (localStorage.getItem("code")) {
+			setCode(localStorage.getItem("code"));
+		}
+		// console.log("loggedinlayout", code);
 	}, [localStorage.getItem("code")]);
-
 	return (
 		<Container>
 			<Sidebar
@@ -38,10 +41,16 @@ const LoggedInLayout: React.FC = () => {
 				handleMouseMove={handleMouseMove}
 				widthHandleDragger={widthHandleDragger}
 			></Sidebar>
-			<MainContent
-				left={width}
-				widthHandleDragger={widthHandleDragger}
-			></MainContent>
+			{isLoading ? (
+				<h1>Loading....</h1>
+			) : (
+				data && (
+					<MainContent
+						left={width}
+						widthHandleDragger={widthHandleDragger}
+					></MainContent>
+				)
+			)}
 		</Container>
 	);
 };

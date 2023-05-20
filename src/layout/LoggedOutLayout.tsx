@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import {
+	Outlet,
+	Route,
+	Routes,
+	useLocation,
+	useNavigate,
+} from "react-router-dom";
 
 import NavBar from "../components/LoggedOut/NavBar/NavBar";
 import Sidebar from "../components/LoggedOut/SideBar/Sidebar";
@@ -19,7 +25,16 @@ const Content = styled.div`
 
 const LoggedOutLayout = () => {
 	const navigate = useNavigate();
+
 	const code = useGetAccessCode();
+	//remove accessToken & refreshToken whenever LoggedOutLayout is rendered
+	if (
+		localStorage.getItem("accessToken") &&
+		localStorage.getItem("refreshToken")
+	) {
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("refreshToken");
+	}
 	useEffect(() => {
 		if (code) {
 			navigate("/me");

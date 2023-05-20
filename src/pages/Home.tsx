@@ -1,63 +1,58 @@
-import getUser from "../hooks/spotify-data/getUser";
-import { Container } from "./Home.style";
+import { useEffect, useState } from "react";
+import AlbumCards from "../components/cards/AlbumCards/AlbumCards";
+import getUserAlbums, { UserAlbums } from "../hooks/spotify-data/getUserAlbums";
+import { Albums, Container, SubHeaders } from "./Home.style";
 
 const Home = () => {
-	console.log("HOME");
-	// const accessToken = localStorage.getItem("accessToken");
-
-	// const { data, error, isLoading } = getUser(accessToken ?? "");
-	// console.log({ data, error, isLoading });
-	// return (
-	// 	<>
-	// 		<h2>HOME</h2>
-	// 		{isLoading ? (
-	// 			<p>Loading....</p>
-	// 		) : data ? (
-	// 			<>
-	// 				<p>
-	// 					<span>ID: </span>
-	// 					{data?.id}
-	// 				</p>
-	// 				<p>
-	// 					<span>Name: </span>
-	// 					{data?.display_name}
-	// 				</p>
-	// 				<p>
-	// 					<span>Country: </span>
-	// 					{data?.country}
-	// 				</p>
-	// 				<p>
-	// 					<span>Email: </span>
-	// 					{data?.email}
-	// 				</p>
-	// 				<p>
-	// 					<span>Followers: </span>
-	// 					{data?.followers.total}
-	// 				</p>
-	// 				<p>
-	// 					<span>Spotify Link: </span>
-	// 					{data?.external_urls.spotify}
-	// 				</p>
-	// 			</>
-	// 		) : (
-	// 			<p>{error?.message}</p>
-	// 		)}
-	// 	</>
+	// const [accessToken, setAccessToken] = useState(
+	// 	localStorage.getItem("accessToken")
 	// );
-	return <Container>Home</Container>;
+	// const accessToken = localStorage.getItem("accessToken") || "";
+	// const { data, error, isLoading } = getUserAlbums(accessToken);
+	// console.log("HOME", data, error, isLoading);
+	// const data ={}
+	// localStorage.setItem("albumdata", JSON.stringify(data));
+	const albumdata = localStorage.getItem("albumdata");
+	const data: UserAlbums = JSON.parse(albumdata ?? "");
+	console.log(data);
+	return (
+		<Container>
+			<>
+				<SubHeaders>
+					<h2>Saved Albums</h2>
+					<a href="">
+						<b>show all</b>
+					</a>
+				</SubHeaders>
+				<Albums>
+					{data &&
+						data.items.map((item) => (
+							<AlbumCards
+								key={item.album.id}
+								src={item.album.images[1].url}
+								height={item.album.images[1].height}
+								width={item.album.images[1].width}
+								albumName={item.album.name}
+								releaseDate={item.album.release_date}
+								type={item.album.album_type}
+							></AlbumCards>
+						))}
+					{data &&
+						data.items.map((item) => (
+							<AlbumCards
+								key={item.album.id}
+								src={item.album.images[1].url}
+								height={item.album.images[1].height}
+								width={item.album.images[1].width}
+								albumName={item.album.name}
+								releaseDate={item.album.release_date}
+								type={item.album.album_type}
+							></AlbumCards>
+						))}
+				</Albums>
+			</>
+		</Container>
+	);
 };
-// type UserProfile = {
-// 	country: string;
-// 	display_name: string;
-// 	email: string;
-// 	followers: { href: number; total: number };
-// 	id: string;
-// 	images: [];
-// 	product: string;
-// 	external_urls: { spotify: string };
-// };
-//! TYPE GUARD
-// function isUserProfile(obj: any): obj is UserProfile {
-// 	return obj && typeof obj === "object" && "country" in obj;
-// }
+
 export default Home;

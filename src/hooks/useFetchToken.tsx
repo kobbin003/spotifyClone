@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 type FetchState<T, U> = {
-	data: T | U | null;
-	error: Error | null;
+	data: T | null;
+	error: U | null;
 	isLoading: boolean;
 };
 export const useFetchToken = <T, U extends {}>(
 	queryParams: URLSearchParams
 ): FetchState<T, U> => {
-	console.log("useFetchToken");
-	const [data, setData] = useState<T | U | null>();
-	const [error, setError] = useState<Error | null>();
+	// console.log("useFetchToken");
+	const [data, setData] = useState<T | null>();
+	const [error, setError] = useState<U | null>();
 	const [isLoading, setIsLoading] = useState(true);
 
 	const client_id = import.meta.env.VITE_CLIENT_ID;
@@ -34,8 +34,13 @@ export const useFetchToken = <T, U extends {}>(
 				// }
 			})
 			.then((data) => {
-				setData(data);
-				setIsLoading(false);
+				if (data.error) {
+					setError(data.error);
+					setIsLoading(false);
+				} else {
+					setData(data);
+					setIsLoading(false);
+				}
 			})
 			.catch((err) => {
 				setError(err);

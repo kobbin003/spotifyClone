@@ -27,6 +27,7 @@ export const Icon = styled.img<IconProp>`
 	}};
 	padding-right: ${(props) => (props.spotify ? "0.2em" : "0.9em")};
 `;
+
 export const Container = styled.div`
 	position: fixed;
 	height: 100vh;
@@ -37,6 +38,9 @@ export const Container = styled.div`
 	grid-row: 1/4;
 	background: #000000;
 	line-height: 1.7rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	color: #d3d3d3;
 	& > * {
 		padding-left: 1.3rem;
@@ -113,14 +117,13 @@ export const Section = styled.section`
 `;
 
 export const FooterContainer = styled.div`
-	position: absolute;
-	bottom: 0;
-	padding-bottom: 5em;
+	padding-bottom: 2em;
+	/* padding-top: 100px; */
 	& > *:nth-child(2) {
 		padding-top: 1em;
 	}
 	@media screen and (max-width: 786px) {
-		padding-bottom: 6em;
+		/* padding-bottom: 6em; */
 	}
 `;
 export const Footer = styled.footer`

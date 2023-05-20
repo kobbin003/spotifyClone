@@ -3,7 +3,7 @@ export const Container = styled.main<{
 	left: number;
 	widthHandleDragger: number;
 }>`
-	background: var(--black-darkest);
+	background: var(--black-dark);
 	/* background: goldenrod; */
 	position: relative;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
@@ -12,7 +12,7 @@ export const Container = styled.main<{
 	border-radius: 0.3em;
 	height: 100vh;
 	overflow: scroll;
-	overscroll-behavior: contain;
+	/* overscroll-behavior: contain; */
 	/* max-height: calc(100vh-1em); */
 	//? dont let height go beyond 100vh or else it's container will get scroll
 	/* margin-top: 10px; */
@@ -27,4 +27,5 @@ export const Container = styled.main<{
 export const Content = styled.main`
 	/* padding-top: 500px; */
 	padding-top: calc(50 / 16 * 1em);
+	height: inherit;
 `;

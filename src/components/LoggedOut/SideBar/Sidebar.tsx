@@ -14,47 +14,52 @@ import {
 import { Link } from "react-router-dom";
 
 const SideBar = () => {
+	// const browserheight = window.innerHeight;
+	// const screenheight = screen.height;
+	// const screenwidth = screen.width;
+	// console.log(browserheight, screenheight, screenwidth);
 	return (
 		// <Button primary="#007bff">Primary Button</Button>
-
 		<Container>
-			<LogoHeader>
-				<Icon
-					src="/icons/spotify.svg"
-					spotify
-				></Icon>
-				<span>Spotify</span>
-			</LogoHeader>
-			<Section>
-				<UnorderedList>
-					<li>
-						<Icon src="/icons/home.svg"></Icon>
-						<a href="">Home</a>
-					</li>
-					<li>
-						<Icon src="/icons/search.svg"></Icon>
-						<a href="">Search</a>
-					</li>
-					<li>
-						<Icon src="/icons/library.svg"></Icon>
-						<a href="">Your Library</a>
-					</li>
-					<li>
-						<Icon
-							src="/icons/add-playlist.svg"
-							big
-						></Icon>
-						<button type="button">Create Playlist</button>
-					</li>
-					<li>
-						<Icon
-							src="/icons/heartsquare.svg"
-							big
-						></Icon>
-						<button type="button">Liked songs</button>
-					</li>
-				</UnorderedList>
-			</Section>
+			<div>
+				<LogoHeader>
+					<Icon
+						src="/icons/spotify.svg"
+						spotify
+					></Icon>
+					<span>Spotify</span>
+				</LogoHeader>
+				<Section>
+					<UnorderedList>
+						<li>
+							<Icon src="/icons/home.svg"></Icon>
+							<a href="">Home</a>
+						</li>
+						<li>
+							<Icon src="/icons/search.svg"></Icon>
+							<a href="">Search</a>
+						</li>
+						<li>
+							<Icon src="/icons/library.svg"></Icon>
+							<a href="">Your Library</a>
+						</li>
+						<li>
+							<Icon
+								src="/icons/add-playlist.svg"
+								big
+							></Icon>
+							<button type="button">Create Playlist</button>
+						</li>
+						<li>
+							<Icon
+								src="/icons/heartsquare.svg"
+								big
+							></Icon>
+							<button type="button">Liked songs</button>
+						</li>
+					</UnorderedList>
+				</Section>
+			</div>
 			<FooterContainer>
 				<Footer>
 					<UnorderedList>

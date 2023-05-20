@@ -93,7 +93,9 @@ export const Icon = styled.img<IconProp>`
 			return "1.8em";
 		} else if (props.small) {
 			return "10px";
-		} else return "1.6em";
+		} else {
+			return "1.6em";
+		}
 	}};
 	width: ${(props) => {
 		if (props.spotify) {
@@ -104,14 +106,16 @@ export const Icon = styled.img<IconProp>`
 			return "1em";
 		} else if (props.small) {
 			return "10px";
-		} else return "1.6em";
+		} else {
+			return "1.6em";
+		}
 	}};
 	padding-right: ${(props) => {
 		if (props.spotify) {
 			return "0.2em";
 		}
 		if (props.noPadding) {
-			return "0";
+			return "0em";
 		} else {
 			return "0.9em";
 		}

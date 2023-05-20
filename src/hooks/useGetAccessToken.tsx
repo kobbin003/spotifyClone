@@ -19,14 +19,19 @@ export const useGetAccessToken = (code: string) => {
 	// WHEN code(argument) changes
 	// WHICH changes on storage event in LoggedInLayout.tsx
 	// BECAUSE it cannot use hook inside useEffect in LoggedInLayout.tsx
-	console.log("useGetAccesstoken", codeState);
+	// console.log("useGetAccesstoken", codeState);
 
 	// FORFEIT useFetchToken if "accesstoken" already stored
 	// OR ELSE it will print invalid authorization code
 	// SINCE one code can generate only one access_token.
 	if (localStorage.getItem("accessToken")) {
 		console.log("access token found!");
-		return {};
+		// return data as if accesstoken was fetched or else it wont display <MainContent>
+		return {
+			data: { access_token: localStorage.getItem("accessToken") },
+			error: null,
+			isLoading: false,
+		};
 	}
 	const redirect_uri = "http://localhost:5173/callback";
 	const queryParams = new URLSearchParams({
@@ -39,20 +44,15 @@ export const useGetAccessToken = (code: string) => {
 	);
 	// set LocalStorage item:
 	// 		//! TYPE ASSERTIONS
-	if (data && (data as TokenData)?.access_token) {
-		console.log("DATA", data, error);
-		localStorage.setItem("accessToken", (data as TokenData).access_token);
-		localStorage.setItem("refreshToken", (data as TokenData).access_token);
-	} else if ((data as ErrorData)?.error) {
-		console.log("ERROR", data, error);
-		localStorage.removeItem("accessToken");
-		localStorage.removeItem("refreshToken");
-	}
 	useEffect(() => {
-		// console.log("getaccesstoken", code);
-		setCodeState(code);
-		// console.log("DATA", data, error);
-	}, [code]);
-	// console.log("DATA OUT COMPONENT", data, error);
+		if (data && (data as TokenData)?.access_token) {
+			console.log("DATA", data, error);
+			localStorage.setItem("accessToken", (data as TokenData).access_token);
+			localStorage.setItem("refreshToken", (data as TokenData).refresh_token);
+		}
+	}, [data?.access_token]);
+	// useEffect(() => {
+	// 	setCodeState(code);
+	// }, [code]);
 	return { data, error, isLoading };
 };

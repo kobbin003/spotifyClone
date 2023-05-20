@@ -33,6 +33,7 @@ export const router = createBrowserRouter([
 	{
 		path: "/me",
 		element: <LoggedInLayout />,
+		// errorElement: <div>error</div>,
 		children: [
 			{
 				index: true,
