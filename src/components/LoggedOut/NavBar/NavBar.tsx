@@ -1,4 +1,12 @@
-import { MouseEvent } from "react";
+import {
+	ChangeEvent,
+	FocusEvent,
+	FormEventHandler,
+	MouseEvent,
+	SyntheticEvent,
+	useRef,
+	useState,
+} from "react";
 import {
 	NavArrowIcon,
 	LoginLink,
@@ -8,15 +16,15 @@ import {
 	NavigatePageSection,
 	FixedContainer,
 } from "./style";
-import { authorize, authorizeFromBackEnd } from "../../../utils/authorize";
-import { useNavigate } from "react-router-dom";
+import { authorize } from "../../../utils/authorize";
+import Search from "../../Search";
 const NavBar = () => {
+	const location = window.location.pathname;
 	const handleLogin = (e: MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 		authorize();
-		// authorizeFromBackEnd();
-		// console.log("log in");
 	};
+
 	return (
 		<Container>
 			<FixedContainer>
@@ -33,12 +41,12 @@ const NavBar = () => {
 							direction="right"
 						/>
 					</a>
+					{location === "/search" ? <Search></Search> : <></>}
 				</NavigatePageSection>
 				<LoginSignupSection>
 					<SignUpLink href="">Sign up</SignUpLink>
 					<LoginLink
 						href=""
-						// onClick={(e) => handleOnClickLogin(e, true)}
 						onClick={handleLogin}
 					>
 						Log in

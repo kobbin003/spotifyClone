@@ -1,7 +1,7 @@
 import React from "react";
 
-const Search = () => {
-	return <div>Search</div>;
+const SearchIn = () => {
+	return <div>SearchIn</div>;
 };
 
-export default Search;
+export default SearchIn;

@@ -47,7 +47,42 @@ export const NavArrowIcon = styled.img<{ direction: string }>`
 	position: relative;
 	left: ${(prop) => (prop.direction === "left" ? "0.4em" : "0px")};
 `;
-
+// export const SearchInputContainer = styled.div`
+// 	position: relative;
+// 	height: 75%;
+// 	width: 25vw;
+// 	min-width: 100px;
+// 	/* background-color: pink; */
+// 	padding: 3px;
+// 	&::before {
+// 		content: url("/public/icons/search.svg");
+// 		color: red;
+// 		position: absolute;
+// 		/* scale: 1.2; */
+// 		top: 15px;
+// 		left: 15px;
+// 		width: 1em;
+// 		z-index: 10;
+// 	}
+// 	input {
+// 		height: 100%;
+// 		width: 100%;
+// 		color: #ffffff;
+// 		border-radius: 5555px;
+// 		caret-color: #ffffff;
+// 		border: none;
+// 		caret: unset;
+// 		background-color: #242424;
+// 		padding-left: 40px;
+// 		&::placeholder {
+// 			font-size: 0.8rem;
+// 			font-weight: 500;
+// 		}
+// 		&:hover {
+// 			filter: brightness(150%);
+// 		}
+// 	}
+// `;
 //-----------------
 type IconProp = {
 	readonly spotify?: boolean;

@@ -1,12 +1,4 @@
-import * as React from "react";
-import {
-	Routes,
-	Route,
-	Outlet,
-	Link,
-	createBrowserRouter,
-	useLoaderData,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import LoggedOutLayout from "./layout/LoggedOutLayout";

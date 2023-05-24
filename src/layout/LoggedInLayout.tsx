@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useGetAccessToken } from "../hooks/useGetAccessToken";
 import { ErrorBoundary } from "react-error-boundary";
 import { errorBoundaryFallback } from "./errorBoundaryFallback";
-// import { TokenData, ErrorData } from "../hooks/useGetAccessToken";
 const widthHandleDragger: number = 2;
 
 const LoggedInLayout: React.FC = () => {
@@ -14,7 +13,7 @@ const LoggedInLayout: React.FC = () => {
 	const [width, setWidth] = useState(14.5);
 	const [isDraggable, setIsDraggable] = useState(false);
 	const [code, setCode] = useState<string | null>(localStorage.getItem("code"));
-	const { data, error, isLoading } = useGetAccessToken(code || "");
+	const { data, error, isLoading } = useGetAccessToken(code || null);
 	// useGetRefreshToken(false);
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
@@ -27,14 +26,20 @@ const LoggedInLayout: React.FC = () => {
 			console.log("mouse move", isDraggable, e);
 		}
 	};
-	// console.log("loggedin", { data, error, isLoading });
 
 	useEffect(() => {
 		if (localStorage.getItem("code")) {
 			setCode(localStorage.getItem("code"));
 		}
-		// console.log("loggedinlayout", code);
 	}, [localStorage.getItem("code")]);
+	useEffect(() => {
+		// if code not found, then navigate to "/"
+		if (!code) navigate("/");
+	}, []);
+	useEffect(() => {
+		console.log("data", data);
+	}, [code]);
+
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
 			<Container>

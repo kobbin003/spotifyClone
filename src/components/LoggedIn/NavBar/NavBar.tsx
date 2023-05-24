@@ -11,8 +11,10 @@ import {
 	ProfileButton,
 	Icon,
 	DropDown,
+	// SearchInputContainer,
 } from "./navBar.style";
 import { useNavigate } from "react-router-dom";
+import Search from "../../Search";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
@@ -21,6 +23,7 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
+	const location = window.location.pathname;
 	const navigate = useNavigate();
 	const handleDropDownMenu = () => {
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
@@ -50,6 +53,7 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 							direction="right"
 						/>
 					</a>
+					{location === "/me/search" && <Search loggedIn></Search>}
 				</NavigatePageSection>
 				<ProfileContainer>
 					<UpgradeLink href="">Upgrade</UpgradeLink>

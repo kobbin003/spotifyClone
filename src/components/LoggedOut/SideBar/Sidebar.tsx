@@ -33,15 +33,18 @@ const SideBar = () => {
 					<UnorderedList>
 						<li>
 							<Icon src="/icons/home.svg"></Icon>
-							<a href="">Home</a>
+							<Link to="/me">
+								Home
+								{/* <a href="">Home</a> */}
+							</Link>
 						</li>
 						<li>
 							<Icon src="/icons/search.svg"></Icon>
-							<a href="">Search</a>
+							<Link to="/search">Search</Link>
 						</li>
 						<li>
 							<Icon src="/icons/library.svg"></Icon>
-							<a href="">Your Library</a>
+							<button type="button">Your Library</button>
 						</li>
 						<li>
 							<Icon
