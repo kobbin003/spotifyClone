@@ -17,7 +17,11 @@ import {
 	FixedContainer,
 } from "./style";
 import { authorize } from "../../../utils/authorize";
-import Search from "../../Search";
+import Search from "../../SearchBar";
+import {
+	SearchInputContainerIn,
+	SearchInputContainerOut,
+} from "../../SearchBar.style";
 const NavBar = () => {
 	const location = window.location.pathname;
 	const handleLogin = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -41,7 +45,11 @@ const NavBar = () => {
 							direction="right"
 						/>
 					</a>
-					{location === "/search" ? <Search></Search> : <></>}
+					{location === "/search" ? (
+						<Search styledComponent={SearchInputContainerOut}></Search>
+					) : (
+						<></>
+					)}
 				</NavigatePageSection>
 				<LoginSignupSection>
 					<SignUpLink href="">Sign up</SignUpLink>

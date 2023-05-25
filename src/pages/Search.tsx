@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const SearchIn = () => {
+const Search = () => {
+	useEffect(() => {}, []);
 	return <div>SearchIn</div>;
 };
 
-export default SearchIn;
+export default Search;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
 	NavArrowIcon,
@@ -14,15 +14,24 @@ import {
 	// SearchInputContainer,
 } from "./navBar.style";
 import { useNavigate } from "react-router-dom";
-import Search from "../../Search";
+import Search from "../../SearchBar";
+import { SearchInputContainerIn } from "../../SearchBar.style";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
+	passQueryToMainContent: React.Dispatch<
+		React.SetStateAction<string | undefined>
+	>;
 };
-const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
+const NavBar = ({
+	widthHandleDragger,
+	left,
+	passQueryToMainContent,
+}: NavbarProp) => {
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
+	const [queryFromSearchBar, setQueryFromSearchBar] = useState<string>();
 	const location = window.location.pathname;
 	const navigate = useNavigate();
 	const handleDropDownMenu = () => {
@@ -34,6 +43,11 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 		localStorage.removeItem("refreshToken");
 		navigate("/");
 	};
+	useEffect(() => {
+		// console.log("NAVBAR", queryFromSearchBar);
+		passQueryToMainContent(queryFromSearchBar);
+	}, [queryFromSearchBar]);
+
 	return (
 		<>
 			<FixedContainer
@@ -53,7 +67,13 @@ const NavBar = ({ widthHandleDragger, left }: NavbarProp) => {
 							direction="right"
 						/>
 					</a>
-					{location === "/me/search" && <Search loggedIn></Search>}
+					{location === "/me/search" && (
+						<Search
+							loggedIn
+							styledComponent={SearchInputContainerIn}
+							passQueryToNavBar={setQueryFromSearchBar}
+						></Search>
+					)}
 				</NavigatePageSection>
 				<ProfileContainer>
 					<UpgradeLink href="">Upgrade</UpgradeLink>

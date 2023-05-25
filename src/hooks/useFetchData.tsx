@@ -6,6 +6,7 @@ type FetchDataState<T, U> = {
 	error: U | null;
 	isLoading: boolean;
 };
+
 const useFetchData = <T, U extends {}>(
 	url: string,
 	accessToken: string,

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { style } from "styled-system";
 export const SearchInputContainer = styled.div`
 	position: relative;
 
