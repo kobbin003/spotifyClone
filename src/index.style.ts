@@ -59,6 +59,9 @@ export const GlobalStyle = createGlobalStyle`
 	padding: 0;
 	font-family: "MyFont", "Times New Roman";
 }
+body{
+	background-color: yellowgreen;
+}
 :root {
 	font-size: 16px;
 	--black-darkest: #000000;
@@ -72,6 +75,7 @@ export const GlobalStyle = createGlobalStyle`
 	--font-black:#000000;
 	--background-white:#ffffff;
 	--button-white:#ffffff;
-
+	--data-display-background:#181818;
+	--data-display-background-hover:#3a3a3a;
 }
 `;

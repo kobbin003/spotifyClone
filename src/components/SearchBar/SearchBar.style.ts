@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { style } from "styled-system";
+
 export const SearchInputContainer = styled.div`
 	position: relative;
 
@@ -57,42 +57,16 @@ export const SearchInputContainerIn = styled(SearchInputContainer)`
 		}
 	}
 `;
-// export const SearchInputContainerIn = styled.div`
-// 	position: relative;
-// 	height: 80%;
-// 	width: 25vw;
-// 	min-width: 100px;
-// 	background-color: pink;
-// 	padding: 3px;
-// 	input {
-// 		height: 100%;
-// 		width: 100%;
-// 		border-radius: 5555px;
-// 		border: none;
-// 		caret: unset;
 
-// 		padding-left: 40px;
-// 		&::placeholder {
-// 			font-size: 0.8rem;
-// 			font-weight: 500;
-// 		}
-// 		&::-webkit-search-cancel-button {
-// 			display: none;
-// 		}
-// 		&:hover {
-// 			filter: brightness(150%);
-// 		}
-// 	}
-// `;
-export const SearchIcon = styled.img<{ in?: boolean }>`
-	height: ${(props) => (props.in ? "40%" : "55%")};
+export const SearchIcon = styled.img<{ loggedIn?: boolean }>`
+	height: ${(props) => (props.loggedIn ? "40%" : "55%")};
 	/* width: 10%; */
 	position: absolute;
-	left: ${(props) => (props.in ? "0.8em" : "0.6em")};
+	left: ${(props) => (props.loggedIn ? "0.8em" : "0.6em")};
 `;
 export const ResetButton = styled.button<{
 	visible: string;
-	in?: boolean;
+	loggedIn?: boolean;
 }>`
 	height: 90%;
 	width: 26px;
@@ -100,9 +74,9 @@ export const ResetButton = styled.button<{
 	background-color: transparent;
 	/* background-color: red; */
 	/* padding-left: 0.3em; */
-	padding-left: ${(props) => props.in && "0.3em"};
+	padding-left: ${(props) => props.loggedIn && "0.3em"};
 	/* padding-right: 1em; */
-	padding-right: ${(props) => props.in && "1em"};
+	padding-right: ${(props) => props.loggedIn && "1em"};
 	border: none;
 	position: absolute;
 	right: 0.5em;
@@ -112,7 +86,7 @@ export const ResetButton = styled.button<{
 	align-items: center;
 	visibility: ${(props) => props.visible};
 	img {
-		height: ${(props) => (props.in ? "40%" : "70%")};
+		height: ${(props) => (props.loggedIn ? "40%" : "70%")};
 		/* height: 90%; */
 		/* width: 100%; */
 		/* min-width: 20px; */

@@ -17,11 +17,11 @@ import {
 	FixedContainer,
 } from "./style";
 import { authorize } from "../../../utils/authorize";
-import Search from "../../SearchBar";
+import SearchBar from "../../SearchBar/SearchBar";
 import {
 	SearchInputContainerIn,
 	SearchInputContainerOut,
-} from "../../SearchBar.style";
+} from "../../SearchBar/SearchBar.style";
 const NavBar = () => {
 	const location = window.location.pathname;
 	const handleLogin = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -46,7 +46,10 @@ const NavBar = () => {
 						/>
 					</a>
 					{location === "/search" ? (
-						<Search styledComponent={SearchInputContainerOut}></Search>
+						<SearchBar
+							// passQueryToNavBar=""
+							styledComponent={SearchInputContainerOut}
+						></SearchBar>
 					) : (
 						<></>
 					)}

@@ -14,8 +14,8 @@ import {
 	// SearchInputContainer,
 } from "./navBar.style";
 import { useNavigate } from "react-router-dom";
-import Search from "../../SearchBar";
-import { SearchInputContainerIn } from "../../SearchBar.style";
+import Search from "../../SearchBar/SearchBar";
+import { SearchInputContainerIn } from "../../SearchBar/SearchBar.style";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;

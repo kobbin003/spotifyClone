@@ -12,7 +12,7 @@ const SearchBar = ({
 	styledComponent: StyledComponent, //component should be Uppercase.
 }: {
 	loggedIn?: boolean;
-	passQueryToNavBar: React.Dispatch<React.SetStateAction<string | undefined>>;
+	passQueryToNavBar?: React.Dispatch<React.SetStateAction<string | undefined>>;
 	styledComponent: StyledComponent<any, any>; //style to apply to the component.
 }) => {
 	const [resetButtonVisibility, setResetButtonVisibility] = useState<
@@ -31,7 +31,7 @@ const SearchBar = ({
 			setResetButtonVisibility("hidden");
 		}
 		// pass search query to parent
-		passQueryToNavBar(e.target.value);
+		if (passQueryToNavBar) passQueryToNavBar(e.target.value);
 	};
 	const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
 		setSearchValue("");
@@ -100,11 +100,11 @@ const SearchBar = ({
 				onChange={handleOnChange}
 			></input>
 			<SearchIcon
-				in
+				loggedIn
 				src="/icons/navBar/searchWhiteGrey.svg"
 			></SearchIcon>
 			<ResetButton
-				in
+				loggedIn
 				visible={resetButtonVisibility}
 				type="button"
 				onClick={handleReset}

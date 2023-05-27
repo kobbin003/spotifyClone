@@ -1,7 +1,7 @@
 import React from "react";
 import useFetchData from "../useFetchData";
-
-type Item = {
+import { getTopSearch } from "../../utils/getTopSearchItem";
+export type SearchItem = {
 	external_urls: { spotify: string };
 	followers: { href: null; total: number };
 	genres: string[];
@@ -14,30 +14,36 @@ type Item = {
 	uri: string;
 };
 
-type SearchData = {
+export type SearchData = {
 	[key: string]: {
 		href: string;
-		items: Item[];
+		items: SearchItem[];
 		limit: number;
 		offset: number;
 		total: number;
 	};
 };
+
 type Error = {
 	error: {
 		status: number;
 		message: string;
 	};
 };
+
 const getSearchItem = (query: string, type: string) => {
 	const url = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=10&offset=0`;
+	const accessToken = localStorage.getItem("accessToken") || "";
 	const { data, error, isLoading } = useFetchData<SearchData, Error>(
 		url,
-		"accessToken",
+		accessToken,
 		"GET"
 	);
-
-	console.log("getSearchItem", data, error, isLoading);
+	if (data !== (null || undefined)) {
+		const modifiedData = getTopSearch(data);
+		console.log("getSearchItem", modifiedData, error, isLoading);
+		localStorage.setItem("searchData", JSON.stringify(modifiedData));
+	}
 	// return <div>getSearchItem</div>;
 };
 

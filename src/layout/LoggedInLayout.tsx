@@ -35,6 +35,22 @@ const LoggedInLayout: React.FC = () => {
 	useEffect(() => {
 		// if code not found, then navigate to "/"
 		if (!code) navigate("/");
+
+		/*
+		// cleaning up localstorage on browser close
+		const handleBeforeUnload = () => {
+			// Remove data from localStorage
+			localStorage.removeItem("accessToken");
+		};
+
+		// Add event listener for beforeunload
+		window.addEventListener("beforeunload", handleBeforeUnload);
+
+		// Clean up the event listener on component unmount
+		return () => {
+			window.removeEventListener("beforeunload", handleBeforeUnload);
+		};
+		*/
 	}, []);
 	useEffect(() => {
 		console.log("data", data);

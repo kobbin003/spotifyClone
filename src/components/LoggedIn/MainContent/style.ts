@@ -11,21 +11,15 @@ export const Container = styled.main<{
 	color: var(--font-white);
 	border-radius: 0.3em;
 	height: 100vh;
+	//? dont let height go beyond 100vh or else it's container will get scroll
 	overflow: scroll;
 	/* overscroll-behavior: contain; */
-	/* max-height: calc(100vh-1em); */
-	//? dont let height go beyond 100vh or else it's container will get scroll
 	/* margin-top: 10px; */
 `;
-// export const Emptydiv = styled.div`
-// 	position: fixed;
-// 	width: 100%;
-// 	background-color: var(--black-darkest);
-// 	height: 10px;
-// 	z-index: 1;
-// `;
+
 export const Content = styled.main`
 	/* padding-top: 500px; */
 	padding-top: calc(50 / 16 * 1em);
-	height: inherit;
+	/* height: inherit; */
+	/* background-color: aqua; */
 `;

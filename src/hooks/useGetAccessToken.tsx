@@ -13,6 +13,8 @@ export type ErrorData = {
 	error: string;
 	error_dscription: string;
 };
+type AccessTokenLocalStorage = { access_token: string };
+
 export const useGetAccessToken = (code: string | null) => {
 	//? try it in useFetchToken:
 	//! USING this statement here
@@ -32,16 +34,25 @@ export const useGetAccessToken = (code: string | null) => {
 		redirect_uri,
 		grant_type: "authorization_code",
 	});
-	let { data, error, isLoading } = useFetchToken<TokenData, ErrorData>(
-		queryParams
-	);
+	let { data, error, isLoading } = useFetchToken<
+		TokenData,
+		AccessTokenLocalStorage,
+		ErrorData
+	>(queryParams);
 	// 		//! TYPE ASSERTIONS
 	useEffect(() => {
 		// set LocalStorage item:
-		if (data && (data as TokenData)?.access_token) {
+
+		if (data && "refresh_token" in data) {
 			console.log("DATA", data, error);
 			localStorage.setItem("accessToken", (data as TokenData).access_token);
 			localStorage.setItem("refreshToken", (data as TokenData).refresh_token);
+		} else if (data && !("refresh_token" in data)) {
+			console.log("DATA has accesstoken", data, error);
+			localStorage.setItem(
+				"accessToken",
+				(data as AccessTokenLocalStorage).access_token
+			);
 		}
 	}, [data?.access_token]);
 
