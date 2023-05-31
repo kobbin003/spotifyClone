@@ -12,14 +12,19 @@ export const Container = styled.main<{
 	border-radius: 0.3em;
 	height: 100vh;
 	//? dont let height go beyond 100vh or else it's container will get scroll
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	/* overscroll-behavior: contain; */
 	/* margin-top: 10px; */
 `;
 
 export const Content = styled.main`
+	/* position: relative; */
 	/* padding-top: 500px; */
+	/* width: 100%; */
 	padding-top: calc(50 / 16 * 1em);
+	padding-left: 0.8em;
+	/* border: 1px solid yellow; */
 	/* height: inherit; */
 	/* background-color: aqua; */
 `;

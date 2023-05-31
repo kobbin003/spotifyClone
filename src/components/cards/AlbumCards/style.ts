@@ -76,18 +76,22 @@ export const Card = styled.a`
 	}
 `;
 export const ImageContainer = styled.div`
+	position: relative;
+	height: 100%;
 	img {
 		border-radius: 5px;
 		width: 100%;
 	}
-	contain: content;
 `;
 export const SpotifyPlay = styled.img`
+	display: block;
+	height: 100%;
+	width: 100%;
 	/* height: 5px; */
 	/* width: 5px; */
 	position: absolute;
-	bottom: -70px;
-	right: -60px;
+	right: -40px;
+	bottom: -50px;
 	visibility: hidden;
 	scale: 0.2;
 	transition: translate 0.2s ease-in;

@@ -20,23 +20,20 @@ import SearchTypesList from "../../searchTypesList/SearchTypesList";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
-	passQueryToMainContent: React.Dispatch<
-		React.SetStateAction<string | undefined>
-	>;
+	queryFromSearchBar: React.Dispatch<React.SetStateAction<string | undefined>>;
+	showSearchTypes: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const NavBar = ({
 	widthHandleDragger,
 	left,
-	passQueryToMainContent,
+	queryFromSearchBar,
+	showSearchTypes,
 }: NavbarProp) => {
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
-	const [queryFromSearchBar, setQueryFromSearchBar] = useState<string>();
-	const [showSearchTypes, setShowSearchTypes] = useState<boolean>(false);
 	const location = window.location.pathname;
 	const isInSearchRoute = /^\/me\/search.*/.test(location);
-	console.log("navbar", location, /^\/me\/search.*/.test(location));
 	const navigate = useNavigate();
 	const handleDropDownMenu = () => {
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
@@ -47,10 +44,6 @@ const NavBar = ({
 		localStorage.removeItem("refreshToken");
 		navigate("/");
 	};
-	useEffect(() => {
-		// console.log("NAVBAR", queryFromSearchBar);
-		passQueryToMainContent(queryFromSearchBar);
-	}, [queryFromSearchBar]);
 
 	return (
 		<>
@@ -71,17 +64,17 @@ const NavBar = ({
 							direction="right"
 						/>
 					</a>
-					{isInSearchRoute && (
-						<SearchBar
-							loggedIn
-							styledComponent={SearchInputContainerIn}
-							passQueryToNavBar={setQueryFromSearchBar}
-							showSearchTypes={setShowSearchTypes}
-						></SearchBar>
-					)}
 				</NavigatePageSection>
+				{isInSearchRoute && (
+					<SearchBar
+						loggedIn
+						styledComponent={SearchInputContainerIn}
+						passQueryToNavBar={queryFromSearchBar}
+						showSearchTypes={showSearchTypes}
+					></SearchBar>
+				)}
 				<ProfileContainer>
-					<UpgradeLink href="">Upgrade</UpgradeLink>
+					{!isInSearchRoute && <UpgradeLink href="">Upgrade</UpgradeLink>}
 					<InstallAppLink href="">
 						<Icon
 							src="/icons/navBar/download.svg"
@@ -98,9 +91,7 @@ const NavBar = ({
 					</ProfileButton>
 				</ProfileContainer>
 			</FixedContainer>
-			{isInSearchRoute && showSearchTypes && (
-				<SearchTypesList></SearchTypesList>
-			)}
+
 			<DropDown dropDownVisibility={dropDownVisibility}>
 				<a href="">Profile</a>
 				<a

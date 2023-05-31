@@ -11,10 +11,10 @@ import { Link } from "react-router-dom";
 const SearchTypesList = () => {
 	type INITIALSTATE = { searchType: string; active: boolean }[];
 	const initialState = [
-		{ searchType: "Artist", active: false },
-		{ searchType: "Track", active: false },
-		{ searchType: "Album", active: false },
-		{ searchType: "Playlist", active: false },
+		{ searchType: "artist", active: true },
+		{ searchType: "track", active: false },
+		{ searchType: "album", active: false },
+		{ searchType: "playlist", active: false },
 	];
 	type ACTIONTYPE = { type: "ACTIVATE"; payload: { searchType: string } };
 	const reducer = (state: INITIALSTATE, action: ACTIONTYPE) => {

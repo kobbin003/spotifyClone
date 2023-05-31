@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 import getSearchItem, {
 	SearchData,
 	SearchItem,
 } from "../../hooks/spotify-data/getSearchItem";
-import SearchType from "../../components/searchTypesList/SearchType";
+import SearchType from "../../components/searchTypesList/SearchTypesList";
 import {
 	Container,
 	ResultCard,
@@ -43,7 +43,7 @@ const Search = () => {
 				</TopResult>
 				<Songs></Songs>
 			</RowOne> */}
-			<h2>Recent Searches</h2>
+			<Outlet />
 		</Container>
 	);
 };

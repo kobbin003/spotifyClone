@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
 				path: "search",
 				element: <Search />,
 				children: [
-					{ index: true, element: <Search /> },
+					// { index: true, element: <Search /> },
 					// 	// "artist", "track", "album", "playlist"
 					{ path: "artist", element: <Artist /> },
 					{ path: "album", element: <Album /> },

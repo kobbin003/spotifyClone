@@ -21,8 +21,9 @@ export const FixedContainer = styled.div<{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	/* z-index: 3; */
+	z-index: 1;
 	overflow-x: hidden;
+	/* contain: content; */
 `;
 
 export const NavigatePageSection = styled.section`
@@ -102,8 +103,9 @@ export const Icon = styled.img<IconProp>`
 export const ProfileContainer = styled.div`
 	position: relative; //?
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
+	flex: 1;
 	height: 50px;
 	font-size: 0.9rem;
 	/* padding-right: 1em; //? */

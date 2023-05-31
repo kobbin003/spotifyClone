@@ -36,7 +36,7 @@ const Sidebar = ({
 						</li>
 						<li>
 							<Icon src="/icons/search.svg"></Icon>
-							<Link to="/me/search">Search</Link>
+							<Link to="/me/search/artist">Search</Link>
 						</li>
 					</UnorderedList>
 				</Home>

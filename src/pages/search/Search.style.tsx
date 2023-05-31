@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 export const Container = styled.div`
-	height: 100vh;
-	width: 100%;
+	/* width: 100%; */
+	/* height: 100vh;
+	width: 100%; */
+	/* margin-left: 0.8em; */
 	/* border: 1px solid red; */
-	padding-top: calc(40 / 16 * 1em);
+	/* padding-top: calc(40 / 16 * 1em); */
 	/* background-color: #5ba2e1; */
 `;
 export const RowOne = styled.div`

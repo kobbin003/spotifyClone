@@ -3,26 +3,37 @@ import styled from "styled-components";
 export const Container = styled.ul`
 	position: relative;
 	display: flex;
-	/* width: 50%; */
-	/* min-width: 2em; */
+	width: 80%;
+	/* left: 0; */
+	/* min-width: 200px; */
 	/* height: 1.5em; */
-	border: 1px solid yellow;
-	top: calc(50 / 16 * 1em);
+	/* border: 1px solid yellow; */
+	/* background-color: aqua; */
+	top: calc(50 / 16 * 1em); /* according to the height of navbar */
 	margin-top: 10px;
 	/* left: 0.4em; */
 	margin-left: 0.4em;
 	padding: 0.5em;
-	position: fixed;
-	/* z-index: 1; */
-	overflow-x: hidden;
+	overflow-x: scroll;
+	::-webkit-scrollbar {
+		width: 1px;
+		height: 1px;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: #acabab;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: green;
+	}
 `;
 export const LinkContainer = styled.li<{ active: boolean }>`
-	width: fit-content;
-	/* margin: 1px 5px; */
 	list-style: none;
 	a {
 		border-radius: 5555px;
 		text-decoration: none;
+		font-size: 0.8rem;
 		background-color: ${(prop) =>
 			prop.active ? "white" : "var(--data-display-background-hover)"};
 		color: ${(prop) =>

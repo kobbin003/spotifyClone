@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import NavBar from "../NavBar/NavBar";
 import { Container, Content } from "./style";
+import SearchTypesList from "../../searchTypesList/SearchTypesList";
 
 type Prop = {
 	left: number;
@@ -10,10 +11,16 @@ type Prop = {
 };
 
 const MainContent = ({ left, widthHandleDragger }: Prop) => {
-	const [queryFromNavBar, setQueryFromNavBar] = useState<string>();
-	// useEffect(() => {
-	// 	console.log("MAINCONTENT", queryFromNavBar);
-	// }, [queryFromNavBar]);
+	const [queryFromSearchBar, setQueryFromSearchBar] = useState<string>();
+	const [showSearchTypes, setShowSearchTypes] = useState<boolean>(false);
+	const location = window.location.pathname;
+	const isInSearchRoute = /^\/me\/search.*/.test(location);
+	useEffect(() => {
+		// console.log("location change", location);
+		if (location === "/me/") {
+			setShowSearchTypes(false);
+		}
+	}, [location]);
 	return (
 		<Container
 			left={left}
@@ -21,11 +28,15 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 		>
 			<NavBar
 				left={left}
-				passQueryToMainContent={setQueryFromNavBar}
+				queryFromSearchBar={setQueryFromSearchBar}
 				widthHandleDragger={widthHandleDragger}
+				showSearchTypes={setShowSearchTypes}
 			></NavBar>
+			{isInSearchRoute && showSearchTypes && (
+				<SearchTypesList></SearchTypesList>
+			)}
 			<Content>
-				<Outlet context={queryFromNavBar} />
+				<Outlet context={queryFromSearchBar} />
 			</Content>
 		</Container>
 	);

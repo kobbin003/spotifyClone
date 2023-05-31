@@ -13,9 +13,9 @@ export type SearchItem = {
 	type: string;
 	uri: string;
 };
-
+type Types = "tracks" | "artists" | "albums" | "playlists";
 export type SearchData = {
-	[key: string]: {
+	[key in Types]: {
 		href: string;
 		items: SearchItem[];
 		limit: number;
@@ -40,9 +40,9 @@ const getSearchItem = (query: string, type: string) => {
 		"GET"
 	);
 	if (data !== (null || undefined)) {
-		const modifiedData = getTopSearch(data);
-		console.log("getSearchItem", modifiedData, error, isLoading);
-		localStorage.setItem("searchData", JSON.stringify(modifiedData));
+		// const modifiedData = getTopSearch(data);
+		console.log("getSearchItem", data, error, isLoading);
+		localStorage.setItem("searchData", JSON.stringify(data));
 	}
 	// return <div>getSearchItem</div>;
 };
