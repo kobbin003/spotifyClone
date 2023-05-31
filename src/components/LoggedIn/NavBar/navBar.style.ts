@@ -13,18 +13,23 @@ export const FixedContainer = styled.div<{
 	position: fixed;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
 	height: calc(50 / 16 * 1em);
-	min-width: 350px;
+	/* min-width: 320px; */
+	/** //! DO NOT make min-width of fixed container with space in right size
+		//! OR ELSE it will overflow when container gets minimized
+	 */
 	background-color: var(--black-dark);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	z-index: 3;
+	/* z-index: 3; */
+	overflow-x: hidden;
 `;
 
 export const NavigatePageSection = styled.section`
 	position: relative;
 	height: 100%;
 	display: flex;
+	min-width: 80px;
 	justify-content: center;
 	align-items: center;
 	align-content: center;
@@ -129,6 +134,7 @@ export const InstallAppLink = styled(ButtonLink)`
 	background: #000000;
 	color: #ffffff;
 	padding: 0.7em 0.65em;
+	/* min-width: 70px; */
 	& img {
 		padding-right: 0.1em;
 	}
@@ -136,6 +142,7 @@ export const InstallAppLink = styled(ButtonLink)`
 	& span {
 		font-size: 0.3em;
 		font-weight: inherit;
+		white-space: nowrap;
 	}
 `;
 

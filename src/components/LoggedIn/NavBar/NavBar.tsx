@@ -14,8 +14,9 @@ import {
 	// SearchInputContainer,
 } from "./navBar.style";
 import { useNavigate } from "react-router-dom";
-import Search from "../../SearchBar/SearchBar";
+import SearchBar from "../../SearchBar/SearchBar";
 import { SearchInputContainerIn } from "../../SearchBar/SearchBar.style";
+import SearchTypesList from "../../searchTypesList/SearchTypesList";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
@@ -32,7 +33,10 @@ const NavBar = ({
 		"visible" | "hidden"
 	>("hidden");
 	const [queryFromSearchBar, setQueryFromSearchBar] = useState<string>();
+	const [showSearchTypes, setShowSearchTypes] = useState<boolean>(false);
 	const location = window.location.pathname;
+	const isInSearchRoute = /^\/me\/search.*/.test(location);
+	console.log("navbar", location, /^\/me\/search.*/.test(location));
 	const navigate = useNavigate();
 	const handleDropDownMenu = () => {
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
@@ -67,12 +71,13 @@ const NavBar = ({
 							direction="right"
 						/>
 					</a>
-					{location === "/me/search" && (
-						<Search
+					{isInSearchRoute && (
+						<SearchBar
 							loggedIn
 							styledComponent={SearchInputContainerIn}
 							passQueryToNavBar={setQueryFromSearchBar}
-						></Search>
+							showSearchTypes={setShowSearchTypes}
+						></SearchBar>
 					)}
 				</NavigatePageSection>
 				<ProfileContainer>
@@ -93,6 +98,9 @@ const NavBar = ({
 					</ProfileButton>
 				</ProfileContainer>
 			</FixedContainer>
+			{isInSearchRoute && showSearchTypes && (
+				<SearchTypesList></SearchTypesList>
+			)}
 			<DropDown dropDownVisibility={dropDownVisibility}>
 				<a href="">Profile</a>
 				<a

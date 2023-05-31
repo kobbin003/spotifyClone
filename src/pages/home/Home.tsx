@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import AlbumCards from "../components/cards/AlbumCards/AlbumCards";
-import getUserAlbums, { UserAlbums } from "../hooks/spotify-data/getUserAlbums";
+import AlbumCards from "../../components/cards/AlbumCards/AlbumCards";
+import getUserAlbums, {
+	UserAlbums,
+} from "../../hooks/spotify-data/getUserAlbums";
 import { Albums, Container, SubHeaders } from "./Home.style";
 
 const Home = () => {

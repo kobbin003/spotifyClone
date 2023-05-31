@@ -1,4 +1,11 @@
-import React, { useState, useRef, ChangeEvent, MouseEvent } from "react";
+import React, {
+	useState,
+	useRef,
+	ChangeEvent,
+	MouseEvent,
+	FocusEvent,
+	useEffect,
+} from "react";
 import {
 	ResetButton,
 	SearchIcon,
@@ -9,10 +16,12 @@ import { StyledComponent } from "styled-components";
 const SearchBar = ({
 	loggedIn,
 	passQueryToNavBar,
+	showSearchTypes,
 	styledComponent: StyledComponent, //component should be Uppercase.
 }: {
 	loggedIn?: boolean;
 	passQueryToNavBar?: React.Dispatch<React.SetStateAction<string | undefined>>;
+	showSearchTypes?: React.Dispatch<React.SetStateAction<boolean>>;
 	styledComponent: StyledComponent<any, any>; //style to apply to the component.
 }) => {
 	const [resetButtonVisibility, setResetButtonVisibility] = useState<
@@ -33,6 +42,12 @@ const SearchBar = ({
 		// pass search query to parent
 		if (passQueryToNavBar) passQueryToNavBar(e.target.value);
 	};
+	const handleOnFocus = (e: FocusEvent<HTMLInputElement>) => {
+		if (showSearchTypes) {
+			showSearchTypes(true);
+		}
+	};
+
 	const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
 		setSearchValue("");
 		setResetButtonVisibility("hidden");
@@ -41,54 +56,7 @@ const SearchBar = ({
 			searchInput.current.focus();
 		}
 	};
-	// return (
-	// 	// {loggedIn}
-	// 	<>
-	// 		{loggedIn ? (
-	// 			<SearchInputContainerIn>
-	// 				<input
-	// 					ref={searchInput}
-	// 					type="search"
-	// 					placeholder="What do you want to listen to?"
-	// 					value={searchValue}
-	// 					autoFocus
-	// 					onChange={handleOnChange}
-	// 				></input>
-	// 				<SearchIcon
-	// 					in
-	// 					src="/icons/navBar/searchWhiteGrey.svg"
-	// 				></SearchIcon>
-	// 				<ResetButton
-	// 					in
-	// 					visible={resetButtonVisibility}
-	// 					type="button"
-	// 					onClick={handleReset}
-	// 				>
-	// 					<img src="/icons/navBar/clearInputWhiteGrey.svg" />
-	// 				</ResetButton>
-	// 			</SearchInputContainerIn>
-	// 		) : (
-	// 			<SearchInputContainerOut>
-	// 				<input
-	// 					ref={searchInput}
-	// 					type="search"
-	// 					placeholder="What do you want to listen to?"
-	// 					value={searchValue}
-	// 					autoFocus
-	// 					onChange={handleOnChange}
-	// 				></input>
-	// 				<SearchIcon src="/icons/navBar/searchBlack.svg"></SearchIcon>
-	// 				<ResetButton
-	// 					visible={resetButtonVisibility}
-	// 					type="button"
-	// 					onClick={handleReset}
-	// 				>
-	// 					<img src="/icons/navBar/clearInputBlack.svg" />
-	// 				</ResetButton>
-	// 			</SearchInputContainerOut>
-	// 		)}
-	// 	</>
-	// );
+
 	return (
 		<StyledComponent>
 			<input
@@ -97,6 +65,7 @@ const SearchBar = ({
 				placeholder="What do you want to listen to?"
 				value={searchValue}
 				autoFocus
+				onFocus={handleOnFocus}
 				onChange={handleOnChange}
 			></input>
 			<SearchIcon
