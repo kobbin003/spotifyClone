@@ -34,7 +34,7 @@ export const CardsContainer = styled.div`
 	@media (min-width: 892px) and (max-width: 1200px) {
 		/* background-color: wheat; */
 		/* grid: auto/auto auto auto auto; */
-		grid: auto/repeat(4, minmax(150px, auto));
+		grid: auto/repeat(4, minmax(150px, 250px));
 	}
 
 	/* Extra large devices (large laptops and desktops, 1200px and up) */

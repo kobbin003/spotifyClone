@@ -28,12 +28,17 @@ const AlbumCards = ({
 	return (
 		<Card href="">
 			<ImageContainer>
-				<SpotifyPlay src="/icons/spotify_play.svg" />
 				<img
 					src={src}
 					// onError={handleError}
 					// onLoad={handleLoad}
 				/>
+				<SpotifyPlay>
+					<img
+						src="/icons/spotify_play.svg"
+						className="spotify"
+					/>
+				</SpotifyPlay>
 			</ImageContainer>
 			<div>
 				<h4>

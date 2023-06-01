@@ -12,11 +12,15 @@ export const SubHeaders = styled.div`
 	display: flex;
 	justify-content: space-between;
 	padding: 1em;
+	h2 {
+		min-width: 200px;
+	}
 	a {
 		text-decoration: none;
 		color: var(--font-grey);
 		font-size: 0.8rem;
 		align-self: center;
+		min-width: 50px;
 	}
 `;
 export const Albums = styled.div`
