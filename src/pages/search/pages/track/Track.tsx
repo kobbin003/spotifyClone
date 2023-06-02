@@ -1,11 +1,19 @@
 import React from "react";
 import { TrackBody, Container, Header, TrackItem, Row } from "./style";
 import { tracks } from "../data";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 const Track = () => {
+	const [queryFromSearchBar, left, widthHandleDragger]: [
+		string,
+		number,
+		number
+	] = useOutletContext();
 	return (
 		<Container>
-			<Header>
+			<Header
+				left={left}
+				widthHandleDragger={widthHandleDragger}
+			>
 				<div>#</div>
 				<div>Title</div>
 				<div>Album</div>

@@ -51,45 +51,48 @@ const NavBar = ({
 				left={left}
 				widthHandleDragger={widthHandleDragger}
 			>
-				<NavigatePageSection>
-					<a href="">
-						<NavArrowIcon
-							src="/icons/navBar/arrow-circle-left.svg"
-							direction="left"
-						/>
-					</a>
-					<a href="">
-						<NavArrowIcon
-							src="/icons/navBar/arrow-circle-right.svg"
-							direction="right"
-						/>
-					</a>
-				</NavigatePageSection>
-				{isInSearchRoute && (
-					<SearchBar
-						loggedIn
-						styledComponent={SearchInputContainerIn}
-						passQueryToNavBar={queryFromSearchBar}
-						showSearchTypes={showSearchTypes}
-					></SearchBar>
-				)}
-				<ProfileContainer>
-					{!isInSearchRoute && <UpgradeLink href="">Upgrade</UpgradeLink>}
-					<InstallAppLink href="">
-						<Icon
-							src="/icons/navBar/download.svg"
-							globe
-						></Icon>
-						<span>Install App</span>
-					</InstallAppLink>
-					<ProfileButton>
-						<Icon
-							src="/icons/navBar/profile.svg"
-							user
-							onClick={handleDropDownMenu}
-						></Icon>
-					</ProfileButton>
-				</ProfileContainer>
+				<div>
+					<NavigatePageSection>
+						<a href="">
+							<NavArrowIcon
+								src="/icons/navBar/arrow-circle-left.svg"
+								direction="left"
+							/>
+						</a>
+						<a href="">
+							<NavArrowIcon
+								src="/icons/navBar/arrow-circle-right.svg"
+								direction="right"
+							/>
+						</a>
+					</NavigatePageSection>
+					{isInSearchRoute && (
+						<SearchBar
+							loggedIn
+							styledComponent={SearchInputContainerIn}
+							passQueryToNavBar={queryFromSearchBar}
+							showSearchTypes={showSearchTypes}
+						></SearchBar>
+					)}
+					<ProfileContainer>
+						{!isInSearchRoute && <UpgradeLink href="">Upgrade</UpgradeLink>}
+						<InstallAppLink href="">
+							<Icon
+								src="/icons/navBar/download.svg"
+								globe
+							></Icon>
+							<span>Install App</span>
+						</InstallAppLink>
+						<ProfileButton>
+							<Icon
+								src="/icons/navBar/profile.svg"
+								user
+								onClick={handleDropDownMenu}
+							></Icon>
+						</ProfileButton>
+					</ProfileContainer>
+				</div>
+				<SearchTypesList />
 			</FixedContainer>
 
 			<DropDown dropDownVisibility={dropDownVisibility}>

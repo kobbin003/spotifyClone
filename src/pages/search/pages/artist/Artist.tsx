@@ -8,6 +8,8 @@ import { CardsContainer, ImageContainer, ResultCard, Title } from "./style";
 const Artist = () => {
 	const query: string | "" = useOutletContext();
 	// getSearchItem(query, "artist");
+	console.log("query-Artist", query);
+
 	const searchData: SearchData = JSON.parse(
 		localStorage.getItem("searchData") || ""
 	);
@@ -17,7 +19,7 @@ const Artist = () => {
 			{searchData && (
 				<CardsContainer>
 					{searchData.artists.items.map((item) => (
-						<ResultCard>
+						<ResultCard key={item.id}>
 							<ImageContainer>
 								<img src={item.images[2].url}></img>
 								<img src="/icons/spotify_play.svg"></img>

@@ -21,6 +21,8 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 			setShowSearchTypes(false);
 		}
 	}, [location]);
+	// console.log("maincontent", queryFromSearchBar);
+
 	return (
 		<Container
 			left={left}
@@ -32,11 +34,12 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 				widthHandleDragger={widthHandleDragger}
 				showSearchTypes={setShowSearchTypes}
 			></NavBar>
-			{isInSearchRoute && showSearchTypes && (
+			{/* {isInSearchRoute && showSearchTypes && (
 				<SearchTypesList></SearchTypesList>
-			)}
+			)} */}
 			<Content>
-				<Outlet context={queryFromSearchBar} />
+				<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
+				{/* <Outlet /> */}
 			</Content>
 		</Container>
 	);

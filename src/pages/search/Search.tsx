@@ -14,7 +14,12 @@ import {
 } from "./Search.style";
 
 const Search = () => {
-	const query: string | "" = useOutletContext();
+	const [queryFromSearchBar, left, widthHandleDragger]: [
+		string,
+		number,
+		number
+	] = useOutletContext();
+	// console.log("query-Search", queryFromSearchBar);
 	const [type, setType] = useState<string>("");
 	// getSearchItem(query, type);
 	const searchData: SearchItem = JSON.parse(
@@ -22,28 +27,7 @@ const Search = () => {
 	);
 	return (
 		<Container>
-			{/* <SearchType selectType={setType}></SearchType> */}
-			{/* <RowOne>
-				<TopResult>
-					<h2>
-						<b>Top result</b>
-					</h2>
-					{searchData && (
-						<ResultCard>
-							<img src={searchData.images[2].url}></img>
-							<p>
-								<b>{searchData.name}</b>
-							</p>
-							<p>
-								{searchData.type[0].toUpperCase() + searchData.type.slice(1)}
-							</p>
-							<img src="/icons/spotify_play.svg"></img>
-						</ResultCard>
-					)}
-				</TopResult>
-				<Songs></Songs>
-			</RowOne> */}
-			<Outlet />
+			<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
 		</Container>
 	);
 };

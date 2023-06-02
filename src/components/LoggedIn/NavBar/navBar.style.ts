@@ -12,18 +12,23 @@ export const FixedContainer = styled.div<{
 }>`
 	position: fixed;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
-	height: calc(50 / 16 * 1em);
-	/* min-width: 320px; */
+	height: calc(100 / 16 * 1em);
 	/** //! DO NOT make min-width of fixed container with space in right size
 		//! OR ELSE it will overflow when container gets minimized
 	 */
 	background-color: var(--black-dark);
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
 	z-index: 1;
 	overflow-x: hidden;
-	/* contain: content; */
+	& > div {
+		position: relative;
+		width: 100%;
+		height: 50%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 `;
 
 export const NavigatePageSection = styled.section`

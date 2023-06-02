@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+	position: relative;
 	width: 100%;
-	padding-top: 0.3em;
+	max-width: inherit;
 	font-weight: 500;
 	font-size: 0.8rem;
+	/* border: 2px solid lightcyan; */
+	margin-top: 50px;
 `;
 
 export const Row = styled.div`
@@ -12,6 +15,7 @@ export const Row = styled.div`
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
+	overflow: hidden;
 	&:hover {
 		a {
 			color: var(--font-white);
@@ -31,13 +35,13 @@ export const Row = styled.div`
 	}
 	& > div:nth-of-type(1) {
 		width: 3em;
-		min-width: 20px;
+		min-width: 40px;
 		/* background-color: red; */
 		text-align: center;
 	}
 	& > div:nth-of-type(2) {
 		flex: 1;
-		min-width: 180px;
+		min-width: 200px;
 	}
 	& > div:nth-of-type(3) {
 		/* background-color: greenyellow; */
@@ -45,27 +49,39 @@ export const Row = styled.div`
 		min-width: 100px;
 	}
 	& > div:nth-of-type(4) {
+		/* background-color: greenyellow; */
 		width: 5em;
 		min-width: 8em;
 		display: flex;
-		padding-right: 1em;
+		align-items: center;
+		margin-right: 2em;
 	}
 
 	img {
 		height: 20px;
 	}
 `;
-export const Header = styled(Row)`
+export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
+	position: fixed;
+
+	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger + 5.1}em);
 	border-bottom: 1px solid var(--font-grey);
 	padding: 0.5em 0;
-	background-color: var(--data-display-background-hover);
+	background-color: var(--background-dull);
+
 	div:nth-of-type(4) {
 		align-self: center;
 		justify-content: center;
+		overflow: hidden;
+		img {
+			display: block;
+		}
 	}
 `;
 export const TrackBody = styled.div`
-	padding: 1em 0;
+	padding-bottom: 1em;
+	padding-top: 50px;
+	/* margin-top: 50px; */
 `;
 export const TrackItem = styled(Row)`
 	a {

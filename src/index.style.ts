@@ -78,5 +78,6 @@ body{
 	--button-white:#ffffff;
 	--data-display-background:#181818;
 	--data-display-background-hover:#3a3a3a;
+	--background-dull:#1b1b1b;
 }
 `;
