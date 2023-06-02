@@ -71,6 +71,7 @@ body{
 	--profile-dropdown:#282828;
 	--profile-dropdown-font:#f3f3f3;
     --font-grey: #d3d3d3;
+    --font-greyer: #b3b3b3;
     --font-white: #ffffff;
 	--font-black:#000000;
 	--background-white:#ffffff;

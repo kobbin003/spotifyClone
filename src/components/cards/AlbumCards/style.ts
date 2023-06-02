@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const Card = styled.a`
 	height: fit-content;
-	/* min-height: 180px; */
+	/* min-height: 200px; */
 	/* width: 150px; */
 	/* width: auto; */
 	/* border: 1px solid green; */
@@ -43,6 +43,7 @@ export const Card = styled.a`
 	h4 {
 		color: var(--font-white);
 		padding: 0.8em 0;
+		min-height: 16px;
 		white-space: nowrap;
 		overflow-x: scroll;
 		overflow-y: hidden;

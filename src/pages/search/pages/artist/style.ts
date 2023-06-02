@@ -8,6 +8,7 @@ export const CardsContainer = styled.div`
 	display: grid;
 	width: 100%;
 	position: relative;
+	cursor: pointer;
 	/* grid: repeat(2, 1fr) / repeat(4, minmax(150px, 300px)); */
 	/* min-width: 200px; */
 	@media only screen and (max-width: 500px) {
