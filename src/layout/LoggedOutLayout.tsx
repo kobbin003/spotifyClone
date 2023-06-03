@@ -11,15 +11,10 @@ import { ErrorBoundary } from "react-error-boundary";
 import NavBar from "../components/LoggedOut/NavBar/NavBar";
 import Sidebar from "../components/LoggedOut/SideBar/Sidebar";
 import styled from "styled-components";
-import { LoggedOutAppContainer } from "../App.style";
+import { LoggedOutAppContainer } from "./LoggedOutLayout.style";
 import useGetAccessCode from "../hooks/useGetAccessCode";
 import { errorBoundaryFallback } from "./errorBoundaryFallback";
-
-const Content = styled.div`
-	position: relative;
-	grid-column: 2/3;
-	grid-row: 2/3;
-`;
+import { Content } from "./LoggedOutLayout.style";
 
 const LoggedOutLayout = () => {
 	const navigate = useNavigate();
@@ -49,7 +44,7 @@ const LoggedOutLayout = () => {
 				<Sidebar></Sidebar>
 				<NavBar></NavBar>
 				<Content>
-					<Outlet />
+					<Outlet context={["", 0, 0]} />
 				</Content>
 			</LoggedOutAppContainer>
 		</ErrorBoundary>

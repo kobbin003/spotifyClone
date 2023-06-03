@@ -11,16 +11,19 @@ import { Link, useLocation } from "react-router-dom";
 const SearchTypesList = () => {
 	type INITIALSTATE = { searchType: string; active: boolean }[];
 	// select the last item in the window.location.pathname
-	const locationPathname = window.location.pathname.split("/").slice(-1)[0];
+	const lastItemAtLocationPathname = window.location.pathname.split("/").at(-1);
+	// check if isLoggedIn, By checking the first item in the window.location.pathname
+	const isLoggedIn = window.location.pathname.startsWith("/me");
+	console.log("isLoggedIn", isLoggedIn);
 	const typesState = [
-		{ searchType: "Artist", active: false },
-		{ searchType: "Track", active: false },
-		{ searchType: "Album", active: false },
-		{ searchType: "Playlist", active: false },
+		{ searchType: "artist", active: false },
+		{ searchType: "track", active: false },
+		{ searchType: "album", active: false },
+		{ searchType: "playlist", active: false },
 	];
-	// set active true if locationPathname matches searchType.
+	// set active true if lastItemAtLocationPathname matches searchType.
 	const initialState = typesState.map((type) => {
-		if (locationPathname === type.searchType) {
+		if (lastItemAtLocationPathname === type.searchType) {
 			return { ...type, active: true };
 		} else return { ...type };
 	});
@@ -50,12 +53,16 @@ const SearchTypesList = () => {
 					active={type.active}
 				>
 					<Link
-						to={`/me/search/${type.searchType}`}
+						to={
+							isLoggedIn
+								? `/me/search/${type.searchType}`
+								: `/search/${type.searchType}`
+						}
 						onClick={handleOnClick}
 						id={type.searchType}
 						// name={type}
 					>
-						{type.searchType}
+						{type.searchType[0].toUpperCase() + type.searchType.slice(1)}
 					</Link>
 				</LinkContainer>
 			))}

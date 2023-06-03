@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
 	position: relative;
 	width: 100%;
-	max-width: inherit;
+	/* max-width: inherit; */
 	font-weight: 500;
 	font-size: 0.8rem;
-	/* border: 2px solid lightcyan; */
-	margin-top: 50px;
+	/* border: 1px solid goldenrod; */
+	/* margin-top: 50px; */
 `;
 
 export const Row = styled.div`
@@ -63,12 +63,11 @@ export const Row = styled.div`
 `;
 export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 	position: fixed;
-
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger + 5.1}em);
 	border-bottom: 1px solid var(--font-grey);
 	padding: 0.5em 0;
 	background-color: var(--background-dull);
-
+	background-color: aqua;
 	div:nth-of-type(4) {
 		align-self: center;
 		justify-content: center;

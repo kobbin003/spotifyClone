@@ -5,6 +5,7 @@ export const Container = styled.div`
 	/* height: 500px; */
 	height: 100%;
 	width: 100%;
+	background-color: var(--black-dark);
 	/* min-width: 550px; */
 	/* overflow: hidden; */
 `;

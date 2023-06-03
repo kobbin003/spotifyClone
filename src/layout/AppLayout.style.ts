@@ -13,5 +13,5 @@ export const LoggedOutAppContainer = styled.div`
 `;
 
 export const GridItem = styled.div`
-	border: 2px solid red;
+	/* border: 2px solid red; */
 `;

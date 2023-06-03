@@ -60,7 +60,7 @@ export const GlobalStyle = createGlobalStyle`
 	font-family: "MyFont", "Times New Roman";
 }
 body{
-	background-color: yellowgreen;
+	/* background-color: yellowgreen; */
 }
 :root {
 	font-size: 16px;

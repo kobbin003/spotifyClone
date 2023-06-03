@@ -33,14 +33,14 @@ const SideBar = () => {
 					<UnorderedList>
 						<li>
 							<Icon src="/icons/home.svg"></Icon>
-							<Link to="/me">
+							<Link to="/">
 								Home
 								{/* <a href="">Home</a> */}
 							</Link>
 						</li>
 						<li>
 							<Icon src="/icons/search.svg"></Icon>
-							<Link to="/search">Search</Link>
+							<Link to="/search/artist">Search</Link>
 						</li>
 						<li>
 							<Icon src="/icons/library.svg"></Icon>

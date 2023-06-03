@@ -11,13 +11,22 @@ export const FixedContainer = styled.div`
 	position: fixed;
 	width: calc(100% - 250px);
 	min-width: 350px;
-	height: 50px;
+	height: 100px;
 	background-color: #101010;
 	/* background-color: transparent; */
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
+	/* justify-content: space-between;
+	align-items: center; */
 	z-index: 1;
+	& > div {
+		position: relative;
+		width: 100%;
+		height: 50%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 `;
 export const InnerContainer = styled.div`
 	position: relative;

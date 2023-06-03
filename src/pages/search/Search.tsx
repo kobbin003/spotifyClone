@@ -19,6 +19,7 @@ const Search = () => {
 		number,
 		number
 	] = useOutletContext();
+	const location = window.location.pathname;
 	// console.log("query-Search", queryFromSearchBar);
 	const [type, setType] = useState<string>("");
 	// getSearchItem(query, type);
@@ -28,6 +29,7 @@ const Search = () => {
 	return (
 		<Container>
 			<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
+			{/* SEARCH */}
 		</Container>
 	);
 };

@@ -1,34 +1,11 @@
 import styled from "styled-components";
 export const Card = styled.a`
 	height: fit-content;
-	/* min-height: 200px; */
+	/* min-height: 300px; */
 	/* width: 150px; */
 	/* width: auto; */
 	/* border: 1px solid green; */
 	margin-right: 0.3em;
-	/* Extra small devices (phones, 600px and down) */
-	@media only screen and (max-width: 600px) {
-		/* width: 40%; */
-	}
-
-	/* Small devices (portrait tablets and large phones, 600px and up) */
-	@media only screen and (min-width: 600px) {
-		/* width: 27%; */
-	}
-
-	/* Medium devices (landscape tablets, 768px and up) */
-	@media only screen and (min-width: 768px) {
-		/* width: 20%; */
-	}
-
-	/* Large devices (laptops/desktops, 992px and up) */
-	@media only screen and (min-width: 992px) {
-		/* width: 20%; */
-	}
-
-	/* Extra large devices (large laptops and desktops, 1200px and up) */
-	@media only screen and (min-width: 1200px) {
-	}
 	text-decoration: none;
 	background-color: #181818;
 	transition: background-color 0.2s ease-in;

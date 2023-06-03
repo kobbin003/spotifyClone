@@ -30,6 +30,8 @@ export const Icon = styled.img<IconProp>`
 
 export const Container = styled.div`
 	position: fixed;
+	/* position: relative; */
+	border: 1p solid darkviolet;
 	height: 100vh;
 	width: 250px;
 	/* left: 0;
