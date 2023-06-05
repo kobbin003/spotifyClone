@@ -41,6 +41,7 @@ const LoggedOutLayout = () => {
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
 			<LoggedOutAppContainer>
+				<div>HELLOOOO</div>
 				<Sidebar></Sidebar>
 				<NavBar></NavBar>
 				<Content>

@@ -47,7 +47,7 @@ const TrackOut = () => {
 							<img src={item.album.images[0].url} />
 							<div>
 								<Link to="/n">
-									<span>{item.name}akjbasbjhas</span>
+									<span>{item.name}</span>
 								</Link>
 								<Link to="">
 									<span>{item.artists[0].name}</span>
@@ -56,7 +56,7 @@ const TrackOut = () => {
 						</TitleColumn>
 						<AlbumColumn>
 							<Link to="">
-								<span>{item.album.name}</span>
+								<span>{item.album.name} akjba sbjhas</span>
 							</Link>
 						</AlbumColumn>
 						<TimeColumn>

@@ -6,26 +6,28 @@ export const Container = styled.div<{
 }>`
 	width: 100%;
 	position: relative;
-	/* width: 100%; */
-	/* width: calc(100vw - (100vw - 100%)); */
 	min-width: calc(
 		100vw - ${(prop) => prop.left + prop.widthHandleDragger}em - 16.5rem
 	);
-	/* border: 0.3px solid darkred; */
-	/* max-width: inherit; */
+	/* border: 0.3px solid goldenrod; */
 	overflow-x: hidden;
 	font-weight: 500;
 	font-size: 0.8rem;
-	/* margin-top: -5px; */
+	margin-top: -5px;
+	overscroll-behavior: contain;
 `;
 
 export const Row = styled.div`
-	position: relative;
-	display: flex;
+	/* position: relative; */
 	width: 100%;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	overflow: hidden;
+	/* display: grid;
+	grid:
+		auto/
+		minmax(40px, 40px) minmax(250px, auto) minmax(150px, auto) minmax(0px, auto); */
 	&:hover {
 		a {
 			color: var(--font-white);
@@ -42,31 +44,58 @@ export const Row = styled.div`
 	& > div {
 		padding-left: 0.2em;
 		color: var(--font-greyer);
+		height: fit-content;
 	}
 	& > div:nth-of-type(1) {
-		/* width: 3em; */
-		/* min-width: 40px; */
+		width: 40px;
+		min-width: 40px;
 		/* background-color: red; */
 		text-align: center;
 	}
 	& > div:nth-of-type(2) {
-		flex: 1;
-		/* min-width: 260px; */
+		flex: 0.9;
+		min-width: 150px;
+		margin-right: 1em;
 		/* background-color: greenyellow; */
+		@media screen and (max-width: 650px) {
+			width: 150px;
+		}
+		@media (min-width: 650px) and (max-width: 700px) {
+			width: 165px;
+		}
+		@media (min-width: 700px) and (max-width: 750px) {
+			width: 190px;
+		}
+		@media (min-width: 750px) and (max-width: 850px) {
+			width: 200px;
+		}
+		@media (min-width: 850px) and (max-width: 1050px) {
+			width: auto;
+		}
 		overflow-x: hidden;
+		white-space: nowrap;
 	}
 	& > div:nth-of-type(3) {
-		flex: 0.5;
+		flex: 0.4;
+		min-width: 150px;
+		margin-right: 1em;
+		@media screen and (max-width: 750px) {
+			width: 120px;
+		}
+		@media (min-width: 750px) and (max-width: 850px) {
+			width: auto;
+		}
+		overflow-x: hidden;
+		white-space: nowrap;
 		/* background-color: greenyellow; */
 		/* width: 15em; */
-		/* min-width: 100px; */
 	}
 	& > div:nth-of-type(4) {
 		/* background-color: greenyellow; */
-		width: 5em;
-		/* min-width: 8em; */
+		/* flex: 0.2; */
 		display: flex;
 		align-items: center;
+		min-width: 90px;
 		margin-right: 2em;
 	}
 
@@ -74,16 +103,38 @@ export const Row = styled.div`
 		height: 20px;
 	}
 `;
+
 export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
-	/* position: fixed;
+	position: fixed;
 
 	width: calc(
-		100vw - ${(prop) => prop.left + prop.widthHandleDragger}em - 16.5rem
+		100vw - ${(prop) => prop.left + prop.widthHandleDragger}em - 16rem
 	);
 	border-bottom: 1px solid var(--font-grey);
 	padding: 0.5em 0;
 	background-color: var(--background-dull);
-
+	z-index: 1;
+	div:nth-of-type(2) {
+		@media screen and (max-width: 650px) {
+			min-width: 150px;
+		}
+		@media (min-width: 650px) and (max-width: 700px) {
+			min-width: 165px;
+		}
+		@media (min-width: 700px) and (max-width: 750px) {
+			min-width: 190px;
+		}
+		@media (min-width: 750px) and (max-width: 850px) {
+			min-width: 220px;
+		}
+		@media (min-width: 850px) and (max-width: 1050px) {
+			min-width: auto;
+		}
+	}
+	div:nth-of-type(3) {
+		/* background-color: aqua; */
+		/* width: 500px; */
+	}
 	div:nth-of-type(4) {
 		align-self: center;
 		justify-content: center;
@@ -91,18 +142,20 @@ export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 		img {
 			display: block;
 		}
-	} */
+	}
 `;
 export const TrackBody = styled.div`
-	/* position: relative;
+	position: relative;
 	padding-bottom: 1em;
-	padding-top: 50px; */
+	padding-top: 50px;
 	/* background-color: darkorchid; */
 `;
 export const TrackItem = styled(Row)`
-	/* &:hover {
+	position: relative;
+	&:hover {
 		background-color: var(--data-display-background-hover);
-
+		& > div {
+		}
 		div:nth-of-type(1) {
 			button {
 				display: flex;
@@ -112,18 +165,20 @@ export const TrackItem = styled(Row)`
 				display: none;
 			}
 		}
-	} */
+	}
 `;
 
 export const CountColumn = styled.div`
 	span {
+		display: block;
 		font-size: 1rem;
 	}
 	button {
-		/* width: 100%;
-		background-color: transparent;
+		display: block;
+		width: 100%;
 		border: none;
 		display: none;
+		background-color: transparent;
 		color: var(--font-greyer);
 		font-weight: 500;
 		font-size: 1rem;
@@ -132,12 +187,11 @@ export const CountColumn = styled.div`
 			display: block;
 			height: 75%;
 			width: 75%;
-		} */
+		}
 	}
 `;
 export const TitleColumn = styled.div`
-	/* display: flex;
-	border: 1px solid limegreen;
+	display: flex;
 	align-items: center;
 	img {
 		display: block;
@@ -145,48 +199,53 @@ export const TitleColumn = styled.div`
 		height: 30px;
 		width: auto;
 	}
-	div {
+	& > div {
 		display: flex;
 		flex-direction: column;
-		background-color: lawngreen;
-
 		a {
 			display: block;
-			overflow: hidden;
-			min-width: 100px;
-			white-space: nowrap;
+			width: 100%;
+
 			text-decoration: none;
 			font-size: 1rem;
 			padding: 0.2em 0;
 			color: var(--font-greyer);
 			&:nth-of-type(1) {
 				color: var(--font-white);
-				background-color: blueviolet;
 			}
 			span {
+				display: block;
+				white-space: nowrap;
+				/** //! change width at media*/
+
+				overflow: hidden;
+				text-overflow: ellipsis;
+
 				&:hover {
 					text-decoration: underline;
 				}
 			}
 		}
-	} */
+	}
 `;
 export const AlbumColumn = styled.div`
-	/* a {
+	a {
 		display: block;
 		text-decoration: none;
 		font-size: 1rem;
 		padding: 0.2em 0;
 		color: var(--font-greyer);
+		cursor: default;
 		span {
 			&:hover {
 				text-decoration: underline;
+				cursor: pointer;
 			}
 		}
-	} */
+	}
 `;
 export const TimeColumn = styled.div`
-	/* justify-content: space-between;
+	justify-content: space-between;
 	& > div {
 		flex: 1;
 		visibility: hidden;
@@ -194,5 +253,5 @@ export const TimeColumn = styled.div`
 	& > img {
 		padding-left: 0.5em;
 		visibility: hidden;
-	} */
+	}
 `;

@@ -21,6 +21,6 @@ export const Content = styled.main`
 	/* width: calc(100vw - (100vw - 100%) - 250px); */
 	/** //*100vw - scroll width - sidebar-width */
 	/** //! don't unmute the "border" */
-	background-color: goldenrod;
+	/* background-color: goldenrod; */
 	/* border: 0.5px solid goldenrod; */
 `;

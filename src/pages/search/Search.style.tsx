@@ -4,14 +4,14 @@ export const Container = styled.div`
 	/* position: relative; */
 	/* width: 80%; */
 	/* width: calc(100vw - (100vw - 100%)); */
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
 	/* height: 100vh;
 	width: 100%; */
 	/* margin-left: 0.8em; */
 	/* border: 1px solid red; */
 	/* padding-top: calc(40 / 16 * 1em); */
-	margin-top: 1em;
-	background-color: #5ba2e1;
+	/* margin-top: 1em; */
+	/* background-color: #5ba2e1; */
 `;
 export const RowOne = styled.div`
 	position: relative;
