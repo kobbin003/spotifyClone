@@ -17,6 +17,7 @@ export const FixedContainer = styled.div<{
 		//! OR ELSE it will overflow when container gets minimized
 	 */
 	background-color: var(--black-dark);
+	/* background-color: transparent; */
 	display: flex;
 	flex-direction: column;
 	z-index: 1;
@@ -186,6 +187,7 @@ export const DropDown = styled.div<{
 	visibility: ${(prop) => prop.dropDownVisibility};
 	display: flex;
 	flex-direction: column;
+	z-index: 2;
 	a {
 		text-decoration: none;
 		display: inline-block;

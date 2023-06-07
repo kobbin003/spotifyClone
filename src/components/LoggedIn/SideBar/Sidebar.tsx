@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	ActionCards,
 	ButtonLink,
@@ -12,6 +12,14 @@ import {
 	UnorderedList,
 } from "./style";
 import { Link } from "react-router-dom";
+import getUserPlaylist, {
+	UserPlaylist,
+	UserPlaylistError,
+} from "../../../hooks/spotify-data/getUserPlaylist";
+import UserLibrary from "./component/UserLibrary";
+import { ContainerLibrary, LibraryItem } from "./component/style";
+import { getFollowedArtist } from "../../../hooks/spotify-data/getFollowedArtist";
+import getUserAlbums from "../../../hooks/spotify-data/getUserAlbums";
 
 export type sideBarProps = {
 	width: number;
@@ -25,6 +33,21 @@ const Sidebar = ({
 	handleClick,
 	handleMouseMove,
 }: sideBarProps): JSX.Element => {
+	const accessToken = localStorage.getItem("accessToken") || "";
+	let playlistData, albumData;
+	// const { data, error, isLoading } = getCurrentUserPlaylist(accessToken);
+	const {
+		data: artistsData,
+		error: artistsError,
+		isLoading: artistsIsLoading,
+	} = getFollowedArtist(accessToken);
+	const {
+		data: albumsData,
+		error: albumsError,
+		isLoading: albumsIsLoading,
+	} = getUserAlbums(accessToken);
+
+	// const items = data.items;
 	return (
 		<>
 			<Container width={width}>
@@ -55,20 +78,28 @@ const Sidebar = ({
 							</CreatePlaylist>
 						</li>
 					</UnorderedList>
-					<ActionCards>
-						<h4>Create your first playlist</h4>
-						<p>It's easy, we'll help you</p>
-						<ButtonLink>
-							<span>CreatePlaylist</span>
-						</ButtonLink>
-					</ActionCards>
-					<ActionCards>
+					{artistsData && albumsData ? (
+						<UserLibrary
+							artists={artistsData.artists.items}
+							// playlists={}
+							albums={albumsData}
+						/>
+					) : (
+						<ActionCards>
+							<h4>Create your first playlist</h4>
+							<p>It's easy, we'll help you</p>
+							<ButtonLink>
+								<span>CreatePlaylist</span>
+							</ButtonLink>
+						</ActionCards>
+					)}
+					{/* <ActionCards>
 						<h4>Let's find some podcasts to follow</h4>
 						<p>We'll keep you updated on new episodes</p>
 						<ButtonLink>
 							<span>Browse podcasts</span>
 						</ButtonLink>
-					</ActionCards>
+					</ActionCards> */}
 				</Library>
 				<DraggableHandle
 					onClick={handleClick}

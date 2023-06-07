@@ -92,7 +92,7 @@ const NavBar = ({
 						</ProfileButton>
 					</ProfileContainer>
 				</div>
-				<SearchTypesList />
+				{isInSearchRoute && <SearchTypesList />}
 			</FixedContainer>
 
 			<DropDown dropDownVisibility={dropDownVisibility}>

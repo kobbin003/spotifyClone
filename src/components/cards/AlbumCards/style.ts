@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export const Card = styled.a`
 	height: fit-content;
-	/* min-height: 300px; */
+	/* min-height: 200px; */
 	/* width: 150px; */
 	/* width: auto; */
 	/* border: 1px solid green; */
@@ -57,14 +57,15 @@ export const ImageContainer = styled.div`
 	position: relative;
 	height: 100%;
 	width: 100%;
+	flex: 1;
 	/* min-height: 150px; */
 	& > img:first-child {
 		border-radius: 5px;
 		/* border: 2px solid goldenrod; */
 		/* height: 50%; */
 		width: 100%;
-		min-width: 100px;
-		/* min-height: 100px; */
+		min-width: 115px;
+		/* min-height: 120px; */
 	}
 `;
 export const SpotifyPlay = styled.div`

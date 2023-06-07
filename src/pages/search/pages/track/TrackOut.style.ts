@@ -9,7 +9,8 @@ export const Container = styled.div<{
 	min-width: calc(
 		100vw - ${(prop) => prop.left + prop.widthHandleDragger}em - 16.5rem
 	);
-	/* border: 0.3px solid goldenrod; */
+	/* border: 0.3px solid goldenrod;
+	background-color: pink; */
 	overflow-x: hidden;
 	font-weight: 500;
 	font-size: 0.8rem;

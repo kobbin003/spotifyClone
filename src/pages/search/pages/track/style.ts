@@ -67,7 +67,7 @@ export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 	border-bottom: 1px solid var(--font-grey);
 	padding: 0.5em 0;
 	background-color: var(--background-dull);
-	background-color: aqua;
+	z-index: 10;
 	div:nth-of-type(4) {
 		align-self: center;
 		justify-content: center;

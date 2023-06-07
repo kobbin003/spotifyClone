@@ -4,7 +4,6 @@ import {
 	Container,
 	Header,
 	TrackItem,
-	Row,
 	CountColumn,
 	TitleColumn,
 	AlbumColumn,
@@ -56,7 +55,7 @@ const TrackOut = () => {
 						</TitleColumn>
 						<AlbumColumn>
 							<Link to="">
-								<span>{item.album.name} akjba sbjhas</span>
+								<span>{item.album.name}</span>
 							</Link>
 						</AlbumColumn>
 						<TimeColumn>

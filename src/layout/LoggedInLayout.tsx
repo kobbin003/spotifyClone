@@ -14,6 +14,7 @@ const LoggedInLayout: React.FC = () => {
 	const [isDraggable, setIsDraggable] = useState(false);
 	const [code, setCode] = useState<string | null>(localStorage.getItem("code"));
 	const { data, error, isLoading } = useGetAccessToken(code || null);
+	// console.log("logged in layout", data, error, isLoading);
 	// useGetRefreshToken(false);
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);

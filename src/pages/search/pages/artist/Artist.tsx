@@ -7,8 +7,10 @@ import { CardsContainer, ImageContainer, ResultCard, Title } from "./style";
 
 const Artist = () => {
 	const query: string | "" = useOutletContext();
+	const type = window.location.pathname.split("/").at(-1);
+
 	// getSearchItem(query, "artist");
-	console.log("query-Artist", query);
+	// getSearchItem(query, type || "");
 
 	const searchData: SearchData = JSON.parse(
 		localStorage.getItem("searchData") || ""

@@ -3,9 +3,11 @@ import { style } from "styled-system";
 
 export const Container = styled.div`
 	/* height: 500px; */
-	height: 100%;
+	height: 100vh;
 	width: 100%;
 	background-color: var(--black-dark);
+	background-color: goldenrod;
+	/* padding-top: 90px; */
 	/* min-width: 550px; */
 	/* overflow: hidden; */
 `;

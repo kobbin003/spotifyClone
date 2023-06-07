@@ -164,7 +164,10 @@ export const Library = styled.div`
 	/* height: 5100px; */
 	flex: 1;
 	background-color: var(--black-dark);
+	/* background-color: aqua; */
+	/* width: calc(100% - 1rem); */
 	border: 1px solid var(--black-dark);
+	border: 1px solid red;
 	border-radius: 5px;
 	margin: 0em 0.5em 0.5em;
 `;

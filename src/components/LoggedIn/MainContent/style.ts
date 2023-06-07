@@ -21,6 +21,7 @@ export const Content = styled.main`
 	width: 100%;
 	padding-top: calc(50 / 16 * 1em);
 	padding-left: 0.8em;
+	height: fit-content;
 	/* border: 1px solid yellow; */
 	/* background-color: aqua; */
 `;
