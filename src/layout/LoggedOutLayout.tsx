@@ -15,10 +15,13 @@ import { LoggedOutAppContainer } from "./LoggedOutLayout.style";
 import useGetAccessCode from "../hooks/useGetAccessCode";
 import { errorBoundaryFallback } from "./errorBoundaryFallback";
 import { Content } from "./LoggedOutLayout.style";
+import PopUpCards from "../components/cards/PopUpCards/PopUpCards";
 
 const LoggedOutLayout = () => {
 	const navigate = useNavigate();
-
+	const [top, setTop] = useState<number>(0);
+	const [left, setLeft] = useState<number>(0);
+	const [visibility, setVisibility] = useState<boolean>(false);
 	const code = useGetAccessCode();
 	//remove accessToken & refreshToken whenever LoggedOutLayout is rendered
 	if (
@@ -41,7 +44,18 @@ const LoggedOutLayout = () => {
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
 			<LoggedOutAppContainer>
-				<Sidebar></Sidebar>
+				<Sidebar
+					setTop={setTop}
+					setLeft={setLeft}
+					setVisibility={setVisibility}
+				></Sidebar>
+				<PopUpCards
+					title="Create a playlist"
+					message="Log in to create and share playlist"
+					left={left}
+					top={top}
+					visibility={visibility ? "visible" : "hidden"}
+				></PopUpCards>
 				<NavBar></NavBar>
 				<Content>
 					<Outlet context={["", 0, 0]} />

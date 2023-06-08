@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import styled from "styled-components";
 import {
 	Icon,
@@ -13,13 +13,49 @@ import {
 } from "./style";
 import { Link } from "react-router-dom";
 
-const SideBar = () => {
-	// const browserheight = window.innerHeight;
-	// const screenheight = screen.height;
-	// const screenwidth = screen.width;
-	// console.log(browserheight, screenheight, screenwidth);
+const SideBar = ({
+	setTop,
+	setLeft,
+	setVisibility,
+}: {
+	setTop: React.Dispatch<React.SetStateAction<number>>;
+	setLeft: React.Dispatch<React.SetStateAction<number>>;
+	setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+	const [element, setElement] = useState<HTMLElement>();
+	const [outsideElement, setOutsideElement] = useState<HTMLElement>();
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const target = e.target as HTMLElement;
+		const clientDimension = target.getBoundingClientRect();
+		// console.log(clientDimension);
+		setLeft(clientDimension.left + clientDimension.width);
+		setTop(clientDimension.top - clientDimension.height * 2);
+
+		setTimeout(() => {
+			console.log("setting true");
+			setVisibility(true);
+		}, 10);
+
+		setElement(e.currentTarget);
+		// console.log("element", element);
+	};
+	useEffect(() => {
+		const handleClickedOutside = (e: any) => {
+			// console.log("clicked", e.target);
+			setOutsideElement(e.target);
+		};
+		document.addEventListener("click", handleClickedOutside);
+		return () => document.removeEventListener("click", handleClickedOutside);
+	}, []);
+	useEffect(() => {
+		console.log("element change", element, outsideElement);
+		if (element !== outsideElement) {
+			console.log("setting false");
+			setVisibility(false);
+		}
+	}, [element, outsideElement]);
+
 	return (
-		// <Button primary="#007bff">Primary Button</Button>
 		<Container>
 			<div>
 				<LogoHeader>
@@ -40,25 +76,45 @@ const SideBar = () => {
 						</li>
 						<li>
 							<Icon src="/icons/search.svg"></Icon>
-							<Link to="/search/artist">Search</Link>
+							<button
+								type="button"
+								onClick={handleClick}
+							>
+								Search
+							</button>
 						</li>
 						<li>
 							<Icon src="/icons/library.svg"></Icon>
-							<button type="button">Your Library</button>
+							<button
+								type="button"
+								onClick={handleClick}
+							>
+								Your Library
+							</button>
 						</li>
 						<li>
 							<Icon
 								src="/icons/add-playlist.svg"
 								big
 							></Icon>
-							<button type="button">Create Playlist</button>
+							<button
+								type="button"
+								onClick={handleClick}
+							>
+								Create Playlist
+							</button>
 						</li>
 						<li>
 							<Icon
 								src="/icons/heartsquare.svg"
 								big
 							></Icon>
-							<button type="button">Liked songs</button>
+							<button
+								type="button"
+								onClick={handleClick}
+							>
+								Liked songs
+							</button>
 						</li>
 					</UnorderedList>
 				</Section>

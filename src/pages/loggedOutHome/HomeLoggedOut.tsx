@@ -3,6 +3,7 @@ import { Albums, Container, SubHeaders } from "./style";
 import { UserAlbums } from "../../hooks/spotify-data/getUserAlbums";
 import AlbumCards from "../../components/cards/AlbumCards/AlbumCards";
 import getNewReleases from "../../hooks/spotify-data/getNewReleases";
+import PopUpCards from "../../components/cards/PopUpCards/PopUpCards";
 
 const HomeLoggedOut = () => {
 	const albumdata = localStorage.getItem("albumdata");
@@ -11,7 +12,7 @@ const HomeLoggedOut = () => {
 	// const {data,error,isLoading} = getNewReleases()
 	return (
 		<Container>
-			<>
+			{/* <>
 				<SubHeaders>
 					<h2>New Albums</h2>
 					<a href="">
@@ -56,7 +57,7 @@ const HomeLoggedOut = () => {
 							></AlbumCards>
 						))}
 				</Albums>
-			</>
+			</> */}
 		</Container>
 	);
 };

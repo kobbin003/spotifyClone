@@ -34,6 +34,7 @@ export const Container = styled.div`
 	border: 1p solid darkviolet;
 	height: 100vh;
 	width: 250px;
+	overflow: visible;
 	/* left: 0;
 	top: 0; */
 	grid-column: 1/2;

@@ -13,9 +13,9 @@ export type SearchItem = {
 	type: string;
 	uri: string;
 };
-type Types = "tracks" | "artists" | "albums" | "playlists";
+type SearchTypes = "tracks" | "artists" | "albums" | "playlists";
 export type SearchData = {
-	[key in Types]: {
+	[key in SearchTypes]: {
 		href: string;
 		items: SearchItem[];
 		limit: number;

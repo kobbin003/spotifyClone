@@ -20,22 +20,22 @@ export const router = createBrowserRouter([
 				index: true,
 				element: <HomeLoggedOut />,
 			},
-			{
-				path: "search",
-				element: <Search />,
-				children: [
-					// { index: true, element: <Search /> },
-					// 	// "artist", "track", "album", "playlist"
-					{
-						path: "artist",
-						element: <Artist />,
-					},
-					{ path: "album", element: <AlbumOut /> },
-					// { path: "album", element: <Album /> },
-					{ path: "track", element: <TrackOut /> },
-					{ path: "playlist", element: <PlaylistOut /> },
-				],
-			},
+			// {
+			// 	path: "search",
+			// 	element: <Search />,
+			// 	children: [
+			// 		// { index: true, element: <Search /> },
+			// 		// 	// "artist", "track", "album", "playlist"
+			// 		{
+			// 			path: "artist",
+			// 			element: <Artist />,
+			// 		},
+			// 		{ path: "album", element: <AlbumOut /> },
+			// 		// { path: "album", element: <Album /> },
+			// 		{ path: "track", element: <TrackOut /> },
+			// 		{ path: "playlist", element: <PlaylistOut /> },
+			// 	],
+			// },
 			{
 				path: "*",
 				element: <div>NO MATCH!!!</div>,
