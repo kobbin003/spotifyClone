@@ -20,6 +20,7 @@ const Search = () => {
 		number
 	] = useOutletContext();
 	const location = window.location.pathname;
+	const isLoggedIn = location.split("/").includes("me");
 	// console.log("query-Search", queryFromSearchBar);
 	const [type, setType] = useState<string>("");
 	// getSearchItem(query, type);
@@ -27,7 +28,7 @@ const Search = () => {
 		localStorage.getItem("searchData") || ""
 	);
 	return (
-		<Container>
+		<Container isLoggedIn={isLoggedIn}>
 			<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
 			{/* SEARCH */}
 		</Container>

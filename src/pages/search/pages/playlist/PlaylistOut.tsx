@@ -14,12 +14,12 @@ import { playlists } from "../data";
 const PlaylistOut = () => {
 	const query: string | "" = useOutletContext();
 	// getSearchItem(query, "artist");
-	console.log("query-Artist", query);
+	// console.log("query-Artist", query);
 
 	const searchData = playlists;
 	return (
 		<>
-			<Title>Albums</Title>
+			<Title>Playlists</Title>
 			{searchData && (
 				<CardsContainer>
 					{searchData.playlists.items.map((item) => (

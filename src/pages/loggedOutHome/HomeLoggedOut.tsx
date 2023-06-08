@@ -7,7 +7,7 @@ import getNewReleases from "../../hooks/spotify-data/getNewReleases";
 const HomeLoggedOut = () => {
 	const albumdata = localStorage.getItem("albumdata");
 	const data: UserAlbums = JSON.parse(albumdata ?? "");
-	console.log(data);
+	// console.log(data);
 	// const {data,error,isLoading} = getNewReleases()
 	return (
 		<Container>

@@ -14,7 +14,7 @@ import { albums } from "../data";
 const AlbumOut = () => {
 	const query: string | "" = useOutletContext();
 	// getSearchItem(query, "artist");
-	console.log("query-Artist", query);
+	// console.log("query-Artist", query);
 
 	const searchData = albums;
 	return (

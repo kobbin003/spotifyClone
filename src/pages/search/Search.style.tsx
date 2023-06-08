@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-export const Container = styled.div`
+export const Container = styled.div<{ isLoggedIn: boolean }>`
 	/* position: relative; */
 	/* width: 80%; */
 	/* width: calc(100vw - (100vw - 100%)); */
@@ -9,7 +9,7 @@ export const Container = styled.div`
 	width: 100%; */
 	/* margin-left: 0.8em; */
 	/* border: 1px solid red; */
-	padding-top: calc(40 / 16 * 1em);
+	padding-top: ${(prop) => (prop.isLoggedIn ? "calc(40 / 16 * 1em)" : "0")};
 	/* margin-top: 1em; */
 	/* background-color: #5ba2e1; */
 `;

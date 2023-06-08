@@ -61,31 +61,33 @@ type UserLibraryProps = {
 const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 	return (
 		<ContainerLibrary>
-			{albums.items.map(({ album }, index) => (
-				<LibraryItem key={album.id}>
-					<div>
-						<img
-							src={
-								album.images[0]
-									? album.images[0].url
-									: "/icons/defaultCover.svg"
-							}
-						/>
-					</div>
-					<div>
-						<div>{album.name}</div>
+			<>
+				{albums.items.map(({ album }, index) => (
+					<LibraryItem key={album.id}>
 						<div>
-							<span>{album.album_type}</span>
-							<b> . </b>
-							<span>
-								{album.artists.map((artist) => (
-									<>{artist.name}</>
-								))}
-							</span>
+							<img
+								src={
+									album.images[0]
+										? album.images[0].url
+										: "/icons/defaultCover.svg"
+								}
+							/>
 						</div>
-					</div>
-				</LibraryItem>
-			))}
+						<div>
+							<div>{album.name}</div>
+							<div>
+								<span>{album.album_type}</span>
+								<b> . </b>
+								<span>
+									{album.artists.map((artist) => (
+										<>{artist.name}</>
+									))}
+								</span>
+							</div>
+						</div>
+					</LibraryItem>
+				))}
+			</>
 			{/* {playlists.map((playlist, index) => (
 				<LibraryItem key={playlist.id}>
 					<div>
@@ -107,25 +109,27 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 					</div>
 				</LibraryItem>
 			))} */}
-			{artists.map((artist, index) => (
-				<LibraryItem key={artist.id}>
-					<div>
-						<img
-							src={
-								artist.images[0]
-									? artist.images[0].url
-									: "/icons/defaultCover.svg"
-							}
-						/>
-					</div>
-					<div>
-						<div>{artist.name}</div>
+			<>
+				{artists.map((artist, index) => (
+					<LibraryItem key={artist.id}>
 						<div>
-							<span>{artist.type}</span>
+							<img
+								src={
+									artist.images[0]
+										? artist.images[0].url
+										: "/icons/defaultCover.svg"
+								}
+							/>
 						</div>
-					</div>
-				</LibraryItem>
-			))}
+						<div>
+							<div>{artist.name}</div>
+							<div>
+								<span>{artist.type}</span>
+							</div>
+						</div>
+					</LibraryItem>
+				))}
+			</>
 		</ContainerLibrary>
 	);
 };

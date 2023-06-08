@@ -26,7 +26,15 @@ const useFetchData = <T, U extends {}>(
 			},
 		};
 		fetch(url, options)
-			.then((response) => response.json())
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error(
+						`Network response was not OK. Error:code${response.status} `
+					);
+				}
+			})
 			.then((data) => {
 				//* setError IF data has error
 				// console.log("fetchdata", data);
@@ -35,18 +43,18 @@ const useFetchData = <T, U extends {}>(
 					setError(data.error);
 					setIsLoading(false);
 					// console.log("data.error.message", data.error.message);
+					// return data.error.message;
 					return data.error.message;
 				} else {
 					setData(data);
 					setError(null);
 					setIsLoading(false);
-					// console.log("data.no error error.message");
-					return "null";
+					// return "HI";
 				}
 			})
 			.then((res) => {
-				console.log("chain", res);
-				if (res === "The access token expired" || "Invalid access token") {
+				if (res === ("The access token expired" || "Invalid access token")) {
+					console.log("useFetchData: access token expired");
 					//! USE refresh token to get a new access_token
 					const client_id = import.meta.env.VITE_CLIENT_ID;
 					const client_secret = import.meta.env.VITE_CLIENT_SECRET;
@@ -70,14 +78,11 @@ const useFetchData = <T, U extends {}>(
 					// console.log("refreshtoken", data);
 					// console.log("expired");
 					return fetch(url, options);
-				} else if (res === "null") {
-					// console.log("reached 3");
-					return;
 				}
 			})
 			.then((res) => res?.json())
 			.then((res) => {
-				// console.log("res", res);
+				console.log("res", res);
 				if (res) {
 					localStorage.setItem("accessToken", res?.access_token);
 				} else {

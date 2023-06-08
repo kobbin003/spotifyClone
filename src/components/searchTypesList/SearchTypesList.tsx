@@ -14,7 +14,7 @@ const SearchTypesList = () => {
 	const lastItemAtLocationPathname = window.location.pathname.split("/").at(-1);
 	// check if isLoggedIn, By checking the first item in the window.location.pathname
 	const isLoggedIn = window.location.pathname.startsWith("/me");
-	console.log("isLoggedIn", isLoggedIn);
+	// console.log("isLoggedIn", isLoggedIn);
 	const typesState = [
 		{ searchType: "artist", active: false },
 		{ searchType: "track", active: false },

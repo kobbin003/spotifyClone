@@ -9,8 +9,8 @@ export const Container = styled.div<{
 	min-width: calc(
 		100vw - ${(prop) => prop.left + prop.widthHandleDragger}em - 16.5rem
 	);
-	/* border: 0.3px solid goldenrod;
-	background-color: pink; */
+	/* border: 0.3px solid goldenrod;*/
+	/* background-color: goldenrod; */
 	overflow-x: hidden;
 	font-weight: 500;
 	font-size: 0.8rem;
@@ -114,6 +114,7 @@ export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 	border-bottom: 1px solid var(--font-grey);
 	padding: 0.5em 0;
 	background-color: var(--background-dull);
+	/* background-color: pink; */
 	z-index: 1;
 	div:nth-of-type(2) {
 		@media screen and (max-width: 650px) {

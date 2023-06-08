@@ -35,7 +35,7 @@ const Sidebar = ({
 }: sideBarProps): JSX.Element => {
 	const accessToken = localStorage.getItem("accessToken") || "";
 	let playlistData, albumData;
-	// const { data, error, isLoading } = getCurrentUserPlaylist(accessToken);
+	// const { data, error, isLoading } = getUserPlaylist(accessToken);
 	const {
 		data: artistsData,
 		error: artistsError,
