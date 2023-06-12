@@ -91,27 +91,29 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 				// <div key={album.id}>{album.id}</div>
 			))}
 
-			{/* <>
+			<>
 				{artists.map((artist, index) => (
 					<LibraryItem key={artist.id}>
-						<div>
-							<img
-								src={
-									artist.images[0]
-										? artist.images[0].url
-										: "/icons/defaultCover.svg"
-								}
-							/>
-						</div>
-						<div>
-							<div>{artist.name}</div>
+						<Link to={`/me/artist/${artist.id}`}>
 							<div>
-								<span>{artist.type}</span>
+								<img
+									src={
+										artist.images[0]
+											? artist.images[0].url
+											: "/icons/defaultCover.svg"
+									}
+								/>
 							</div>
-						</div>
+							<div>
+								<div>{artist.name}</div>
+								<div>
+									<span>{artist.type}</span>
+								</div>
+							</div>
+						</Link>
 					</LibraryItem>
 				))}
-			</> */}
+			</>
 
 			{/* {playlists.map((playlist, index) => (
 				<LibraryItem key={playlist.id}>

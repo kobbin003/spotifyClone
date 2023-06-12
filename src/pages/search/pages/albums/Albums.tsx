@@ -2,7 +2,7 @@ import React from "react";
 import { albums } from "../data";
 import AlbumCards from "../../../../components/cards/AlbumCards/AlbumCards";
 import { Container } from "./style";
-const Album = () => {
+const Albums = () => {
 	const arr = albums.albums.items;
 	return (
 		<Container>
@@ -21,4 +21,4 @@ const Album = () => {
 	);
 };
 
-export default Album;
+export default Albums;

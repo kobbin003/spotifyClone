@@ -4,7 +4,6 @@ export const ContainerLibrary = styled.ul`
 	height: calc(100% - 120px);
 	max-height: calc(100% - 120px);
 	/* width: 100%; */
-
 	border-radius: 5px;
 	margin: 0.4em;
 	padding: 0.5em;
@@ -20,6 +19,7 @@ export const LibraryItem = styled.li`
 	width: 100%;
 	overflow: hidden;
 	padding: 0.3em 0.5em;
+
 	a {
 		display: flex;
 		padding: 0 0em;
@@ -49,16 +49,19 @@ export const LibraryItem = styled.li`
 			justify-content: center;
 			align-content: center;
 			padding-left: 0.5em;
-			overflow: hidden;
 			white-space: nowrap;
-			text-overflow: ellipsis;
 			font-size: 0.8rem;
 			width: 100%;
-			/* background-color: aqua; */
+			/* background-color: brown; */
 			padding-right: 10px;
 			& > div:nth-of-type(1) {
 				font-weight: 600;
-				width: 100%;
+				max-width: 100%;
+				/* max-width: 120px; */
+				/* background-color: aqua; */
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
 			}
 			& > div:nth-of-type(2) {
 				color: var(--font-greyer);
