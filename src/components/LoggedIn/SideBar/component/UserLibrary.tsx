@@ -1,6 +1,7 @@
 import React from "react";
 import { ContainerLibrary, LibraryItem } from "./style";
 import { UserAlbums } from "../../../../hooks/spotify-data/getUserAlbums";
+import { Link } from "react-router-dom";
 type UserLibraryProps = {
 	// playlists: {
 	// 	collaborative: boolean;
@@ -61,9 +62,9 @@ type UserLibraryProps = {
 const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 	return (
 		<ContainerLibrary>
-			<>
-				{albums.items.map(({ album }, index) => (
-					<LibraryItem key={album.id}>
+			{albums.items.map(({ album }, index) => (
+				<LibraryItem key={album.id}>
+					<Link to={`/me/album/${album.id}`}>
 						<div>
 							<img
 								src={
@@ -77,17 +78,41 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 							<div>{album.name}</div>
 							<div>
 								<span>{album.album_type}</span>
-								<b> . </b>
+								<b>&nbsp; . &nbsp;</b>
 								<span>
 									{album.artists.map((artist) => (
-										<>{artist.name}</>
+										<p key={artist.id}>{artist.name}</p>
 									))}
 								</span>
 							</div>
 						</div>
+					</Link>
+				</LibraryItem>
+				// <div key={album.id}>{album.id}</div>
+			))}
+
+			{/* <>
+				{artists.map((artist, index) => (
+					<LibraryItem key={artist.id}>
+						<div>
+							<img
+								src={
+									artist.images[0]
+										? artist.images[0].url
+										: "/icons/defaultCover.svg"
+								}
+							/>
+						</div>
+						<div>
+							<div>{artist.name}</div>
+							<div>
+								<span>{artist.type}</span>
+							</div>
+						</div>
 					</LibraryItem>
 				))}
-			</>
+			</> */}
+
 			{/* {playlists.map((playlist, index) => (
 				<LibraryItem key={playlist.id}>
 					<div>
@@ -109,27 +134,6 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 					</div>
 				</LibraryItem>
 			))} */}
-			<>
-				{artists.map((artist, index) => (
-					<LibraryItem key={artist.id}>
-						<div>
-							<img
-								src={
-									artist.images[0]
-										? artist.images[0].url
-										: "/icons/defaultCover.svg"
-								}
-							/>
-						</div>
-						<div>
-							<div>{artist.name}</div>
-							<div>
-								<span>{artist.type}</span>
-							</div>
-						</div>
-					</LibraryItem>
-				))}
-			</>
 		</ContainerLibrary>
 	);
 };
