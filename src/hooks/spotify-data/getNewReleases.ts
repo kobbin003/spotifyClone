@@ -35,9 +35,7 @@ export type NewReleasesError = {
 	status: number;
 	message: string;
 };
-const getNewReleases = (
-	accessToken: string
-): {
+const getNewReleases = (): {
 	data: NewReleases | null;
 	error: NewReleasesError | null;
 	isLoading: boolean;
@@ -47,7 +45,7 @@ const getNewReleases = (
 	const { data, error, isLoading } = useFetchData<
 		NewReleases,
 		NewReleasesError
-	>(url, accessToken, "GET");
+	>(url, "GET");
 	console.log("getNewReleases", { data, error, isLoading });
 	return { data, error, isLoading };
 };

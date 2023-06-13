@@ -39,13 +39,13 @@ type FollowedArtist = {
 };
 type FollowedArtistError = { status: number; message: string };
 
-export const getFollowedArtist = (accessToken: string) => {
+export const getFollowedArtist = () => {
 	// console.log("accesstoken", accessToken);
 	const url = `https://api.spotify.com/v1/me/following?type=artist&limit=10`;
 	const { data, error, isLoading } = useFetchData<
 		FollowedArtist,
 		FollowedArtistError
-	>(url, accessToken, "GET");
+	>(url, "GET");
 	// console.log("getFollowedArtist", { data, error, isLoading });
 	return { data, error, isLoading };
 };

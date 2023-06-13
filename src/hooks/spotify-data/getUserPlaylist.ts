@@ -57,7 +57,7 @@ const getUserPlaylist = (
 	const { data, error, isLoading } = useFetchData<
 		UserPlaylist,
 		UserPlaylistError
-	>(url, accessToken, "GET");
+	>(url, "GET");
 	console.log("getCurrentUserPlaylist", { data, error, isLoading });
 	return { data, error, isLoading };
 };

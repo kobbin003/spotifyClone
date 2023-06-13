@@ -40,12 +40,12 @@ const Sidebar = ({
 		data: artistsData,
 		error: artistsError,
 		isLoading: artistsIsLoading,
-	} = getFollowedArtist(accessToken);
+	} = getFollowedArtist();
 	const {
 		data: albumsData,
 		error: albumsError,
 		isLoading: albumsIsLoading,
-	} = getUserAlbums(accessToken);
+	} = getUserAlbums();
 
 	// const items = data.items;
 	return (

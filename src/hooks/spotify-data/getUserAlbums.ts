@@ -32,9 +32,7 @@ export type UserAlbumsError = {
 	status: number;
 	message: string;
 };
-const getUserAlbums = (
-	accessToken: string
-): {
+const getUserAlbums = (): {
 	data: UserAlbums | null;
 	error: UserAlbumsError | null;
 	isLoading: boolean;
@@ -43,7 +41,7 @@ const getUserAlbums = (
 	const url = `https://api.spotify.com/v1/me/albums`;
 	const { data, error, isLoading } = useFetchData<UserAlbums, UserAlbumsError>(
 		url,
-		accessToken,
+		// accessToken,
 		"GET"
 	);
 	console.log("getUserAlbums", { data, error, isLoading });

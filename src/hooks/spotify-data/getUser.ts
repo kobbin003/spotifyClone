@@ -15,12 +15,12 @@ type UserProfileErrorError = {
 	status: number;
 	message: string;
 };
-const getCurrentUserProfile = (accessToken: string) => {
+const getCurrentUserProfile = () => {
 	const url = "https://api.spotify.com/v1/me";
 	const { data, error, isLoading } = useFetchData<
 		UserProfile,
 		UserProfileErrorError
-	>(url, accessToken, "GET");
+	>(url, "GET");
 	return { data, isLoading, error };
 };
 
