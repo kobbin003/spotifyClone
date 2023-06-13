@@ -15,7 +15,9 @@ const useFetchData = <T, U extends {}>(
 	const [data, setData] = useState<T | null>();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<U | null>();
-	const [accessToken, setaccessToken] = useState<string>("");
+	const [accessToken, setaccessToken] = useState<string>(
+		localStorage.getItem("accessToken") || ""
+	);
 	// const accessToken = localStorage.getItem("accessToken") || "";
 	useEffect(() => {
 		if (localStorage.getItem("accessToken")) {

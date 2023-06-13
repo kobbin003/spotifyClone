@@ -12,10 +12,7 @@ const LoggedInLayout: React.FC = () => {
 	const navigate = useNavigate();
 	const [width, setWidth] = useState(14.5);
 	const [isDraggable, setIsDraggable] = useState(false);
-	const [code, setCode] = useState<string | null>(localStorage.getItem("code"));
-	const { data, error, isLoading } = useGetAccessToken(code || null);
-	// console.log("logged in layout", data, error, isLoading);
-	// useGetRefreshToken(false);
+	const { data, error, isLoading } = useGetAccessToken();
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
 		console.log("mouse enter", isDraggable);
@@ -29,17 +26,9 @@ const LoggedInLayout: React.FC = () => {
 	};
 
 	useEffect(() => {
-		if (localStorage.getItem("code")) {
-			setCode(localStorage.getItem("code"));
-		}
-	}, [localStorage.getItem("code")]);
-	useEffect(() => {
 		// if code not found, then navigate to "/"
-		if (!code) navigate("/");
+		if (!localStorage.getItem("code")) navigate("/");
 	}, []);
-	useEffect(() => {
-		console.log("data", data);
-	}, [code]);
 
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>

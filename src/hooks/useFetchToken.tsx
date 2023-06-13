@@ -12,11 +12,14 @@ export const useFetchToken = <T, U, E extends {}>(
 	const [data, setData] = useState<T | U | null | undefined>();
 	const [error, setError] = useState<E | null>();
 	const [isLoading, setIsLoading] = useState(true);
+	const [code, setCode] = useState<string>(localStorage.getItem("code") || "");
 
 	const client_id = import.meta.env.VITE_CLIENT_ID;
 	const client_secret = import.meta.env.VITE_CLIENT_SECRET;
 	const payload = client_id + ":" + client_secret;
 	const encodedPayload = window.btoa(payload);
+	// set "code" in queryParams
+	queryParams.append("code", code);
 	const url = `https://accounts.spotify.com/api/token?${queryParams}`;
 	const options = {
 		method: "POST",
@@ -26,6 +29,13 @@ export const useFetchToken = <T, U, E extends {}>(
 		},
 		json: true,
 	};
+	// console.log("initial code", code, localStorage.getItem("code"));
+	useEffect(() => {
+		if (localStorage.getItem("code")) {
+			// console.log("code change", code, localStorage.getItem("code"));
+			setCode(localStorage.getItem("code") || "");
+		}
+	}, [localStorage.getItem("code")]);
 	useEffect(() => {
 		setIsLoading(true);
 		// FORFEIT useFetchToken if "accesstoken" already stored
@@ -47,25 +57,29 @@ export const useFetchToken = <T, U, E extends {}>(
 		}
 		////////////////
 		console.log("token not present");
-		fetch(url, options)
-			.then((res) => {
-				// if (res.ok) { //! putting this will not let you get error
-				return res.json();
-				// }
-			})
-			.then((data) => {
-				if (data.error) {
-					setError(data.error);
+		//* fethc only if code present
+		if (code) {
+			console.log("code present");
+			fetch(url, options)
+				.then((res) => {
+					// if (res.ok) { //! putting this will not let you get error
+					return res.json();
+					// }
+				})
+				.then((data) => {
+					if (data.error) {
+						setError(data.error);
+						setIsLoading(false);
+					} else {
+						setData(data);
+						setIsLoading(false);
+					}
+				})
+				.catch((err) => {
+					setError(err);
 					setIsLoading(false);
-				} else {
-					setData(data);
-					setIsLoading(false);
-				}
-			})
-			.catch((err) => {
-				setError(err);
-				setIsLoading(false);
-			});
+				});
+		}
 	}, [url]);
 
 	return {

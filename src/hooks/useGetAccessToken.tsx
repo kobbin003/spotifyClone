@@ -1,6 +1,6 @@
 import useGetRefreshToken from "./useGetRefreshToken";
 import { useFetchToken } from "./useFetchToken";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export type TokenData = {
 	access_token: string;
@@ -15,7 +15,7 @@ export type ErrorData = {
 };
 type AccessTokenLocalStorage = { access_token: string };
 
-export const useGetAccessToken = (code: string | null) => {
+export const useGetAccessToken = () => {
 	//? try it in useFetchToken:
 	//! USING this statement here
 	//! WILL BREAK the hook law of
@@ -28,9 +28,10 @@ export const useGetAccessToken = (code: string | null) => {
 	// 		isLoading: false,
 	// 	};
 	// }
+	// console.log("useGetAccessToken.tsx");
 	const redirect_uri = "http://localhost:5173/callback";
 	const queryParams = new URLSearchParams({
-		code: code ?? "",
+		// code: code ?? "",
 		redirect_uri,
 		grant_type: "authorization_code",
 	});
@@ -39,16 +40,16 @@ export const useGetAccessToken = (code: string | null) => {
 		AccessTokenLocalStorage,
 		ErrorData
 	>(queryParams);
-	// 		//! TYPE ASSERTIONS
+
 	useEffect(() => {
 		// set LocalStorage item:
 
 		if (data && "refresh_token" in data) {
-			console.log("DATA", data, error);
+			// console.log("DATA", data, error);
 			localStorage.setItem("accessToken", (data as TokenData).access_token);
 			localStorage.setItem("refreshToken", (data as TokenData).refresh_token);
 		} else if (data && !("refresh_token" in data)) {
-			console.log("DATA has accesstoken", data, error);
+			// console.log("DATA has accesstoken", data, error);
 			localStorage.setItem(
 				"accessToken",
 				(data as AccessTokenLocalStorage).access_token

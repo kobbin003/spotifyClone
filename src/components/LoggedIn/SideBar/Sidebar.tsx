@@ -33,8 +33,7 @@ const Sidebar = ({
 	handleClick,
 	handleMouseMove,
 }: sideBarProps): JSX.Element => {
-	const accessToken = localStorage.getItem("accessToken") || "";
-	let playlistData, albumData;
+	// const accessToken = localStorage.getItem("accessToken") || "";
 	// const { data, error, isLoading } = getUserPlaylist(accessToken);
 	const {
 		data: artistsData,
@@ -46,6 +45,9 @@ const Sidebar = ({
 		error: albumsError,
 		isLoading: albumsIsLoading,
 	} = getUserAlbums();
+	// useEffect(() => {
+	// 	console.log("sidebar");
+	// }, []);
 
 	// const items = data.items;
 	return (
