@@ -9,15 +9,19 @@ export const Container = styled.div`
 export const FixedContainer = styled.div<{
 	left: number;
 	widthHandleDragger: number;
+	isInSearchRoute: "home" | "search";
 }>`
 	position: fixed;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger}em);
-	height: calc(100 / 16 * 1em);
+	height: ${(prop) =>
+		prop.isInSearchRoute == "home"
+			? "calc(50 / 16 * 1em)"
+			: "calc(100 / 16 * 1em)"};
 	/** //! DO NOT make min-width of fixed container with space in right size
 		//! OR ELSE it will overflow when container gets minimized
 	 */
 	background-color: var(--black-dark);
-	/* background-color: transparent; */
+	/* background-color: pink; */
 	display: flex;
 	flex-direction: column;
 	z-index: 1;
@@ -25,7 +29,7 @@ export const FixedContainer = styled.div<{
 	& > div {
 		position: relative;
 		width: 100%;
-		height: 50%;
+		height: ${(prop) => (prop.isInSearchRoute == "home" ? "100%" : "50%")};
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -40,6 +44,7 @@ export const NavigatePageSection = styled.section`
 	justify-content: center;
 	align-items: center;
 	align-content: center;
+	/* background-color: yellow; */
 	a {
 		position: relative;
 		text-decoration: none;

@@ -2,6 +2,7 @@ import React from "react";
 import { TrackBody, Container, Header, TrackItem, Row } from "./style";
 import { tracks } from "../data";
 import { Link, useOutletContext } from "react-router-dom";
+import { msToMin } from "../../../../utils/msToMin";
 const Track = () => {
 	const [queryFromSearchBar, left, widthHandleDragger]: [
 		string,
@@ -59,11 +60,5 @@ const Track = () => {
 		</Container>
 	);
 };
-function msToMin(ms: number) {
-	const min = ms / (1000 * 60);
-	const minSplit = JSON.stringify(min).split(".");
-	const minDecimalTwo = minSplit[1].slice(0, 2);
-	const inMinutes = minSplit[0] + "." + minDecimalTwo;
-	return inMinutes;
-}
+
 export default Track;

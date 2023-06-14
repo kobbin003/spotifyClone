@@ -31,6 +31,7 @@ const Home = () => {
 
 	return (
 		<Container>
+			<h1>Home</h1>
 			<>
 				{/* <SubHeaders>
 					<h2>Saved Albums</h2>

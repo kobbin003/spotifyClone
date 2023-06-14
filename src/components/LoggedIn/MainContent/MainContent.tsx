@@ -24,24 +24,27 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 	// console.log("maincontent", queryFromSearchBar);
 
 	return (
-		<Container
-			left={left}
-			widthHandleDragger={widthHandleDragger}
-		>
-			<NavBar
+		<>
+			<Container
 				left={left}
-				queryFromSearchBar={setQueryFromSearchBar}
 				widthHandleDragger={widthHandleDragger}
-				showSearchTypes={setShowSearchTypes}
-			></NavBar>
-			{/* {isInSearchRoute && showSearchTypes && (
-				<SearchTypesList></SearchTypesList>
-			)} */}
-			<Content>
-				<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
-				{/* <Outlet /> */}
-			</Content>
-		</Container>
+			>
+				<NavBar
+					left={left}
+					queryFromSearchBar={setQueryFromSearchBar}
+					widthHandleDragger={widthHandleDragger}
+					showSearchTypes={setShowSearchTypes}
+				></NavBar>
+
+				{/* {isInSearchRoute && showSearchTypes && (
+			<SearchTypesList></SearchTypesList>
+		)} */}
+				<Content>
+					<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
+					{/* <Outlet /> */}
+				</Content>
+			</Container>
+		</>
 	);
 };
 

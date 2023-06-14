@@ -50,6 +50,7 @@ const NavBar = ({
 			<FixedContainer
 				left={left}
 				widthHandleDragger={widthHandleDragger}
+				isInSearchRoute={isInSearchRoute ? "search" : "home"}
 			>
 				<div>
 					<NavigatePageSection>

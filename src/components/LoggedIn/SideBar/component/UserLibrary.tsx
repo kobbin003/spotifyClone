@@ -64,7 +64,10 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 		<ContainerLibrary>
 			{albums.items.map(({ album }, index) => (
 				<LibraryItem key={album.id}>
-					<Link to={`/me/album/${album.id}`}>
+					<Link
+						to={`/me/album/${album.id}`}
+						state={album}
+					>
 						<div>
 							<img
 								src={
