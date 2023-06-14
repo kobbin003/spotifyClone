@@ -1,5 +1,7 @@
 import React from "react";
 import { msToMin } from "../../../../utils/msToMin";
+import { BoldDot, Container } from "./style";
+import { UserAlbumArtists } from "../../../../hooks/spotify-data/getUserAlbums";
 
 const AlbumHeader = ({
 	images,
@@ -16,27 +18,36 @@ const AlbumHeader = ({
 	releaseDate: string;
 	totalTracks: number;
 	albumDuration: number;
-	artists: { id: number; name: string; [key: string]: any }[];
+	artists: UserAlbumArtists;
 }) => {
+	console.log("images", artists);
 	return (
-		<div>
+		<Container>
 			<div>
-				<img />
+				<img src={images[0].url} />
 			</div>
 			<div>
-				<p>{albumType}</p>
-				<p>{name}</p>
-				<span>{msToMin(albumDuration)}</span>
-				<p>
-					<span>
-						<img src={images[0].url} />
-					</span>
-					<span>{artists[0].name}</span>
-					<span>{releaseDate.split("-")[0]}</span>
-					<span>{totalTracks}</span>
-				</p>
+				<p>{albumType[0].toUpperCase() + albumType.slice(1)}</p>
+				<h1>{name}</h1>
+				<div>
+					<span>{/* <img src={artists[0].images[0].url} />{" "} */}</span>
+					<p>
+						{artists[0].name}&nbsp;<BoldDot>.</BoldDot>&nbsp;
+					</p>
+					<p>
+						{releaseDate.split("-")[0]}
+						&nbsp;<BoldDot>.</BoldDot>&nbsp;
+					</p>
+					<p>
+						{totalTracks} songs&nbsp;<b>,</b>&nbsp;
+					</p>
+					<p>
+						<span>{msToMin(albumDuration).split(".")[0]}&nbsp;hr&nbsp;</span>
+						<span>{msToMin(albumDuration).split(".")[1]}&nbsp;min&nbsp;</span>
+					</p>
+				</div>
 			</div>
-		</div>
+		</Container>
 	);
 };
 
