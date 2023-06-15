@@ -97,7 +97,10 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 			<>
 				{artists.map((artist, index) => (
 					<LibraryItem key={artist.id}>
-						<Link to={`/me/artist/${artist.id}`}>
+						<Link
+							to={`/me/artist/${artist.id}`}
+							state={artist}
+						>
 							<div>
 								<img
 									src={

@@ -5,7 +5,7 @@ export const Container = styled.div`
 	position: relative;
 	height: 200px;
 	display: flex;
-	border: 1px solid green;
+	border: 1px solid #1ed76069;
 	width: 98%;
 	/* padding: 1em; */
 	padding-top: 3em;
@@ -31,6 +31,7 @@ export const Container = styled.div`
 		/* border: 2px solid goldenrod; */
 		img {
 			height: 200px;
+			border: 2px solid #1ed76099;
 			@media screen and (max-width: 600px) {
 				height: 250px;
 			}

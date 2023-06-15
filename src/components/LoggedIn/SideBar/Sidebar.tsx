@@ -80,21 +80,28 @@ const Sidebar = ({
 							</CreatePlaylist>
 						</li>
 					</UnorderedList>
-					{artistsData && albumsData ? (
-						<UserLibrary
-							artists={artistsData.artists.items}
-							// playlists={}
-							albums={albumsData}
-						/>
+					{albumsIsLoading && artistsIsLoading ? (
+						<p>Loading...</p>
 					) : (
-						<ActionCards>
-							<h4>Create your first playlist</h4>
-							<p>It's easy, we'll help you</p>
-							<ButtonLink>
-								<span>CreatePlaylist</span>
-							</ButtonLink>
-						</ActionCards>
+						<>
+							{artistsData && albumsData ? (
+								<UserLibrary
+									artists={artistsData.artists.items}
+									// playlists={}
+									albums={albumsData}
+								/>
+							) : (
+								<ActionCards>
+									<h4>Create your first playlist</h4>
+									<p>It's easy, we'll help you</p>
+									<ButtonLink>
+										<span>CreatePlaylist</span>
+									</ButtonLink>
+								</ActionCards>
+							)}
+						</>
 					)}
+
 					{/* <ActionCards>
 						<h4>Let's find some podcasts to follow</h4>
 						<p>We'll keep you updated on new episodes</p>

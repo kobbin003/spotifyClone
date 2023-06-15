@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Header, TrackItem } from "./style";
-import { spawn } from "child_process";
 import { msToMin } from "../../../../utils/msToMin";
 
 const AlbumTracks = ({
@@ -17,29 +16,44 @@ const AlbumTracks = ({
 }) => {
 	return (
 		<Container>
-			{/* <Header>
-				<div>#</div>
-				<div>title</div>
-				<div>Clock</div>
-			</Header> */}
 			<ul>
-				<TrackItem>
+				<Header>
 					<div>#</div>
-					<div>title</div>
-					<div>Clock</div>
-				</TrackItem>
+					<div>Title</div>
+					<div>
+						<img
+							src="/public/icons/clock.svg"
+							alt=""
+						/>
+					</div>
+				</Header>
 				{tracks.map((track) => (
 					<TrackItem key={track.id}>
-						<div>{track.track_number}</div>
+						<div>
+							<span>{track.track_number}</span>
+							<button>
+								<img src="/icons/playTrack.svg" />
+							</button>
+						</div>
 						<div>
 							<p>{track.name}</p>
 							<p>
 								{artists.map((artist) => (
-									<span>{artist.name}</span>
+									<span key={artist.name}>{artist.name}</span>
 								))}
 							</p>
 						</div>
-						<div>{msToMin(track.duration_ms)}</div>
+						<div>
+							{/* <div> */}
+							<button>
+								<img src="/icons/heart.svg" />
+							</button>
+							{/* </div> */}
+							<span>{msToMin(track.duration_ms)}</span>
+							<button>
+								<img src="/icons/threedots.svg" />
+							</button>
+						</div>
 					</TrackItem>
 				))}
 			</ul>

@@ -61,7 +61,7 @@ const getUserAlbums = (): {
 		// accessToken,
 		"GET"
 	);
-	console.log("getUserAlbums", { data, error, isLoading });
+	// console.log("getUserAlbums", { data, error, isLoading });
 	return { data, error, isLoading };
 };
 

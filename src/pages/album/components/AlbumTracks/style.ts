@@ -7,8 +7,11 @@ export const Container = styled.div`
 export const Row = styled.li`
 	width: 100%;
 	display: grid;
-	grid: auto / minmax(30px, 50px) minmax(150px, 1fr) minmax(50px, 0.4fr);
+	grid: auto / minmax(30px, 50px) minmax(150px, 1fr) minmax(150px, 0.3fr);
 	/* align-items: center; */
+	justify-content: center;
+	color: var(--font-greyer);
+	font-size: 0.9rem;
 	& > div {
 		align-self: center;
 	}
@@ -23,14 +26,92 @@ export const Row = styled.li`
 	}
 	& > div:nth-of-type(3) {
 		/* background-color: violet; */
-		justify-self: flex-end;
+		/* justify-self: flex-end; */ //!
 		padding-right: 1em;
+		/* justify-self: center; */
+		/* width: fit-content; */
 	}
 `;
-export const Header = styled(Row)``;
+export const Header = styled(Row)`
+	font-weight: 600;
+	border-bottom: 1px solid grey;
+	padding-bottom: 0.4em;
+	margin-bottom: 0.5em;
+	& > div:nth-of-type(3) {
+		display: flex;
+		justify-content: center;
+		img {
+			height: 15px;
+		}
+	}
+`;
 export const TrackItem = styled(Row)`
+	/* background-color: blueviolet; */
+	& > div:nth-of-type(1) {
+		/* background-color: brown; */
+		span {
+			display: block;
+			width: 100%;
+			/* font-size: 1rem; */
+		}
+		button {
+			/* width: 100%; */
+			background-color: transparent;
+			border: none;
+			display: none;
+			color: var(--font-greyer);
+			font-weight: 500;
+			font-size: 1rem;
+
+			img {
+				/* display: block; */
+				/* height: 70%; */
+				width: 70%;
+			}
+		}
+	}
 	& > div:nth-of-type(2) {
+		& > p:nth-of-type(1) {
+			color: var(--font-white);
+			padding-top: 0.5em;
+			padding-bottom: 0.3em;
+		}
 		display: flex;
 		flex-direction: column;
+		/* background-color: green; */
+	}
+	& > div:nth-of-type(3) {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		gap: 10px;
+		/* background-color: blue; */
+		button {
+			background-color: transparent;
+			border: none;
+			height: 20px;
+			visibility: hidden;
+		}
+		button:nth-of-type(1) {
+			flex: 1;
+		}
+		img {
+			height: 100%;
+		}
+	}
+	&:hover {
+		background-color: var(--data-display-background-hover);
+		& > div:nth-of-type(1) {
+			span {
+				display: none;
+			}
+			button {
+				display: flex;
+				justify-content: center;
+			}
+		}
+		& > div > button {
+			visibility: visible;
+		}
 	}
 `;
