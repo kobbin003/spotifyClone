@@ -15,13 +15,13 @@ const useFetchData = <T, U extends {}>(
 	const [data, setData] = useState<T | null>();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<U | null>();
-	const [accessToken, setaccessToken] = useState<string>(
+	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
 	);
 	// const accessToken = localStorage.getItem("accessToken") || "";
 	useEffect(() => {
 		if (localStorage.getItem("accessToken")) {
-			setaccessToken(localStorage.getItem("accessToken") || "");
+			setAccessToken(localStorage.getItem("accessToken") || "");
 		}
 	}, [localStorage.getItem("accessToken")]);
 

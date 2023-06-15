@@ -20,7 +20,7 @@ const AlbumHeader = ({
 	albumDuration: number;
 	artists: UserAlbumArtists;
 }) => {
-	console.log("images", artists);
+	// console.log("images", artists);
 	return (
 		<Container>
 			<div>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 export const Container = styled.main<{
 	left: number;
 	widthHandleDragger: number;
+	scroll: "hidden" | "scroll";
 }>`
 	background: var(--black-dark);
 	/* background: goldenrod; */
@@ -12,7 +13,8 @@ export const Container = styled.main<{
 	border-radius: 0.3em;
 	height: 100vh;
 	//? dont let height go beyond 100vh or else it's container will get scroll
-	overflow-y: scroll;
+	overflow-y: ${(prop) => prop.scroll};
+	/* overflow-y: hidden; */
 	overflow-x: hidden;
 `;
 

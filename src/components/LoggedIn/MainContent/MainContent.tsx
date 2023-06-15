@@ -13,6 +13,7 @@ type Prop = {
 const MainContent = ({ left, widthHandleDragger }: Prop) => {
 	const [queryFromSearchBar, setQueryFromSearchBar] = useState<string>();
 	const [showSearchTypes, setShowSearchTypes] = useState<boolean>(false);
+	const [scroll, setScroll] = useState<"scroll" | "hidden">("scroll");
 	const location = window.location.pathname;
 	const isInSearchRoute = /^\/me\/search.*/.test(location);
 	useEffect(() => {
@@ -28,6 +29,7 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 			<Container
 				left={left}
 				widthHandleDragger={widthHandleDragger}
+				scroll={scroll}
 			>
 				<NavBar
 					left={left}
@@ -40,7 +42,9 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 			<SearchTypesList></SearchTypesList>
 		)} */}
 				<Content>
-					<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />
+					<Outlet
+						context={[queryFromSearchBar, left, widthHandleDragger, setScroll]}
+					/>
 					{/* <Outlet /> */}
 				</Content>
 			</Container>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	position: relative;
-	width: 100%;
 	height: 200px;
 	display: flex;
 	border: 1px solid green;
@@ -12,24 +11,40 @@ export const Container = styled.div`
 	padding-top: 3em;
 	padding-bottom: 1em;
 	padding-right: 0;
+	@media screen and (max-width: 600px) {
+		padding-left: 1em;
+		height: auto;
+		flex-direction: column;
+	}
 	& > div:nth-of-type(1) {
+		display: flex;
+		justify-content: center;
 		height: 100%;
+		min-width: 200px;
 		padding-right: 1em;
 		padding-left: 1em;
+		@media screen and (max-width: 600px) {
+			padding-left: 0;
+			min-width: 250px;
+		}
+		/* background-color: yellow; */
+		/* border: 2px solid goldenrod; */
 		img {
-			height: 100%;
+			height: 200px;
+			@media screen and (max-width: 600px) {
+				height: 250px;
+			}
 		}
 	}
 
 	& > div:nth-of-type(2) {
-		flex: 1;
 		height: 100%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
 		/* background-color: green; */
 		padding-left: 0.5em;
-		/* gap: 1em; */
 		& > p {
 			font-size: 1.2rem;
 			font-weight: 600;
@@ -38,11 +53,16 @@ export const Container = styled.div`
 			font-size: 2.8rem;
 			padding-top: 0.1em;
 			padding-bottom: 0.4em;
+			/* background-color: aqua; */
+			width: auto;
 		}
 		& > div {
 			display: flex;
 			height: fit-content;
 			padding-bottom: 0.5em;
+			& > p {
+				white-space: nowrap;
+			}
 			& > p:nth-of-type(1) {
 				font-weight: 600;
 			}
