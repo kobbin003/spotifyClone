@@ -45,11 +45,6 @@ const Sidebar = ({
 		error: albumsError,
 		isLoading: albumsIsLoading,
 	} = getUserAlbums();
-	// useEffect(() => {
-	// 	console.log("sidebar");
-	// }, []);
-
-	// const items = data.items;
 	return (
 		<>
 			<Container width={width}>
