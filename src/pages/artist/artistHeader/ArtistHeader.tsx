@@ -18,7 +18,7 @@ const ArtistHeader = () => {
 					<div>
 						<h1>{data?.name.toUpperCase()}</h1>
 						<p>
-							{new Intl.NumberFormat().format(data?.followers.total)} followers
+							{new Intl.NumberFormat().format(data?.followers.total)} listeners
 						</p>
 					</div>
 					{/* <img

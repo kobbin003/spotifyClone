@@ -1,8 +1,55 @@
 import styled from "styled-components";
-import { Row } from "../../../search/pages/track/style";
+// import { Row } from "../../../search/pages/track/style";
+export const Container = styled.div`
+	& > h2 {
+		padding-bottom: 1em;
+	}
+`;
+
+export const Row = styled.div`
+	width: 100%;
+	display: grid;
+	grid: auto/30px minmax(200px, 1fr) minmax(100px, 0.35fr);
+	column-gap: 0.5em;
+	row-gap: 0.5em;
+	overflow: hidden;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	&:hover {
+		a {
+			color: var(--font-white);
+		}
+		div:nth-of-type(3) {
+			& > div {
+				visibility: visible;
+			}
+			& > img {
+				visibility: visible;
+			}
+		}
+	}
+	& > div {
+		padding-left: 0.2em;
+		color: var(--font-greyer);
+	}
+	& > div:nth-of-type(1) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	& > div:nth-of-type(2) {
+	}
+
+	& > div:nth-of-type(3) {
+	}
+
+	img {
+		height: 20px;
+	}
+`;
 export const TrackItem = styled(Row)`
-	/* background-color: aqua;
-	width: 90%; */
+	/* background-color: aqua;*/
+	width: 97%;
 	a {
 		display: block;
 		width: 100%;
@@ -21,7 +68,8 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
-	div:nth-of-type(1) {
+	& > div:nth-of-type(1) {
+		/* background-color: aquamarine; */
 		span {
 			font-size: 1rem;
 		}
@@ -41,7 +89,8 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
-	div:nth-of-type(2) {
+	& > div:nth-of-type(2) {
+		/* background-color: burlywood; */
 		display: flex;
 		width: 100%;
 		align-items: center;
@@ -61,31 +110,43 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
-	/* div:nth-of-type(3) {
-		overflow: hidden;
-	} */
-	div:nth-of-type(3) {
+	& > div:nth-of-type(3) {
+		/* background-color: silver; */
+		display: grid;
+		grid: auto/minmax(50px, 50px) minmax(50px, 1fr) 50px;
 		justify-content: space-between;
-		/* & > div {
-			flex: 1;
+		& > button {
+			background-color: transparent;
+			border: none;
 			visibility: hidden;
 		}
-		& > img {
-			padding-left: 0.5em;
-			visibility: hidden;
-		} */
+		& > button:nth-of-type(1) {
+			flex: 1;
+			min-width: 50px;
+			max-width: 80px;
+		}
+		& > span {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
 	}
 
 	&:hover {
 		background-color: var(--data-display-background-hover);
 
-		div:nth-of-type(1) {
+		& > div:nth-of-type(1) {
 			button {
 				display: flex;
 				justify-content: center;
 			}
 			& > span {
 				display: none;
+			}
+		}
+		& > div:nth-of-type(3) {
+			button {
+				visibility: visible;
 			}
 		}
 	}

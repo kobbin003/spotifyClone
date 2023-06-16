@@ -2,7 +2,7 @@ import React from "react";
 import getArtistTopTracks from "../../../../hooks/spotify-data/getArtistTopTracks";
 import { Link, useParams } from "react-router-dom";
 import { msToMin } from "../../../../utils/msToMin";
-import { TrackItem } from "./style";
+import { Container, TrackItem } from "./style";
 
 const PopularTracks = () => {
 	const params = useParams();
@@ -10,7 +10,7 @@ const PopularTracks = () => {
 	const artistTopTracks = getArtistTopTracks(params.id || "");
 	console.log(artistTopTracks);
 	return (
-		<div>
+		<Container>
 			<h2>Popular</h2>
 			{artistTopTracks.data?.tracks.map((track, index) => (
 				<TrackItem key={track.id}>
@@ -26,24 +26,21 @@ const PopularTracks = () => {
 							<Link to="/n">
 								<span>{track.name}</span>
 							</Link>
-							<Link to="">
-								<span>{track.artists[0].name}</span>
-							</Link>
 						</div>
 					</div>
-					{/* <div>
-						<Link to="">
-							<span>{track.album.name}</span>
-						</Link>
-					</div> */}
+
 					<div>
-						<img src="/icons/heart.svg" />
+						<button>
+							<img src="/icons/heart.svg" />
+						</button>
 						<span>{msToMin(track.duration_ms)}</span>
-						<img src="/icons/threedots.svg" />
+						<button>
+							<img src="/icons/threedots.svg" />
+						</button>
 					</div>
 				</TrackItem>
 			))}
-		</div>
+		</Container>
 	);
 };
 

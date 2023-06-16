@@ -15,7 +15,6 @@ const Artist = () => {
 	return (
 		<div>
 			<ArtistHeader />
-			{/* followers:{}, images:[],name:string, */}
 			<ArtistActions />
 			<ArtistContents />
 		</div>
