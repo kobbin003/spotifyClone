@@ -11,11 +11,11 @@ import HomeLoggedOut from "./pages/loggedOutHome/HomeLoggedOut";
 // import Playlist from "./pages/search/pages/playlist/Playlist";
 
 import { Suspense, lazy } from "react";
-import Artist from "./pages/artist/Artist";
+import Artist from "./pages/artist:id/Artist";
 const Search = lazy(() => import("./pages/search/Search"));
 const Artists = lazy(() => import("./pages/search/pages/artists/Artists"));
 const Albums = lazy(() => import("./pages/search/pages/albums/Albums"));
-const Album = lazy(() => import("./pages/album/Album"));
+const Album = lazy(() => import("./pages/album:id/Album"));
 const Track = lazy(() => import("./pages/search/pages/track/Track"));
 const Playlist = lazy(() => import("./pages/search/pages/playlist/Playlist"));
 

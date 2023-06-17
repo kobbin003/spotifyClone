@@ -1,6 +1,9 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { Container, DropDown } from "../../album/components/AlbumActions/style";
+import {
+	Container,
+	DropDown,
+} from "../../album:id/components/AlbumActions/style";
 import { FollowingButton } from "./style";
 
 const ArtistActions = () => {
