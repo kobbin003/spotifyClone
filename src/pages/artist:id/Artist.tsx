@@ -9,7 +9,6 @@ import getArtistTopTracks from "../../hooks/spotify-data/getArtistTopTracks";
 const Artist = () => {
 	const params = useParams();
 	const { state } = useLocation();
-	// console.log(state, params);
 	// const artistAlbums = getArtistAlbums(params.id || "");
 
 	return (

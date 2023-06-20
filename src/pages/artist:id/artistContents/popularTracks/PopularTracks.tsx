@@ -8,7 +8,7 @@ const PopularTracks = () => {
 	const params = useParams();
 
 	const artistTopTracks = getArtistTopTracks(params.id || "");
-	console.log(artistTopTracks);
+	// console.log(artistTopTracks);
 	return (
 		<Container>
 			<h2>Popular</h2>

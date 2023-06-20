@@ -12,6 +12,7 @@ import {
 	SearchInputContainerIn,
 	SearchInputContainerOut,
 } from "./SearchBar.style";
+import { debounce } from "lodash";
 import { StyledComponent } from "styled-components";
 const SearchBar = ({
 	loggedIn,
@@ -42,6 +43,7 @@ const SearchBar = ({
 		// pass search query to parent
 		if (passQueryToNavBar) passQueryToNavBar(e.target.value);
 	};
+	const debouncedHandleOnChange = debounce(handleOnChange, 500);
 	const handleOnFocus = (e: FocusEvent<HTMLInputElement>) => {
 		if (showSearchTypes) {
 			showSearchTypes(true);
@@ -56,6 +58,9 @@ const SearchBar = ({
 			searchInput.current.focus();
 		}
 	};
+	useEffect(() => {
+		console.log("searchValue", searchValue);
+	}, [searchValue]);
 
 	return (
 		<StyledComponent>
@@ -67,6 +72,7 @@ const SearchBar = ({
 				autoFocus
 				onFocus={handleOnFocus}
 				onChange={handleOnChange}
+				// onChange={debouncedHandleOnChange}
 			></input>
 			<SearchIcon
 				loggedIn

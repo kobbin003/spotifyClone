@@ -21,6 +21,7 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 		if (location === "/me/") {
 			setShowSearchTypes(false);
 		}
+		//soething new
 	}, [location]);
 	// console.log("maincontent", queryFromSearchBar);
 

@@ -6,7 +6,7 @@ import { Container } from "./style";
 const ArtistHeader = () => {
 	const { id } = useParams();
 	const { data, error, isLoading } = getArtist(id || "");
-	console.log("artist", data);
+	// console.log("artist", data);
 	// const imageUrl = data?.images[0].url;
 	if (isLoading) return <h2>Loading...</h2>;
 	if (error) return <h4>Error: {error.message}</h4>;
