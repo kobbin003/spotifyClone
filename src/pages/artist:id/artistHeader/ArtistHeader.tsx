@@ -1,13 +1,21 @@
 import React from "react";
-import getArtist from "../../../hooks/spotify-data/getArtist";
-import { useParams } from "react-router-dom";
+import getArtist, {
+	Artist,
+	ArtistError,
+} from "../../../hooks/spotify-data/getArtist";
 import { Container } from "./style";
-
-const ArtistHeader = () => {
-	const { id } = useParams();
-	const { data, error, isLoading } = getArtist(id || "");
+type ArtistHeaderData = {
+	data: Artist | null;
+	error: ArtistError | null;
+	isLoading: boolean;
+};
+const ArtistHeader = ({
+	artistHeaderData,
+}: {
+	artistHeaderData: ArtistHeaderData;
+}) => {
+	const { data, error, isLoading } = artistHeaderData;
 	// console.log("artist", data);
-	// const imageUrl = data?.images[0].url;
 	if (isLoading) return <h2>Loading...</h2>;
 	if (error) return <h4>Error: {error.message}</h4>;
 	return (

@@ -2,11 +2,11 @@ import React from "react";
 import PopularTracks from "./popularTracks/PopularTracks";
 import ArtistAlbums from "./albums/ArtistAlbums";
 
-const ArtistContents = () => {
+const ArtistContents = ({ artistName }: { artistName: string | null }) => {
 	return (
 		<div>
 			<PopularTracks />
-			<ArtistAlbums />
+			<ArtistAlbums artistName={artistName} />
 		</div>
 	);
 };

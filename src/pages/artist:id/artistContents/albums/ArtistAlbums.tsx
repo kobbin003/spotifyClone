@@ -1,6 +1,6 @@
 import React from "react";
 import getArtistAlbums from "../../../../hooks/spotify-data/getArtistAlbums";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import AlbumCards from "../../../../components/cards/AlbumCards/AlbumCards";
 import {
 	AlbumsContainer,
@@ -10,11 +10,15 @@ import {
 	ImageContainer,
 	SpotifyPlay,
 } from "./style";
+import { albums } from "../../../search/pages/data";
 
-const ArtistAlbums = () => {
+const ArtistAlbums = ({ artistName }: { artistName: string | null }) => {
 	const params = useParams();
 	const { data, error, isLoading } = getArtistAlbums(params.id || "");
-	console.log("ArtistAlbums", data, error, isLoading);
+	// console.log("ArtistAlbums", data, error, isLoading);
+	// const artistName = useLocation().state;
+	// console.log(params);
+	// console.log("stateToPass", data?.items);
 	if (isLoading) return <p>Loading...</p>;
 	return (
 		<Container>
@@ -22,12 +26,20 @@ const ArtistAlbums = () => {
 				<Link to="">
 					<h2>Discography</h2>
 				</Link>
-				<Link to="">Show all</Link>
+				<Link
+					to={`/me/artist/${params.id}/allAlbums`}
+					state={{ albums: data?.items, artistName }}
+				>
+					Show all
+				</Link>
 			</Header>
 			<AlbumsContainer>
 				{data &&
 					data.items.map((item) => (
-						<Card href="">
+						<Card
+							href=""
+							key={item.id}
+						>
 							<ImageContainer>
 								<img
 									src={item.images[0].url}

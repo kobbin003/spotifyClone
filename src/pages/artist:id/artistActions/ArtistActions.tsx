@@ -23,17 +23,17 @@ const ArtistActions = () => {
 	return (
 		<Container>
 			<img
-				src="/public/icons/spotify_play.svg"
+				src="/icons/spotify_play.svg"
 				alt=""
 			/>
 			{/* <img
-				src="/public/icons/heartGreen.svg"
+				src="/icons/heartGreen.svg"
 				alt=""
 			/> */}
 			<FollowingButton>FOLLOWING</FollowingButton>
 			<div>
 				<img
-					src="/public/icons/threedots.svg"
+					src="/icons/threedots.svg"
 					alt=""
 					onClick={handleDropDownMenu}
 				/>
