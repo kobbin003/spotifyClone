@@ -15,6 +15,7 @@ import Artist from "./pages/artist:id/Artist";
 const Search = lazy(() => import("./pages/search/Search"));
 const Artists = lazy(() => import("./pages/search/pages/artists/Artists"));
 const Albums = lazy(() => import("./pages/search/pages/albums/Albums"));
+const AllAlbums = lazy(() => import("./pages/allAlbums/AllAlbums"));
 const Album = lazy(() => import("./pages/album:id/Album"));
 const Track = lazy(() => import("./pages/search/pages/track/Track"));
 const Playlist = lazy(() => import("./pages/search/pages/playlist/Playlist"));
@@ -99,6 +100,14 @@ export const router = createBrowserRouter([
 			{
 				path: "artist/:id",
 				element: <Artist />,
+			},
+			{
+				path: "artist/:id/allAlbums",
+				element: (
+					<Suspense fallback={<h4>Loading...</h4>}>
+						<AllAlbums />
+					</Suspense>
+				),
 			},
 			{
 				path: "*",
