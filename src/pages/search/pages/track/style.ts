@@ -9,7 +9,9 @@ export const Container = styled.div`
 	/* border: 1px solid goldenrod; */
 	/* margin-top: 50px; */
 `;
-
+export const Message = styled.div`
+	padding-top: 25px;
+`;
 export const Row = styled.div`
 	display: flex;
 	width: 100%;
@@ -66,8 +68,9 @@ export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger + 5.1}em);
 	border-bottom: 1px solid var(--font-grey);
 	padding: 0.5em 0;
+	/* top: -50px; */
 	background-color: var(--background-dull);
-	z-index: 10;
+	z-index: 1;
 	div:nth-of-type(4) {
 		align-self: center;
 		justify-content: center;

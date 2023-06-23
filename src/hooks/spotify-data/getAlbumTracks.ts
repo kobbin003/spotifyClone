@@ -1,15 +1,16 @@
 import useFetchData from "../useFetchData";
-type AlbumTrack = {
-	artists: {
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		name: string;
-		type: string;
-		uri: string;
-	}[];
+export type AlbumTrackArtist = {
+	external_urls: {
+		spotify: string;
+	};
+	href: string;
+	id: string;
+	name: string;
+	type: string;
+	uri: string;
+};
+export type AlbumTrack = {
+	artists: AlbumTrackArtist[];
 	available_markets: string[];
 	disc_number: number;
 	duration_ms: number;
@@ -40,7 +41,7 @@ type AlbumTrack = {
 	is_local: boolean;
 };
 
-type AlbumTracks = {
+export type AlbumTracks = {
 	href: string;
 	limit: number;
 	next: string;
@@ -53,7 +54,7 @@ type AlbumTracks = {
 type Error = { status: number; message: string };
 
 const getAlbumTracks = (id: string) => {
-	const url = `https://api.spotify.com/v1/artists/${id}`;
+	const url = `https://api.spotify.com/v1/albums/${id}/tracks`;
 	const { data, error, isLoading } = useFetchData<AlbumTracks, Error>(
 		url,
 		"GET"

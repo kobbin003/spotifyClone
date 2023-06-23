@@ -5,12 +5,17 @@ import Track from "../search/pages/track/Track";
 import AlbumHeader from "./components/AlbumHeader/AlbumHeader";
 import AlbumTracks from "./components/AlbumTracks/AlbumTracks";
 import AlbumActions from "./components/AlbumActions/AlbumActions";
-import { UserAlbumItem } from "../../hooks/spotify-data/getUserAlbums";
+import {
+	UserAlbumArtists,
+	UserAlbumItem,
+	UserAlbumTracks,
+	UserAlbumTracksItems,
+} from "../../hooks/spotify-data/getUserAlbums";
 
 const Album = () => {
 	const params = useParams();
 	const album = useLocation();
-	console.log("album link", album.state);
+	// console.log("album link", album.state);
 	const {
 		images,
 		album_type,
@@ -37,10 +42,7 @@ const Album = () => {
 				albumDuration={albumDuration}
 			/>
 			<AlbumActions />
-			<AlbumTracks
-				tracks={tracks.items}
-				artists={artists}
-			/>
+			<AlbumTracks<UserAlbumTracksItems> tracks={tracks.items} />
 		</Container>
 	);
 };

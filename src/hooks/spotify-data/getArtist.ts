@@ -1,6 +1,6 @@
 import useFetchData from "../useFetchData";
 
-type Artist = {
+export type Artist = {
 	external_urls: { spotify: string };
 	followers: { href: string; total: number };
 	genres: string[];
@@ -12,7 +12,7 @@ type Artist = {
 	type: string;
 	uri: string;
 };
-type ArtistError = { status: number; message: string };
+export type ArtistError = { status: number; message: string };
 const getArtist = (id: string) => {
 	const url = `https://api.spotify.com/v1/artists/${id}`;
 	const { data, error, isLoading } = useFetchData<Artist, ArtistError>(

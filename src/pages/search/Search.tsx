@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
-import getSearchItem, {
-	SearchData,
-	SearchItem,
-} from "../../hooks/spotify-data/getSearchItem";
+import getSearchItem from "../../hooks/spotify-data/getSearchItem";
 import SearchType from "../../components/searchTypesList/SearchTypesList";
 import {
 	Container,
@@ -24,9 +21,7 @@ const Search = () => {
 	// console.log("query-Search", queryFromSearchBar);
 	const [type, setType] = useState<string>("");
 	// getSearchItem(query, type);
-	const searchData: SearchItem = JSON.parse(
-		localStorage.getItem("searchData") || ""
-	);
+
 	return (
 		<Container isLoggedIn={isLoggedIn}>
 			<Outlet context={[queryFromSearchBar, left, widthHandleDragger]} />

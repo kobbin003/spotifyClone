@@ -12,18 +12,18 @@ export type UserAlbumArtists = {
 
 export type UserAlbumTracks = {
 	total: number;
-	items: {
-		artists: {
-			id: string;
-			name: string;
-		}[];
-		duration_ms: number;
+	items: UserAlbumTracksItems;
+};
+export type UserAlbumTracksItems = {
+	artists: {
 		id: string;
 		name: string;
-		track_number: number;
 	}[];
-};
-
+	duration_ms: number;
+	id: string;
+	name: string;
+	track_number: number;
+}[];
 export type UserAlbumItem = {
 	album_type: string;
 	total_tracks: number;

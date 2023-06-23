@@ -99,7 +99,7 @@ const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
 					<LibraryItem key={artist.id}>
 						<Link
 							to={`/me/artist/${artist.id}`}
-							state={artist}
+							// state={artist}
 						>
 							<div>
 								<img

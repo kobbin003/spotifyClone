@@ -20,17 +20,17 @@ const useFetchData = <T, U extends {}>(
 	);
 	// const accessToken = localStorage.getItem("accessToken") || "";
 	useEffect(() => {
+		// setAccessToken(localStorage.getItem("accessToken") || "");
 		if (localStorage.getItem("accessToken")) {
-			console.log("accesstoken-fetchdata");
+			console.log("YES-accesstoken-fetchdata");
 			setAccessToken(localStorage.getItem("accessToken") || "");
 		} else {
-			console.log(
-				"NO-accesstoken-fetchdata",
-				localStorage.getItem("accessToken"),
-				accessToken
-			);
+			console.log("NO-accesstoken-fetchdata");
 		}
 	}, [localStorage.getItem("accessToken")]);
+	useEffect(() => {
+		console.log("initial-localstorage");
+	}, []);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -42,7 +42,7 @@ const useFetchData = <T, U extends {}>(
 			},
 		};
 		if (accessToken) {
-			console.log("accesstoken-fetchdata", accessToken);
+			console.log("accesstoken-fetchdata");
 			fetch(url, options)
 				.then((response) => {
 					// if (response.ok) {

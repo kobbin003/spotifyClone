@@ -1,29 +1,37 @@
 import React from "react";
 import getSearchItem, {
-	SearchData,
+	SearchDataArtist,
 } from "../../../../hooks/spotify-data/getSearchItem";
 import { useOutletContext } from "react-router-dom";
 import { CardsContainer, ImageContainer, ResultCard, Title } from "./style";
 
 const Artist = () => {
-	const query: string | "" = useOutletContext();
+	const [queryFromSearchBar, ,]: any[] = useOutletContext();
 	const type = window.location.pathname.split("/").at(-1);
 
-	// getSearchItem(query, "artist");
-	// getSearchItem(query, type || "");
+	// getSearchItem(queryFromSearchBar, type || "");
 
-	const searchData: SearchData = JSON.parse(
-		localStorage.getItem("searchData") || ""
+	const { data, error, isLoading } = getSearchItem<SearchDataArtist>(
+		queryFromSearchBar,
+		"artist"
 	);
+	console.log("artist-search", data);
 	return (
 		<>
 			<Title>Artist</Title>
-			{searchData && (
+			{!queryFromSearchBar ? (
+				<p>Please search for artist in the searchbox</p>
+			) : data ? (
 				<CardsContainer>
-					{searchData.artists.items.map((item) => (
+					{data.artists.items.map((item) => (
 						<ResultCard key={item.id}>
 							<ImageContainer>
-								<img src={item.images[2].url}></img>
+								{/* <img src={item.images[0].url}></img> */}
+								{item.images.length > 0 ? (
+									<img src={item.images[0].url}></img>
+								) : (
+									<img src="/public/icons/defaultCover.svg"></img>
+								)}
 								<img src="/icons/spotify_play.svg"></img>
 							</ImageContainer>
 							<p>
@@ -33,6 +41,8 @@ const Artist = () => {
 						</ResultCard>
 					))}
 				</CardsContainer>
+			) : (
+				<p>Loading...</p>
 			)}
 		</>
 	);
