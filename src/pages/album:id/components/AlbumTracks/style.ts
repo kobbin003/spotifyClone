@@ -75,9 +75,23 @@ export const TrackItem = styled(Row)`
 			color: var(--font-white);
 			padding-top: 0.5em;
 			padding-bottom: 0.3em;
+			& > a {
+				color: white;
+			}
+		}
+		& > p:nth-of-type(2) {
+			& > a {
+				color: var(--font-greyer);
+			}
 		}
 		display: flex;
 		flex-direction: column;
+		a {
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 		/* background-color: green; */
 	}
 	& > div:nth-of-type(3) {

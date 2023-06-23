@@ -1,18 +1,20 @@
 import React from "react";
 import { Container, Header, TrackItem } from "./style";
 import { msToMin } from "../../../../utils/msToMin";
+import { Link } from "react-router-dom";
 
-const AlbumTracks = ({
-	tracks,
-	artists,
-}: {
-	tracks: {
+const AlbumTracks = <
+	T extends {
 		name: string;
 		id: string;
 		duration_ms: number;
 		track_number: number;
-	}[];
-	artists: { name: string }[];
+		artists: any[];
+	}[]
+>({
+	tracks,
+}: {
+	tracks: T;
 }) => {
 	return (
 		<Container>
@@ -22,11 +24,12 @@ const AlbumTracks = ({
 					<div>Title</div>
 					<div>
 						<img
-							src="/public/icons/clock.svg"
+							src="/icons/clock.svg"
 							alt=""
 						/>
 					</div>
 				</Header>
+
 				{tracks.map((track) => (
 					<TrackItem key={track.id}>
 						<div>
@@ -36,19 +39,24 @@ const AlbumTracks = ({
 							</button>
 						</div>
 						<div>
-							<p>{track.name}</p>
 							<p>
-								{artists.map((artist) => (
-									<span key={artist.name}>{artist.name}</span>
+								<Link to="">{track.name}</Link>
+							</p>
+							<p>
+								{track.artists.map((artist) => (
+									<Link
+										to={`/me/artist/${artist.id}`}
+										key={artist.name}
+									>
+										{artist.name}
+									</Link>
 								))}
 							</p>
 						</div>
 						<div>
-							{/* <div> */}
 							<button>
 								<img src="/icons/heart.svg" />
 							</button>
-							{/* </div> */}
 							<span>{msToMin(track.duration_ms)}</span>
 							<button>
 								<img src="/icons/threedots.svg" />
