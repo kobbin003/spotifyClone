@@ -12,39 +12,22 @@ import {
 	UnorderedList,
 } from "./style";
 import { Link } from "react-router-dom";
-import getUserPlaylist, {
-	UserPlaylist,
-	UserPlaylistError,
-} from "../../../hooks/spotify-data/getUserPlaylist";
-import UserLibrary from "./component/UserLibrary";
-import { ContainerLibrary, LibraryItem } from "./component/style";
-import { getFollowedArtist } from "../../../hooks/spotify-data/getFollowedArtist";
-import getUserAlbums from "../../../hooks/spotify-data/getUserAlbums";
+import UserLibraryContainer from "./component/UserLibraryContainer";
 
 export type sideBarProps = {
 	width: number;
 	widthHandleDragger: number;
-	handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	handleMouseMove: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	handleMouseMove: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	tokenSet: boolean;
 };
 const Sidebar = ({
 	width,
 	widthHandleDragger,
 	handleClick,
 	handleMouseMove,
+	tokenSet,
 }: sideBarProps): JSX.Element => {
-	// const accessToken = localStorage.getItem("accessToken") || "";
-	// const { data, error, isLoading } = getUserPlaylist(accessToken);
-	const {
-		data: artistsData,
-		error: artistsError,
-		isLoading: artistsIsLoading,
-	} = getFollowedArtist();
-	const {
-		data: albumsData,
-		error: albumsError,
-		isLoading: albumsIsLoading,
-	} = getUserAlbums();
 	return (
 		<>
 			<Container width={width}>
@@ -75,27 +58,7 @@ const Sidebar = ({
 							</CreatePlaylist>
 						</li>
 					</UnorderedList>
-					{albumsIsLoading && artistsIsLoading ? (
-						<p>Loading...</p>
-					) : (
-						<>
-							{artistsData && albumsData ? (
-								<UserLibrary
-									artists={artistsData.artists.items}
-									// playlists={}
-									albums={albumsData}
-								/>
-							) : (
-								<ActionCards>
-									<h4>Create your first playlist</h4>
-									<p>It's easy, we'll help you</p>
-									<ButtonLink>
-										<span>CreatePlaylist</span>
-									</ButtonLink>
-								</ActionCards>
-							)}
-						</>
-					)}
+					<UserLibraryContainer />
 
 					{/* <ActionCards>
 						<h4>Let's find some podcasts to follow</h4>
