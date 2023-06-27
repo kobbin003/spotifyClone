@@ -1,4 +1,3 @@
-import React from "react";
 import getFollowedArtist from "../../../../hooks/spotify-data/getFollowedArtist";
 import getUserAlbums from "../../../../hooks/spotify-data/getUserAlbums";
 import UserLibrary from "./UserLibrary";
@@ -15,7 +14,8 @@ const UserLibraryContainer = () => {
 		error: albumsError,
 		isLoading: albumsIsLoading,
 	} = getUserAlbums();
-	console.log("user-library-container", artistsData, albumsData);
+	// const { data: playlistData } = { data: "empty playlist" };
+	// console.log("user-library-container", artistsData, albumsData);
 	return (
 		<>
 			{albumsIsLoading && artistsIsLoading ? (
@@ -26,6 +26,7 @@ const UserLibraryContainer = () => {
 						<UserLibrary
 							artists={artistsData}
 							albums={albumsData}
+							// playlists={playlistData}
 						/>
 					) : (
 						<ActionCards>
