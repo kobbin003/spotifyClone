@@ -31,7 +31,6 @@ const UserLibrary = ({
 	const [fetchedData, setFetchedData] = useState<FetchedData>({
 		data: null,
 	});
-	const [types, setTypes] = useState<{ name: string; active: boolean }[]>();
 	type INITIALSTATE = { name: string; active: boolean }[];
 	type ACTIONTYPE = { type: string; payload: { name: string } };
 	const initialState = [
