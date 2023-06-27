@@ -15,6 +15,7 @@ const UserLibraryContainer = () => {
 		error: albumsError,
 		isLoading: albumsIsLoading,
 	} = getUserAlbums();
+	console.log("user-library-container", artistsData, albumsData);
 	return (
 		<>
 			{albumsIsLoading && artistsIsLoading ? (

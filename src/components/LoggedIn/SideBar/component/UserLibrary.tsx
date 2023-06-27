@@ -1,148 +1,76 @@
-import React from "react";
-import { ContainerLibrary, LibraryItem } from "./style";
+import React, { MouseEvent, useEffect, useState } from "react";
+import { ContainerLibrary, SelectContainer } from "./userLibrary.style";
+import ItemLibrary from "./LibraryItem";
+import getFollowedArtist, {
+	FollowedArtist,
+	FollowedArtistError,
+	FollowedArtistItem,
+} from "../../../../hooks/spotify-data/getFollowedArtist";
+import getUserAlbums, {
+	UserAlbumsError,
+} from "../../../../hooks/spotify-data/getUserAlbums";
 import { UserAlbums } from "../../../../hooks/spotify-data/getUserAlbums";
 import { Link } from "react-router-dom";
-type UserLibraryProps = {
-	// playlists: {
-	// 	collaborative: boolean;
-	// 	description: string;
-	// 	external_urls: {
-	// 		spotify: string;
-	// 	};
-	// 	href: string;
-	// 	id: string;
-	// 	images: { height: number; width: number; url: string }[];
-	// 	name: string;
-	// 	owner: {
-	// 		external_urls: {
-	// 			spotify: "string";
-	// 		};
-	// 		followers: {
-	// 			href: "string";
-	// 			total: 0;
-	// 		};
-	// 		href: "string";
-	// 		id: "string";
-	// 		type: "user";
-	// 		uri: "string";
-	// 		display_name: "string";
-	// 	};
 
-	// 	public: boolean;
-	// 	snapshot_id: string;
-	// 	tracks: { href: string; total: number };
-	// 	type: string;
-	// 	uri: string;
-	// }[];
-	artists: {
-		external_urls: {
-			spotify: string;
-		};
-		followers: {
-			href: string;
-			total: number;
-		};
-		genres: string[];
-		href: string;
-		id: string;
-		images: [
-			{
-				url: string;
-				height: number;
-				width: number;
-			}
-		];
-		name: string;
-		popularity: number;
-		type: "artist";
-		uri: string;
-	}[];
-	albums: UserAlbums;
+export type FetchedData = {
+	data: UserAlbums | { items: FollowedArtistItem[] } | null;
+	error: UserAlbumsError | FollowedArtistError | null;
+	isLoading: boolean;
 };
-const UserLibrary = ({ artists, albums }: UserLibraryProps) => {
+const UserLibrary = ({
+	artists,
+	albums,
+}: {
+	artists: { items: FollowedArtistItem[] };
+	albums: UserAlbums;
+}) => {
+	const [libraryItemType, setLibraryItemType] = useState<string>("albums");
+	const [fetchedData, setFetchedData] = useState<FetchedData>({
+		data: null,
+		error: null,
+		isLoading: false,
+	});
+
+	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+		const target = e.target as HTMLElement;
+		if (target.innerText == "albums") {
+			setLibraryItemType(target.innerText);
+			setFetchedData({
+				data: albums ? albums : null,
+				error: null,
+				isLoading: true,
+			});
+		} else if (target.innerText == "artists") {
+			setLibraryItemType(target.innerText);
+			setFetchedData({
+				data: artists ? artists : null,
+				error: null,
+				isLoading: true,
+			});
+		}
+	};
+	useEffect(() => {
+		setFetchedData({
+			data: albums ? albums : null,
+			error: null,
+			isLoading: true,
+		});
+	}, []);
+
 	return (
-		<ContainerLibrary>
-			{albums.items.map(({ album }, index) => (
-				<LibraryItem key={album.id}>
-					<Link
-						to={`/me/album/${album.id}`}
-						state={album}
-					>
-						<div>
-							<img
-								src={
-									album.images[0]
-										? album.images[0].url
-										: "/icons/defaultCover.svg"
-								}
-							/>
-						</div>
-						<div>
-							<div>{album.name}</div>
-							<div>
-								<span>{album.album_type}</span>
-								<b>&nbsp; . &nbsp;</b>
-								<span>
-									{album.artists.map((artist) => (
-										<p key={artist.id}>{artist.name}</p>
-									))}
-								</span>
-							</div>
-						</div>
-					</Link>
-				</LibraryItem>
-				// <div key={album.id}>{album.id}</div>
-			))}
-
-			<>
-				{artists.map((artist, index) => (
-					<LibraryItem key={artist.id}>
-						<Link
-							to={`/me/artist/${artist.id}`}
-							// state={artist}
-						>
-							<div>
-								<img
-									src={
-										artist.images[0]
-											? artist.images[0].url
-											: "/icons/defaultCover.svg"
-									}
-								/>
-							</div>
-							<div>
-								<div>{artist.name}</div>
-								<div>
-									<span>{artist.type}</span>
-								</div>
-							</div>
-						</Link>
-					</LibraryItem>
-				))}
-			</>
-
-			{/* {playlists.map((playlist, index) => (
-				<LibraryItem key={playlist.id}>
-					<div>
-						<img
-							src={
-								playlist.images[0]
-									? playlist.images[0].url
-									: "/icons/defaultCover.svg"
-							}
-						/>
-					</div>
-					<div>
-						<div>{playlist.name}</div>
-						<div>
-							<span>{playlist.type}</span>
-							<b> . </b>
-							<span>{playlist.owner.display_name}</span>
-						</div>
-					</div>
-				</LibraryItem>
-			))} */}
-		</ContainerLibrary>
+		<div>
+			<SelectContainer>
+				<button onClick={handleClick}>artists</button>
+				<button onClick={handleClick}>albums</button>
+				<button onClick={handleClick}>playlists</button>
+			</SelectContainer>
+			<ContainerLibrary>
+				<ItemLibrary
+					itemType={libraryItemType}
+					fetchedData={fetchedData}
+				></ItemLibrary>
+			</ContainerLibrary>
+		</div>
 	);
 };
 
