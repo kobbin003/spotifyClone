@@ -58,15 +58,7 @@ const Sidebar = ({
 							</CreatePlaylist>
 						</li>
 					</UnorderedList>
-					<UserLibraryContainer />
-
-					{/* <ActionCards>
-						<h4>Let's find some podcasts to follow</h4>
-						<p>We'll keep you updated on new episodes</p>
-						<ButtonLink>
-							<span>Browse podcasts</span>
-						</ButtonLink>
-					</ActionCards> */}
+					{tokenSet && <UserLibraryContainer />}
 				</Library>
 				<DraggableHandle
 					onClick={handleClick}
