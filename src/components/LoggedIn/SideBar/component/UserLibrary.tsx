@@ -1,5 +1,9 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import { ContainerLibrary, SelectContainer } from "./userLibrary.style";
+import React, { MouseEvent, useEffect, useReducer, useState } from "react";
+import {
+	ButtonTypes,
+	ContainerLibrary,
+	SelectContainer,
+} from "./userLibrary.style";
 import ItemLibrary from "./LibraryItem";
 import getFollowedArtist, {
 	FollowedArtist,
@@ -11,11 +15,10 @@ import getUserAlbums, {
 } from "../../../../hooks/spotify-data/getUserAlbums";
 import { UserAlbums } from "../../../../hooks/spotify-data/getUserAlbums";
 import { Link } from "react-router-dom";
+import SearchTypesList from "../../../searchTypesList/SearchTypesList";
 
 export type FetchedData = {
 	data: UserAlbums | { items: FollowedArtistItem[] } | null;
-	error: UserAlbumsError | FollowedArtistError | null;
-	isLoading: boolean;
 };
 const UserLibrary = ({
 	artists,
@@ -27,42 +30,62 @@ const UserLibrary = ({
 	const [libraryItemType, setLibraryItemType] = useState<string>("albums");
 	const [fetchedData, setFetchedData] = useState<FetchedData>({
 		data: null,
-		error: null,
-		isLoading: false,
 	});
-
+	const [types, setTypes] = useState<{ name: string; active: boolean }[]>();
+	type INITIALSTATE = { name: string; active: boolean }[];
+	type ACTIONTYPE = { type: string; payload: { name: string } };
+	const initialState = [
+		{ name: "albums", active: true },
+		{ name: "artists", active: false },
+		{ name: "playlists", active: false },
+	];
+	const reducer = (state: INITIALSTATE, action: ACTIONTYPE) => {
+		switch (action.type) {
+			case "ACTIVATE":
+				return state.map((item) => {
+					if (item.name == action.payload.name) {
+						return { ...item, active: true };
+					} else return { ...item, active: false };
+				});
+			default:
+				return state;
+		}
+	};
+	const [state, dispatch] = useReducer(reducer, initialState);
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLElement;
+		setLibraryItemType(target.innerText);
+		dispatch({ type: "ACTIVATE", payload: { name: target.innerText } });
+
 		if (target.innerText == "albums") {
-			setLibraryItemType(target.innerText);
 			setFetchedData({
 				data: albums ? albums : null,
-				error: null,
-				isLoading: true,
 			});
 		} else if (target.innerText == "artists") {
-			setLibraryItemType(target.innerText);
 			setFetchedData({
 				data: artists ? artists : null,
-				error: null,
-				isLoading: true,
 			});
 		}
 	};
+
 	useEffect(() => {
 		setFetchedData({
 			data: albums ? albums : null,
-			error: null,
-			isLoading: true,
 		});
 	}, []);
 
 	return (
 		<div>
 			<SelectContainer>
-				<button onClick={handleClick}>artists</button>
-				<button onClick={handleClick}>albums</button>
-				<button onClick={handleClick}>playlists</button>
+				{state.map((type) => (
+					<ButtonTypes
+						key={type.name}
+						onClick={handleClick}
+						active={type.active}
+					>
+						{type.name}
+					</ButtonTypes>
+				))}
 			</SelectContainer>
 			<ContainerLibrary>
 				<ItemLibrary
@@ -75,3 +98,39 @@ const UserLibrary = ({
 };
 
 export default UserLibrary;
+
+//! selectype with setState
+// const [types, setTypes] = useState<{ name: string; active: boolean }[]>([
+// 	{ name: "albums", active: true },
+// 	{ name: "artists", active: false },
+// 	{ name: "playlists", active: false },
+// ]);
+// setTypes((prev) => {
+// 	if (target.innerText == "albums") {
+// 		return prev.map((item) => {
+// 			if (item.name == "albums") {
+// 				return { ...item, active: true };
+// 			} else {
+// 				return { ...item, active: false };
+// 			}
+// 		});
+// 	} else if (target.innerText == "artists") {
+// 		return prev.map((item) => {
+// 			if (item.name == "artists") {
+// 				return { ...item, active: true };
+// 			} else {
+// 				return { ...item, active: false };
+// 			}
+// 		});
+// 	} else if (target.innerText == "playlists") {
+// 		return prev.map((item) => {
+// 			if (item.name == "playlists") {
+// 				return { ...item, active: true };
+// 			} else {
+// 				return { ...item, active: false };
+// 			}
+// 		});
+// 	} else {
+// 		return prev;
+// 	}
+// });

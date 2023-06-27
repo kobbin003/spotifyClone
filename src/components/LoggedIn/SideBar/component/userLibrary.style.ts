@@ -6,14 +6,13 @@ export const SelectContainer = styled.div`
 	/* background-color: aqua; */
 `;
 export const ButtonTypes = styled.button<{
-	backgroundColor: string;
-	color: string;
+	active: boolean;
 }>`
-	background-color: ${(prop) => prop.backgroundColor};
+	background-color: ${(prop) => (prop.active ? "white" : "transparent")};
 	border: 1px solid white;
 	border-radius: 1000px;
 	padding: 0.1em 0.5em;
-	color: ${(prop) => prop.color};
+	color: ${(prop) => (prop.active ? "black" : "white")};
 	/* color: var(--font-white); */
 	font-size: 0.9rem;
 	scale: 0.8;
