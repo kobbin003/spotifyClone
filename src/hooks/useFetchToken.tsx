@@ -35,7 +35,7 @@ export const useFetchToken = <T, U, E extends {}>(
 			// console.log("code change", code, localStorage.getItem("code"));
 			setCode(localStorage.getItem("code") || "");
 		}
-	}, [localStorage.getItem("code")]);
+	}, []);
 	useEffect(() => {
 		setIsLoading(true);
 		// FORFEIT useFetchToken if "accesstoken" already stored
@@ -81,6 +81,7 @@ export const useFetchToken = <T, U, E extends {}>(
 				});
 		}
 	}, [url]);
+	useEffect(() => {}, [code]);
 
 	return {
 		data: data !== undefined ? data : null,

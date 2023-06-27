@@ -12,6 +12,7 @@ const LoggedInLayout: React.FC = () => {
 	const navigate = useNavigate();
 	const [width, setWidth] = useState(14.5);
 	const [isDraggable, setIsDraggable] = useState(false);
+	const [tokenSet, setTokenSet] = useState(false);
 	const { data, error, isLoading } = useGetAccessToken();
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
@@ -28,7 +29,15 @@ const LoggedInLayout: React.FC = () => {
 	useEffect(() => {
 		// if code not found, then navigate to "/"
 		if (!localStorage.getItem("code")) navigate("/");
-	}, []);
+		// console.log(
+		// 	"logggedinlayout",
+		// 	localStorage.getItem("accessToken"),
+		// 	data?.access_token
+		// );
+		if (data?.access_token) {
+			setTokenSet(true);
+		}
+	}, [data]);
 
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
@@ -38,7 +47,9 @@ const LoggedInLayout: React.FC = () => {
 					handleClick={handleClick}
 					handleMouseMove={handleMouseMove}
 					widthHandleDragger={widthHandleDragger}
+					tokenSet={tokenSet}
 				></Sidebar>
+
 				{isLoading ? (
 					<h1>Loading....</h1>
 				) : (

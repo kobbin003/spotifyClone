@@ -11,11 +11,15 @@ import {
 	UserAlbumTracks,
 	UserAlbumTracksItems,
 } from "../../hooks/spotify-data/getUserAlbums";
+import getAlbum, {
+	Album as AlbumType,
+} from "../../hooks/spotify-data/getAlbum";
 
 const Album = () => {
-	const params = useParams();
-	const album = useLocation();
-	// console.log("album link", album.state);
+	const { id } = useParams();
+	const album = getAlbum(`${id}`);
+	console.log("album", album);
+	// Destructuring:
 	const {
 		images,
 		album_type,
@@ -24,12 +28,13 @@ const Album = () => {
 		total_tracks,
 		artists,
 		tracks,
-	} = album.state as UserAlbumItem;
+	} = album.data as AlbumType;
+
 	const albumDuration = tracks.items.reduce(
 		(total, track) => total + track.duration_ms,
 		0
 	);
-	console.log(albumDuration);
+	// console.log(albumDuration);
 	return (
 		<Container>
 			<AlbumHeader

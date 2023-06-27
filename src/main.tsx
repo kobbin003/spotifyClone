@@ -8,10 +8,12 @@ import { BrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-	<React.StrictMode>
+	// <React.StrictMode>
+	<>
 		<RouterProvider router={router} />
 		<GlobalStyle />
 		<ErrorBoundary fallback={<div>Error</div>}></ErrorBoundary>
 		{/* <App /> */}
-	</React.StrictMode>
+		{/* </React.StrictMode> */}
+	</>
 );

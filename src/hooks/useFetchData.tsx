@@ -20,16 +20,19 @@ const useFetchData = <T, U extends {}>(
 	);
 	// const accessToken = localStorage.getItem("accessToken") || "";
 	useEffect(() => {
+		// console.log(accessToken, "****", localStorage.getItem("accessToken"));
+
 		// setAccessToken(localStorage.getItem("accessToken") || "");
+		// console.log("storage changed", e.key);
 		if (localStorage.getItem("accessToken")) {
 			console.log("YES-accesstoken-fetchdata");
 			setAccessToken(localStorage.getItem("accessToken") || "");
 		} else {
 			console.log("NO-accesstoken-fetchdata");
 		}
-	}, [localStorage.getItem("accessToken")]);
+	}, []);
 	useEffect(() => {
-		console.log("initial-localstorage");
+		// console.log("initial-localstorage");
 	}, []);
 
 	useEffect(() => {

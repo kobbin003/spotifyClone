@@ -54,7 +54,7 @@ const getUserAlbums = (): {
 	error: UserAlbumsError | null;
 	isLoading: boolean;
 } => {
-	// console.log("accesstoken", accessToken);
+	console.log("getUserAlbum");
 	const url = `https://api.spotify.com/v1/me/albums`;
 	const { data, error, isLoading } = useFetchData<UserAlbums, UserAlbumsError>(
 		url,

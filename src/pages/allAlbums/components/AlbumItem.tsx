@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const AlbumItem = ({ albumData }: { albumData: ArtistAlbumItem }) => {
 	const { data, error, isLoading } = getAlbumTracks(albumData.id);
-	// console.log(data?.items);
+	console.log(albumData);
 	// const tracks
 	return (
 		<Container>
@@ -20,13 +20,20 @@ const AlbumItem = ({ albumData }: { albumData: ArtistAlbumItem }) => {
 					<img src={albumData.images[0].url}></img>
 				</div>
 				<div>
-					<div>{albumData.name}</div>
+					<div>
+						<Link
+							to={`/me/album/${albumData.id}`}
+							state={albumData}
+						>
+							{albumData.name}
+						</Link>
+					</div>
 					<div>
 						<p>{albumData.album_type}</p>
 						<p>{albumData.release_date.split("-")[0]}</p>
 						<p>{albumData.total_tracks} songs</p>
 					</div>
-					<div>{/* <AlbumActions /> */}</div>
+					<AlbumActions />
 				</div>
 			</Header>
 			{data && <AlbumTracks<AlbumTrack[]> tracks={data?.items} />}

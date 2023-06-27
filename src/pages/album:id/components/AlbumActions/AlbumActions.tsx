@@ -31,11 +31,11 @@ const AlbumActions = () => {
 	return (
 		<Container>
 			<img
-				src="icons/spotify_play.svg"
+				src="/public/icons/spotify_play.svg"
 				alt=""
 			/>
 			<img
-				src="icons/heartGreen.svg"
+				src="/public/icons/heartGreen.svg"
 				alt=""
 			/>
 			{/* <img
@@ -44,7 +44,7 @@ const AlbumActions = () => {
 			/> */}
 			<div>
 				<img
-					src="icons/threedots.svg"
+					src="/public/icons/threedots.svg"
 					alt=""
 					onClick={handleDropDownMenu}
 				/>
