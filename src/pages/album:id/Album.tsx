@@ -17,9 +17,9 @@ import getAlbum, {
 
 const Album = () => {
 	const { id } = useParams();
-	const album = getAlbum(`${id}`);
-	console.log("album", album);
+	const { data, error, isLoading } = getAlbum(`${id}`);
 	// Destructuring:
+	if (isLoading || !data) return <p>Loading...</p>;
 	const {
 		images,
 		album_type,
@@ -28,26 +28,31 @@ const Album = () => {
 		total_tracks,
 		artists,
 		tracks,
-	} = album.data as AlbumType;
+	} = data as AlbumType;
+	if (!data) return <></>;
+	console.log("album", data, name, release_date);
 
-	const albumDuration = tracks.items.reduce(
-		(total, track) => total + track.duration_ms,
-		0
-	);
 	// console.log(albumDuration);
+	const albumDuration =
+		data &&
+		data.tracks.items.reduce((total, track) => total + track.duration_ms, 0);
 	return (
 		<Container>
-			<AlbumHeader
-				images={images}
-				albumType={album_type}
-				name={name}
-				releaseDate={release_date}
-				totalTracks={total_tracks}
-				artists={artists}
-				albumDuration={albumDuration}
-			/>
-			<AlbumActions />
-			<AlbumTracks<UserAlbumTracksItems> tracks={tracks.items} />
+			{data && (
+				<>
+					<AlbumHeader
+						images={images}
+						albumType={album_type}
+						name={name}
+						releaseDate={release_date}
+						totalTracks={total_tracks}
+						artists={artists}
+						albumDuration={albumDuration}
+					/>
+					<AlbumActions />
+					<AlbumTracks<UserAlbumTracksItems> tracks={tracks.items} />
+				</>
+			)}
 		</Container>
 	);
 };

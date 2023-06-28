@@ -113,7 +113,7 @@ const getAlbum = (
 		// accessToken,
 		"GET"
 	);
-	console.log("getAlbum", { data, error, isLoading });
+	// console.log("getAlbum", id, { data, error, isLoading });
 	return { data, error, isLoading };
 };
 
