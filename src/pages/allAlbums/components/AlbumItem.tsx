@@ -25,12 +25,14 @@ const AlbumItem = ({ albumData }: { albumData: ArtistAlbumItem }) => {
 							to={`/me/album/${albumData.id}`}
 							state={albumData}
 						>
-							{albumData.name}
+							<h2>{albumData.name}</h2>
 						</Link>
 					</div>
 					<div>
-						<p>{albumData.album_type}</p>
-						<p>{albumData.release_date.split("-")[0]}</p>
+						<p>{albumData.album_type}&nbsp;</p>
+						<b>.&nbsp;</b>
+						<p>{albumData.release_date.split("-")[0]}&nbsp;</p>
+						<b>.&nbsp;</b>
 						<p>{albumData.total_tracks} songs</p>
 					</div>
 					<AlbumActions />
