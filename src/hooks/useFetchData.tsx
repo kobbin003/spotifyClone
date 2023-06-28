@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import useGetRefreshToken from "./useGetRefreshToken";
+import { useEffect, useState } from "react";
 
 type FetchDataState<T, U> = {
 	data: T | null;
@@ -9,7 +8,6 @@ type FetchDataState<T, U> = {
 
 const useFetchData = <T, U extends {}>(
 	url: string,
-	// accessToken: string,
 	method: string
 ): FetchDataState<T, U> => {
 	const [data, setData] = useState<T | null>();
@@ -18,21 +16,13 @@ const useFetchData = <T, U extends {}>(
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
 	);
-	// const accessToken = localStorage.getItem("accessToken") || "";
 	useEffect(() => {
-		// console.log(accessToken, "****", localStorage.getItem("accessToken"));
-
-		// setAccessToken(localStorage.getItem("accessToken") || "");
-		// console.log("storage changed", e.key);
 		if (localStorage.getItem("accessToken")) {
 			console.log("YES-accesstoken-fetchdata");
 			setAccessToken(localStorage.getItem("accessToken") || "");
 		} else {
 			console.log("NO-accesstoken-fetchdata");
 		}
-	}, []);
-	useEffect(() => {
-		// console.log("initial-localstorage");
 	}, []);
 
 	useEffect(() => {
@@ -48,30 +38,18 @@ const useFetchData = <T, U extends {}>(
 			console.log("accesstoken-fetchdata");
 			fetch(url, options)
 				.then((response) => {
-					// if (response.ok) {
 					return response.json();
-					// }
-					// else {
-					// 	throw new Error(
-					// 		`Network response was not OK. Error:code${response.status} `
-					// 	);
-					// }
 				})
 				.then((data) => {
 					//* setError IF data has error
-					// console.log("fetchdata", data);
 					if (data.error) {
-						// console.log("data.error", data.error);
 						setError(data.error);
 						setIsLoading(false);
-						// console.log("data.error.message", data.error.message);
-						// return data.error.message;
 						return data.error.message;
 					} else {
 						setData(data);
 						setError(null);
 						setIsLoading(false);
-						// return "HI";
 					}
 				})
 				.then((res) => {
@@ -96,17 +74,15 @@ const useFetchData = <T, U extends {}>(
 							json: true,
 						};
 
-						// const data = useFetchToken(queryParams);
-						// console.log("refreshtoken", data);
-						// console.log("expired");
 						return fetch(url, options);
 					}
 				})
 				.then((res) => res?.json())
 				.then((res) => {
-					console.log("res", res);
 					if (res) {
 						localStorage.setItem("accessToken", res?.access_token);
+						// set acces token ao that fetch is re-performed with the "renewed" token
+						setAccessToken(res?.access_token);
 					} else {
 						console.log("token not expired");
 					}

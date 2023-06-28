@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const Row = styled.li`
 	width: 100%;
 	display: grid;
-	grid: auto / minmax(30px, 50px) minmax(150px, 1fr) minmax(150px, 0.3fr);
+	grid: auto / minmax(30px, 50px) minmax(120px, 1fr) minmax(150px, 0.3fr);
 	/* align-items: center; */
 	justify-content: center;
 	color: var(--font-greyer);
