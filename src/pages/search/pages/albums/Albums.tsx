@@ -2,8 +2,11 @@ import React from "react";
 import { albums } from "../data";
 import AlbumCards from "../../../../components/cards/AlbumCards/AlbumCards";
 import { Container } from "./style";
+import { useOutletContext } from "react-router-dom";
 const Albums = () => {
-	const arr = albums.albums.items;
+	const [queryFromSearchBar, ,]: any[] = useOutletContext();
+	// console.log("album", queryFromSearchBar);
+
 	return (
 		<Container>
 			{albums.albums.items.map((item) => (

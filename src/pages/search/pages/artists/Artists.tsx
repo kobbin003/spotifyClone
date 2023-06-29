@@ -7,7 +7,7 @@ import { CardsContainer, ImageContainer, ResultCard, Title } from "./style";
 
 const Artist = () => {
 	const [queryFromSearchBar, ,]: any[] = useOutletContext();
-	const type = window.location.pathname.split("/").at(-1);
+	// const type = window.location.pathname.split("/").at(-1);
 
 	// getSearchItem(queryFromSearchBar, type || "");
 
@@ -15,7 +15,7 @@ const Artist = () => {
 		queryFromSearchBar,
 		"artist"
 	);
-	console.log("artist-search", data);
+	// console.log("artist-search", data);
 	return (
 		<>
 			<Title>Artist</Title>
