@@ -12,7 +12,6 @@ import {
 	SearchInputContainerIn,
 	SearchInputContainerOut,
 } from "./SearchBar.style";
-import { debounce } from "lodash";
 import { StyledComponent } from "styled-components";
 const SearchBar = ({
 	loggedIn,
@@ -32,6 +31,7 @@ const SearchBar = ({
 	const searchInput = useRef<HTMLInputElement>(null);
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
+
 		// start showing reset button after inital input.
 		if (resetButtonVisibility == "hidden") {
 			setResetButtonVisibility("visible");
@@ -40,10 +40,7 @@ const SearchBar = ({
 		if (e.target.value == "") {
 			setResetButtonVisibility("hidden");
 		}
-		// pass search query to parent
-		if (passQueryToNavBar) passQueryToNavBar(e.target.value);
 	};
-	const debouncedHandleOnChange = debounce(handleOnChange, 500);
 	const handleOnFocus = (e: FocusEvent<HTMLInputElement>) => {
 		if (showSearchTypes) {
 			showSearchTypes(true);
@@ -59,7 +56,14 @@ const SearchBar = ({
 		}
 	};
 	useEffect(() => {
-		console.log("searchValue", searchValue);
+		// DEBOUNCING
+		const timeout = setTimeout(() => {
+			// pass search query to parent
+			if (passQueryToNavBar) {
+				passQueryToNavBar(searchValue);
+			}
+		}, 500);
+		return () => clearTimeout(timeout);
 	}, [searchValue]);
 
 	return (
