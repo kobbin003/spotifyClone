@@ -67,7 +67,10 @@ export const ResultCard = styled.div`
 	flex-direction: column;
 	justify-content: space-around;
 	transition: background-color 0.2s ease-in-out;
-
+	& > a {
+		text-decoration: none;
+		color: white;
+	}
 	p:nth-of-type(1) {
 		display: block;
 		padding-top: 0.6em;

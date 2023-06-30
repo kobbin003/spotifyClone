@@ -2,7 +2,7 @@ import React from "react";
 import getSearchItem, {
 	SearchDataArtist,
 } from "../../../../hooks/spotify-data/getSearchItem";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { CardsContainer, ImageContainer, ResultCard, Title } from "./style";
 
 const Artist = () => {
@@ -25,19 +25,21 @@ const Artist = () => {
 				<CardsContainer>
 					{data.artists.items.map((item) => (
 						<ResultCard key={item.id}>
-							<ImageContainer>
-								{/* <img src={item.images[0].url}></img> */}
-								{item.images.length > 0 ? (
-									<img src={item.images[0].url}></img>
-								) : (
-									<img src="/public/icons/defaultCover.svg"></img>
-								)}
-								<img src="/icons/spotify_play.svg"></img>
-							</ImageContainer>
-							<p>
-								<b>{item.name}</b>
-							</p>
-							<p>{item.type[0].toUpperCase() + item.type.slice(1)}</p>
+							<Link to={`/me/artist/${item.id}`}>
+								<ImageContainer>
+									{/* <img src={item.images[0].url}></img> */}
+									{item.images.length > 0 ? (
+										<img src={item.images[0].url}></img>
+									) : (
+										<img src="/public/icons/defaultCover.svg"></img>
+									)}
+									<img src="/icons/spotify_play.svg"></img>
+								</ImageContainer>
+								<p>
+									<b>{item.name}</b>
+								</p>
+								<p>{item.type[0].toUpperCase() + item.type.slice(1)}</p>
+							</Link>
 						</ResultCard>
 					))}
 				</CardsContainer>
