@@ -25,6 +25,7 @@ const Albums = () => {
 					data.albums.items.map((item) => (
 						<AlbumCards
 							key={item.id}
+							search="album"
 							id={item.id}
 							src={item.images[1].url}
 							albumName={item.name}
