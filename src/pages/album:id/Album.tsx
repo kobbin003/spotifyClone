@@ -16,6 +16,7 @@ import getAlbum, {
 } from "../../hooks/spotify-data/getAlbum";
 
 const Album = () => {
+	console.log("album/:id");
 	const { id } = useParams();
 	const { data, error, isLoading } = getAlbum(`${id}`);
 	// Destructuring:

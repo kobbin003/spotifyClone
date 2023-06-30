@@ -1,5 +1,6 @@
 import React, { SyntheticEvent } from "react";
 import { Card, ImageContainer, SpotifyPlay } from "./style";
+import { Link } from "react-router-dom";
 
 type AlbumCardProps = {
 	src: string;
@@ -8,12 +9,14 @@ type AlbumCardProps = {
 	type: string;
 	height: number;
 	width: number;
+	id: string;
 };
 const AlbumCards = ({
 	src,
 	albumName,
 	releaseDate,
 	type,
+	id,
 	height,
 	width,
 }: AlbumCardProps) => {
@@ -26,28 +29,30 @@ const AlbumCards = ({
 	// 	console.log("image loaded");
 	// };
 	return (
-		<Card href="">
-			<ImageContainer>
-				<img
-					src={src}
-					// onError={handleError}
-					// onLoad={handleLoad}
-				/>
-				<SpotifyPlay>
+		<Card>
+			<Link to={`/me/album/${id}`}>
+				<ImageContainer>
 					<img
-						src="/icons/spotify_play.svg"
-						className="spotify"
+						src={src}
+						// onError={handleError}
+						// onLoad={handleLoad}
 					/>
-				</SpotifyPlay>
-			</ImageContainer>
-			<div>
-				<h4>
-					<b>{albumName}</b>
-				</h4>
-				<p>
-					{releaseYear} <b>.</b> {type}
-				</p>
-			</div>
+					<SpotifyPlay>
+						<img
+							src="/icons/spotify_play.svg"
+							className="spotify"
+						/>
+					</SpotifyPlay>
+				</ImageContainer>
+				<div>
+					<h4>
+						<b>{albumName}</b>
+					</h4>
+					<p>
+						{releaseYear} <b>.</b> {type}
+					</p>
+				</div>
+			</Link>
 		</Card>
 	);
 };

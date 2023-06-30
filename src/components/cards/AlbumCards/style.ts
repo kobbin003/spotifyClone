@@ -1,5 +1,9 @@
 import styled from "styled-components";
-export const Card = styled.a`
+export const Card = styled.div`
+	& > a {
+		text-decoration: none;
+		color: white;
+	}
 	height: fit-content;
 	/* min-height: 200px; */
 	/* width: 150px; */
