@@ -22,7 +22,7 @@ const Albums = () => {
 				data &&
 				data.albums.items.map((item) => (
 					<AlbumCards
-						key={item.name}
+						key={item.id}
 						id={item.id}
 						src={item.images[1].url}
 						albumName={item.name}
