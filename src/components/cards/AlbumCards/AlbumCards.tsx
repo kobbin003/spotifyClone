@@ -10,6 +10,7 @@ type AlbumCardProps = {
 	height: number;
 	width: number;
 	id: string;
+	search: "album" | "playlist";
 };
 const AlbumCards = ({
 	src,
@@ -17,6 +18,7 @@ const AlbumCards = ({
 	releaseDate,
 	type,
 	id,
+	search,
 	height,
 	width,
 }: AlbumCardProps) => {
@@ -30,7 +32,7 @@ const AlbumCards = ({
 	// };
 	return (
 		<Card>
-			<Link to={`/me/album/${id}`}>
+			<Link to={`/me/${search}/${id}`}>
 				<ImageContainer>
 					<img
 						src={src}

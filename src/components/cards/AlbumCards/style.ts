@@ -5,7 +5,7 @@ export const Card = styled.div`
 		color: white;
 	}
 	height: fit-content;
-	/* min-height: 200px; */
+	/* min-height: 250px; */
 	/* width: 150px; */
 	/* width: auto; */
 	/* border: 1px solid green; */
@@ -69,7 +69,7 @@ export const ImageContainer = styled.div`
 		/* height: 50%; */
 		width: 100%;
 		min-width: 115px;
-		/* min-height: 120px; */
+		min-height: 190px;
 	}
 `;
 export const SpotifyPlay = styled.div`
