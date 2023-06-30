@@ -16,6 +16,18 @@ export const Container = styled.main<{
 	overflow-y: ${(prop) => prop.scroll};
 	/* overflow-y: hidden; */
 	overflow-x: hidden;
+	::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: #bcb8b854;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: var(--font-grey);
+	}
 `;
 
 export const Content = styled.main`
