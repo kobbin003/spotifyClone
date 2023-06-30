@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { sideBarProps } from "./Sidebar";
+// import { sideBarProps } from "./Sidebar";
 export type DraggableProps = {
 	widthHandleDragger: number;
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -167,7 +167,7 @@ export const Library = styled.div`
 	/* background-color: aqua; */
 	/* width: calc(100% - 1rem); */
 	border: 1px solid var(--black-dark);
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	border-radius: 5px;
 	margin: 0em 0.5em 0.5em;
 `;
