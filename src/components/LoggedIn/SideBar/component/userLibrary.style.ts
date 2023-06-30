@@ -30,5 +30,18 @@ export const ContainerLibrary = styled.ul`
 	margin-bottom: 1em;
 	overflow-y: scroll;
 	overflow-x: hidden;
+
 	/* scrollbar-color: var(--greyest); */
+	::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: #bcb8b854;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: green;
+	}
 `;
