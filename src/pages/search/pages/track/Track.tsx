@@ -20,7 +20,7 @@ const Track = () => {
 	return (
 		<Container>
 			{queryFromSearchBar.length == 0 ? (
-				<Message>empty query</Message>
+				<Message>Please search for tracks in the searchbox&#9757;</Message>
 			) : isLoading ? (
 				<Message>loading...</Message>
 			) : data ? (
@@ -48,16 +48,21 @@ const Track = () => {
 								<div>
 									<img src={item.album.images[0].url} />
 									<div>
-										<Link to="/n">
+										<Link to={``}>
 											<span>{item.name}</span>
 										</Link>
-										<Link to="">
-											<span>{item.artists[0].name}</span>
-										</Link>
+										{item.artists.map((artist) => (
+											<Link
+												to={`/me/artist/${artist.name}`}
+												key={artist.id}
+											>
+												<span>{artist.name}</span>
+											</Link>
+										))}
 									</div>
 								</div>
 								<div>
-									<Link to="">
+									<Link to={`/me/album/${item.album.id}`}>
 										<span>{item.album.name}</span>
 									</Link>
 								</div>

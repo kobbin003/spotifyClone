@@ -18,9 +18,9 @@ const Artist = () => {
 	// console.log("artist-search", data);
 	return (
 		<>
-			<Title>Artist</Title>
+			<Title>Artists</Title>
 			{!queryFromSearchBar ? (
-				<p>Please search for artist in the searchbox</p>
+				<p>Please search for artist in the searchbox&#9757;</p>
 			) : data ? (
 				<CardsContainer>
 					{data.artists.items.map((item) => (
