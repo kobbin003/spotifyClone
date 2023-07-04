@@ -8,14 +8,13 @@ import {
 } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
-import NavBar from "../components/LoggedOut/NavBar/NavBar";
+// import NavBar from "../components/LoggedOut/NavBar/NavBar";
 import Sidebar from "../components/LoggedOut/SideBar/Sidebar";
-import styled from "styled-components";
 import { LoggedOutAppContainer } from "./LoggedOutLayout.style";
 import useGetAccessCode from "../hooks/useGetAccessCode";
 import { errorBoundaryFallback } from "./errorBoundaryFallback";
-import { Content } from "./LoggedOutLayout.style";
 import PopUpCards from "../components/cards/PopUpCards/PopUpCards";
+import LoginBoard from "../components/LoggedOut/LogInBoard/LoginBoard";
 
 const LoggedOutLayout = () => {
 	const navigate = useNavigate();
@@ -50,16 +49,14 @@ const LoggedOutLayout = () => {
 					setVisibility={setVisibility}
 				></Sidebar>
 				<PopUpCards
-					title="Create a playlist"
-					message="Log in to create and share playlist"
+					title="You are not logged in"
+					message="Log in to have fun"
 					left={left}
 					top={top}
 					visibility={visibility ? "visible" : "hidden"}
 				></PopUpCards>
-				<NavBar></NavBar>
-				<Content>
-					<Outlet context={["", 0, 0]} />
-				</Content>
+				{/* <NavBar></NavBar> */}
+				<LoginBoard />
 			</LoggedOutAppContainer>
 		</ErrorBoundary>
 	);
