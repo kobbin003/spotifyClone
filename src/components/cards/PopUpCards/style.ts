@@ -27,12 +27,17 @@ export const Content = styled.div`
 	div:nth-of-type(1) {
 		display: flex;
 		justify-content: flex-end;
-		button {
+		a {
 			padding: 0.5em 0.8em;
+			background-color: white;
+			color: black;
 			border-radius: 5555px;
 			border: none;
 			font-size: 0.8rem;
 			font-weight: 600;
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
 `;

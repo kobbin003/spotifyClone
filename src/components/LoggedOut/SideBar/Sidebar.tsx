@@ -69,10 +69,12 @@ const SideBar = ({
 					<UnorderedList>
 						<li>
 							<Icon src="/icons/home.svg"></Icon>
-							<Link to="/">
+							<button
+								type="button"
+								onClick={handleClick}
+							>
 								Home
-								{/* <a href="">Home</a> */}
-							</Link>
+							</button>
 						</li>
 						<li>
 							<Icon src="/icons/search.svg"></Icon>

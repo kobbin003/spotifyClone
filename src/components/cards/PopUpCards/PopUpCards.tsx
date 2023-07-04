@@ -1,5 +1,6 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import { Container, Content, Pointy } from "./style";
+import { authorize } from "../../../utils/authorize";
 
 const PopUpCards = ({
 	title,
@@ -14,6 +15,10 @@ const PopUpCards = ({
 	left: number;
 	visibility: "visible" | "hidden";
 }) => {
+	const handleLogin = (e: MouseEvent<HTMLAnchorElement>) => {
+		e.preventDefault();
+		authorize();
+	};
 	return (
 		<Container
 			open
@@ -25,7 +30,7 @@ const PopUpCards = ({
 				<h4>{title}</h4>
 				<p>{message}</p>
 				<div>
-					<button>Log in</button>
+					<a onClick={handleLogin}>Log in</a>
 				</div>
 			</Content>
 			<Pointy></Pointy>
