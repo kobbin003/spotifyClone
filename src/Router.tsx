@@ -3,7 +3,6 @@ import Home from "./pages/home/Home";
 // import Search from "./pages/search/Search";
 import LoggedOutLayout from "./layout/LoggedOutLayout";
 import LoggedInLayout from "./layout/LoggedInLayout";
-import HomeLoggedOut from "./pages/loggedOutHome/HomeLoggedOut";
 
 // import Artist from "./pages/search/pages/artist/Artist";
 // import Albums from "./pages/search/pages/album/Album";
@@ -24,16 +23,6 @@ export const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <LoggedOutLayout />,
-		children: [
-			{
-				index: true,
-				element: <HomeLoggedOut />,
-			},
-			{
-				path: "*",
-				element: <div>NO MATCH!!!</div>,
-			},
-		],
 	},
 	{
 		path: "/me",
