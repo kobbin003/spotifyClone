@@ -11,6 +11,7 @@ import LoggedInLayout from "./layout/LoggedInLayout";
 
 import { Suspense, lazy } from "react";
 import Artist from "./pages/artist:id/Artist";
+import Callback from "./layout/Callback";
 const Search = lazy(() => import("./pages/search/Search"));
 const Artists = lazy(() => import("./pages/search/pages/artists/Artists"));
 const Albums = lazy(() => import("./pages/search/pages/albums/Albums"));
@@ -23,6 +24,12 @@ export const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <LoggedOutLayout />,
+		errorElement: <p>Error</p>,
+	},
+	{
+		path: "/callback",
+		element: <Callback />,
+		errorElement: <p>Error</p>,
 	},
 	{
 		path: "/me",
