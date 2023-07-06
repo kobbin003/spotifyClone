@@ -8,9 +8,9 @@ const Callback = () => {
 	const code = useGetAccessCode();
 
 	useEffect(() => {
-		console.log("code-callback", code);
+		// console.log("code-callback", code);
 		if (code) {
-			console.log("code-callback-yes", code);
+			// console.log("code-callback-yes", code);
 			navigate("/me");
 			localStorage.setItem("code", code);
 		}
