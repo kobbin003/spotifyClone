@@ -13,8 +13,9 @@ export const authorize = () => {
 		scope,
 		state,
 	});
-	window.location.href =
-		"https://accounts.spotify.com/authorize?" + searchParams;
+	// window.location.href =
+	// 	"https://accounts.spotify.com/authorize?" + searchParams;
+	return "https://accounts.spotify.com/authorize?" + searchParams;
 };
 export const authorizeFromBackEnd = () => {
 	/* //! Cannot work around the CORS problem */
