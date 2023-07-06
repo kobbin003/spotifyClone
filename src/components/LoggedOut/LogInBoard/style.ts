@@ -44,6 +44,7 @@ export const Content = styled.main`
 			width: 200px; */
 			border-radius: 1000px;
 			font-weight: 700;
+			text-decoration: none;
 			&:hover {
 				cursor: pointer;
 				transform: scale(1.1);
