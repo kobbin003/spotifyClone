@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/LoggedIn/SideBar/Sidebar";
 import MainContent from "../components/LoggedIn/MainContent/MainContent";
-import { Container } from "./LoggedInLayout.style";
+import { Container, LoadingMsg } from "./LoggedInLayout.style";
 import { useNavigate } from "react-router-dom";
 import { useGetAccessToken } from "../hooks/useGetAccessToken";
 import { ErrorBoundary } from "react-error-boundary";
@@ -34,6 +34,7 @@ const LoggedInLayout: React.FC = () => {
 		// 	localStorage.getItem("accessToken"),
 		// 	data?.access_token
 		// );
+		console.log("loggein", { data, error, isLoading });
 		if (data?.access_token) {
 			setTokenSet(true);
 		}
@@ -51,7 +52,9 @@ const LoggedInLayout: React.FC = () => {
 				></Sidebar>
 
 				{isLoading ? (
-					<h1>Loading....</h1>
+					<LoadingMsg>
+						<h4>Loading....</h4>
+					</LoadingMsg>
 				) : (
 					data && (
 						<MainContent
