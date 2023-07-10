@@ -56,7 +56,7 @@ const getUserPlaylist = (): {
 		UserPlaylist,
 		UserPlaylistError
 	>(url, "GET");
-	console.log("getCurrentUserPlaylist", { data, error, isLoading });
+	// console.log("getCurrentUserPlaylist", { data, error, isLoading });
 	return { data, error, isLoading };
 };
 

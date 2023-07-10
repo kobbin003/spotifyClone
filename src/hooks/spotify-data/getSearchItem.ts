@@ -206,7 +206,7 @@ const getSearchItem = <T>(query: string, type: SearchTypes) => {
 	const url = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=10&offset=0`;
 	const { data, error, isLoading } = useFetchData<T, Error>(url, "GET");
 
-	console.log("getSearchItem", data, error, isLoading);
+	// console.log("getSearchItem", data, error, isLoading);
 	return { data, error, isLoading };
 };
 

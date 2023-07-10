@@ -120,7 +120,7 @@ const getUserSavedTracks = (): {
 		UserSavedTracks,
 		UserSavedTracksError
 	>(url, "GET");
-	console.log("getUserSavedTracks", { data, error, isLoading });
+	// console.log("getUserSavedTracks", { data, error, isLoading });
 	return { data, error, isLoading };
 };
 
