@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtist";
 import { AlbumItems } from "./AlbumItems";
 import { ArtistItems } from "./ArtistItems";
+import PlaylistItems from "./PlaylistItems";
 const isOfTypeAlbum = (input: any) => {
 	if (input.items[0].album) {
 		return true;
@@ -22,22 +23,31 @@ const isOfTypeArtist = (input: any) => {
 		return input.items[0].type == "artist";
 	}
 };
+const isOfTypePlaylists = (input: any) => {
+	if (input) {
+		return input.items[0].type == "playlist";
+	}
+};
 
 //* WE HAVE REMOVED THE "itemType" prop
 //* since we can use typeguard(ts) to check the type of fetchedData
 const LibraryItem = ({
-	// itemType,
+	itemType,
 	fetchedData,
 }: {
-	// itemType: string;
+	itemType: string;
 	fetchedData: FetchedData;
 }) => {
 	const { data } = fetchedData;
 	// console.log("fetch-data", fetchedData);
 	return (
 		<>
-			{data && isOfTypeAlbum(data) && <AlbumItems data={data} />}
+			{itemType == "albums" && data && <AlbumItems data={data} />}
+			{itemType == "artists" && data && <ArtistItems data={data} />}
+			{itemType == "playlists" && data && <PlaylistItems data={data} />}
+			{/* {data && isOfTypeAlbum(data) && <AlbumItems data={data} />}
 			{data && isOfTypeArtist(data) && <ArtistItems data={data} />}
+			{data && isOfTypePlaylists(data) && <PlaylistItems data={data} />} */}
 		</>
 	);
 };

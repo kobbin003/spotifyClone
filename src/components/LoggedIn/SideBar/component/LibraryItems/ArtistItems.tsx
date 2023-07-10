@@ -2,11 +2,19 @@ import { Link } from "react-router-dom";
 import { LibraryItemStyle } from "./LibraryItem.style";
 import { UserAlbums } from "../../../../../hooks/spotify-data/getUserAlbums";
 import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtist";
+import {
+	UserPlaylist,
+	UserPlaylistItem,
+} from "../../../../../hooks/spotify-data/getUserPlaylist";
+import { UserSavedTracks } from "../../../../../hooks/spotify-data/getUserSavedTracks";
 
 export const ArtistItems = ({
 	data,
 }: {
-	data: UserAlbums | { items: FollowedArtistItem[] };
+	data:
+		| UserAlbums
+		| { items: FollowedArtistItem[] }
+		| { playlists: UserPlaylist; savedTracks: UserSavedTracks };
 }) => {
 	const artists = data as { items: FollowedArtistItem[] };
 	return (

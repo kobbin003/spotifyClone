@@ -8,6 +8,7 @@ export const LibraryItemStyle = styled.li`
 	padding: 0.3em 0.5em;
 
 	a {
+		/* background-color: purple; */
 		display: flex;
 		padding: 0 0em;
 		/* align-content: center; */
@@ -16,7 +17,6 @@ export const LibraryItemStyle = styled.li`
 		height: 100%;
 		text-decoration: none;
 		color: var(--font-white);
-		/* background-color: brown; */
 
 		& > div:nth-of-type(1) {
 			width: 20%;
@@ -31,15 +31,16 @@ export const LibraryItemStyle = styled.li`
 			/* align-content: center; */
 		}
 		& > div:nth-of-type(2) {
+			/* background-color: brown; */
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
+			justify-content: space-evenly;
 			align-content: center;
 			padding-left: 0.5em;
 			white-space: nowrap;
 			font-size: 0.8rem;
 			width: 100%;
-			/* background-color: brown; */
+			height: 100%;
 			padding-right: 10px;
 			& > div:nth-of-type(1) {
 				font-weight: 600;
