@@ -7,29 +7,40 @@ import {
 import ItemLibrary from "./LibraryItems/LibraryItem";
 import { FollowedArtistItem } from "../../../../hooks/spotify-data/getFollowedArtist";
 import { UserAlbums } from "../../../../hooks/spotify-data/getUserAlbums";
+import { UserSavedTracks } from "../../../../hooks/spotify-data/getUserSavedTracks";
+import {
+	UserPlaylist,
+	UserPlaylistItem,
+} from "../../../../hooks/spotify-data/getUserPlaylist";
 
 export type FetchedData = {
-	data: UserAlbums | { items: FollowedArtistItem[] } | null;
+	data:
+		| UserAlbums
+		| { items: FollowedArtistItem[] }
+		| { playlists: UserPlaylist; savedTracks: UserSavedTracks }
+		| null;
 };
 const UserLibrary = ({
 	artists,
 	albums,
-}: // playlists,
+	playlists,
+}: // savedTracks,
 {
 	artists: { items: FollowedArtistItem[] };
 	albums: UserAlbums;
-	// playlists: string;
+	playlists: { playlists: UserPlaylist; savedTracks: UserSavedTracks };
+	// savedTracks: UserSavedTracks;
 }) => {
-	// const [libraryItemType, setLibraryItemType] = useState<string>("albums");
+	const [libraryItemType, setLibraryItemType] = useState<string>("playlists");
 	const [fetchedData, setFetchedData] = useState<FetchedData>({
-		data: albums,
+		data: playlists,
 	});
 	type INITIALSTATE = { name: string; active: boolean }[];
 	type ACTIONTYPE = { type: string; payload: { name: string } };
 	const initialState = [
-		{ name: "albums", active: true },
+		{ name: "playlists", active: true },
+		{ name: "albums", active: false },
 		{ name: "artists", active: false },
-		{ name: "playlists", active: false },
 	];
 	const reducer = (state: INITIALSTATE, action: ACTIONTYPE) => {
 		switch (action.type) {
@@ -46,7 +57,7 @@ const UserLibrary = ({
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLElement;
-		// setLibraryItemType(target.innerText);
+		setLibraryItemType(target.innerText);
 		dispatch({ type: "ACTIVATE", payload: { name: target.innerText } });
 
 		if (target.innerText == "albums") {
@@ -57,17 +68,15 @@ const UserLibrary = ({
 			setFetchedData({
 				data: artists ? artists : null,
 			});
-		} else if (target.innerText == "playlists") {
-			// setFetchedData({
-			// 	data: "empty playlist"
-			// });
-			alert("set playlist");
 		} else {
+			setFetchedData({
+				data: playlists ? playlists : null,
+			});
 		}
 	};
 	useEffect(() => {
 		setFetchedData({
-			data: albums ? albums : null,
+			data: playlists ? playlists : null,
 		});
 	}, []);
 
@@ -86,7 +95,7 @@ const UserLibrary = ({
 			</SelectContainer>
 			<ContainerLibrary>
 				<ItemLibrary
-					// itemType={libraryItemType}
+					itemType={libraryItemType}
 					fetchedData={fetchedData}
 				></ItemLibrary>
 			</ContainerLibrary>
