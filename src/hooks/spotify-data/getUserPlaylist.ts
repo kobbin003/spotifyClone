@@ -7,47 +7,45 @@ export type UserPlaylist = {
 	offset: number;
 	previous: string;
 	total: number;
-	items: {
-		collaborative: boolean;
-		description: string;
+	items: UserPlaylistItem[];
+};
+export type UserPlaylistItem = {
+	collaborative: boolean;
+	description: string;
+	external_urls: {
+		spotify: string;
+	};
+	href: string;
+	id: string;
+	images: { height: number; width: number; url: string }[];
+	name: string;
+	owner: {
 		external_urls: {
 			spotify: string;
 		};
+		followers: {
+			href: string;
+			total: number;
+		};
 		href: string;
 		id: string;
-		images: { height: number; width: number; url: string }[];
-		name: string;
-		owner: {
-			external_urls: {
-				spotify: string;
-			};
-			followers: {
-				href: string;
-				total: number;
-			};
-			href: string;
-			id: string;
-			type: string;
-			uri: string;
-			display_name: string;
-		};
-
-		public: boolean;
-		snapshot_id: string;
-		tracks: { href: string; total: number };
 		type: string;
 		uri: string;
-	}[];
-};
+		display_name: string;
+	};
 
+	public: boolean;
+	snapshot_id: string;
+	tracks: { href: string; total: number };
+	type: string;
+	uri: string;
+};
 export type UserPlaylistError = {
 	status: number;
 	message: string;
 };
 
-const getUserPlaylist = (
-	accessToken: string
-): {
+const getUserPlaylist = (): {
 	data: UserPlaylist | null;
 	error: UserPlaylistError | null;
 	isLoading: boolean;
