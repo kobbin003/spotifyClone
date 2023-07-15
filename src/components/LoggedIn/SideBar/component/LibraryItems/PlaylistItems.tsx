@@ -27,7 +27,10 @@ const PlaylistItems = ({
 		<>
 			<>
 				<LibraryItemStyle>
-					<Link to={`/me/savedtracks`}>
+					<Link
+						to={`/me/savedtracks`}
+						state={savedTracks}
+					>
 						<div>
 							<img src={"/public/icons/heartsquare.svg"} />
 						</div>
@@ -37,7 +40,7 @@ const PlaylistItems = ({
 								<img src={"/public/icons/pin.svg"} />
 								<span>&nbsp;playlist</span>
 								<b>&nbsp; . &nbsp;</b>
-								<span>{numSavedSongs} songs</span>
+								<span>{playlists.total} songs</span>
 							</Pindiv>
 						</div>
 					</Link>

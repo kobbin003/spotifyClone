@@ -1,4 +1,4 @@
-import getFollowedArtist from "../../../../hooks/spotify-data/getFollowedArtist";
+import getFollowedArtists from "../../../../hooks/spotify-data/getFollowedArtists";
 import getUserAlbums from "../../../../hooks/spotify-data/getUserAlbums";
 import UserLibrary from "./UserLibrary";
 import { ActionCards, ButtonLink } from "../style";
@@ -10,7 +10,7 @@ const UserLibraryContainer = () => {
 		data: artistsData,
 		error: artistsError,
 		isLoading: artistsIsLoading,
-	} = getFollowedArtist();
+	} = getFollowedArtists();
 
 	const {
 		data: albumsData,
