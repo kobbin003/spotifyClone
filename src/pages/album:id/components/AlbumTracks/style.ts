@@ -33,6 +33,7 @@ export const Row = styled.li`
 	}
 `;
 export const Header = styled(Row)`
+	width: 100%;
 	font-weight: 600;
 	border-bottom: 1px solid grey;
 	padding-bottom: 0.4em;
@@ -40,6 +41,7 @@ export const Header = styled(Row)`
 	& > div:nth-of-type(3) {
 		display: flex;
 		justify-content: center;
+		background-color: aqua;
 		img {
 			height: 15px;
 		}
