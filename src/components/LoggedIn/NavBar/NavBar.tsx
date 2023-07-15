@@ -13,7 +13,7 @@ import {
 	DropDown,
 	// SearchInputContainer,
 } from "./navBar.style";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../../SearchBar/SearchBar";
 import { SearchInputContainerIn } from "../../SearchBar/SearchBar.style";
 import SearchTypesList from "../../searchTypesList/SearchTypesList";
@@ -97,7 +97,7 @@ const NavBar = ({
 			</FixedContainer>
 
 			<DropDown dropDownVisibility={dropDownVisibility}>
-				<a href="">Profile</a>
+				<Link to="/me/profile">Profile</Link>
 				<a
 					href=""
 					onClick={handleLogOut}

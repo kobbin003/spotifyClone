@@ -12,6 +12,8 @@ import LoggedInLayout from "./layout/LoggedInLayout";
 import { Suspense, lazy } from "react";
 import Artist from "./pages/artist:id/Artist";
 import Callback from "./layout/Callback";
+import SavedTracks from "./pages/playlist:id/SavedTracks";
+const Profile = lazy(() => import("./pages/profile/Profile"));
 const Search = lazy(() => import("./pages/search/Search"));
 const Artists = lazy(() => import("./pages/search/pages/artists/Artists"));
 const Albums = lazy(() => import("./pages/search/pages/albums/Albums"));
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
 				index: true,
 				element: <Home />,
 				// element: <DataFiller />,
+			},
+			{
+				path: "profile",
+				element: (
+					<Suspense fallback={<h4>Loading...</h4>}>
+						<Profile />
+					</Suspense>
+				),
 			},
 			{
 				path: "search",
@@ -100,7 +110,19 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "playlist/:id",
-				element: <Playlists />,
+				element: (
+					<Suspense fallback={<h4>Loading...</h4>}>
+						<Playlists />
+					</Suspense>
+				),
+			},
+			{
+				path: "savedtracks",
+				element: (
+					<Suspense fallback={<h4>Loading...</h4>}>
+						<SavedTracks />
+					</Suspense>
+				),
 			},
 			{
 				path: "artist/:id/allAlbums",
