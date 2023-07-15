@@ -2,9 +2,10 @@ import React from "react";
 import { msToMin } from "../../../utils/msToMin";
 import { BoldDot, Container } from "../PlaylistHeader/style";
 import { Owner, Tracks } from "../../../hooks/spotify-data/getPlaylist";
+import getUserProfile from "../../../hooks/spotify-data/getUserProfile";
 
 const SavedTrackHeader = ({ tracks }: { tracks: number }) => {
-	console.log("albumduration");
+	const { data, error, isLoading } = getUserProfile();
 	return (
 		<Container>
 			<div>
@@ -12,11 +13,14 @@ const SavedTrackHeader = ({ tracks }: { tracks: number }) => {
 			</div>
 			<div>
 				<p>Playlist</p>
-				<h1>Liked Songs</h1>
+				<div>
+					<h1>Liked Songs</h1>
+				</div>
 				<div>
 					<span>{/* <img src={artists[0].images[0].url} />{" "} */}</span>
 					<p>
-						{"owner_name"}&nbsp;<BoldDot>.</BoldDot>&nbsp;
+						{data ? data?.display_name : ""}
+						&nbsp;<BoldDot>.</BoldDot>&nbsp;
 					</p>
 					<p>{tracks} songs</p>
 					<p>

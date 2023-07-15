@@ -43,7 +43,10 @@ const SavedTracksTracks = () => {
 									<span>{track.name}</span>
 								</Link>
 								{track.artists.map((artist) => (
-									<Link to={`/me/artist/${artist.id}`}>
+									<Link
+										to={`/me/artist/${artist.id}`}
+										key={artist.id}
+									>
 										<span key={artist.id}>{artist.name}</span>
 									</Link>
 								))}
