@@ -6,10 +6,6 @@ import getUserTopTracks from "../../../hooks/spotify-data/getUserTopItems";
 
 const UserTopTracks = () => {
 	const { data, error, isLoading } = getUserTopTracks();
-	console.log("popular tracks", data);
-	if (data) {
-		localStorage.setItem("poptracks", JSON.stringify(data));
-	}
 	return (
 		<Container>
 			<h2>Top Tracks</h2>
