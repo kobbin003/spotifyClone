@@ -22,7 +22,7 @@ const Album = lazy(() => import("./pages/album:id/Album"));
 const Playlists = lazy(() => import("./pages/playlist:id/Playlist"));
 const Track = lazy(() => import("./pages/search/pages/track/Track"));
 const Playlist = lazy(() => import("./pages/search/pages/playlist/Playlist"));
-
+const AllPlaylists = lazy(() => import("./pages/allPlaylists/AllPlaylists"));
 export const router = createBrowserRouter([
 	{
 		path: "/",
@@ -113,6 +113,14 @@ export const router = createBrowserRouter([
 				element: (
 					<Suspense fallback={<h4>Loading...</h4>}>
 						<Playlists />
+					</Suspense>
+				),
+			},
+			{
+				path: "profile/allplaylists",
+				element: (
+					<Suspense fallback={<h4>Loading...</h4>}>
+						<AllPlaylists />
 					</Suspense>
 				),
 			},
