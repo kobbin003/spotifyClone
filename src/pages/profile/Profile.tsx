@@ -1,5 +1,6 @@
 import getUserProfile from "../../hooks/spotify-data/getUserProfile";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
+import UserPlaylists from "./UserPlaylists/UserPlaylists";
 import UserTopTracks from "./UserTopTracks/UserTopTracks";
 
 const Profile = () => {
@@ -17,6 +18,7 @@ const Profile = () => {
 			<h2>PROFILE</h2>
 			{data && <ProfileHeader data={data} />}
 			<UserTopTracks />
+			<UserPlaylists />
 		</>
 	);
 	// return <div>Home</div>;
