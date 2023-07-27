@@ -101,12 +101,72 @@ export const AlbumsContainer = styled.div`
 	}
 	& > a {
 		/* border: 1px solid yellowgreen; */
+		height: fit-content;
+		/* border: 1px solid goldenrod; */
+		margin-right: 0.3em;
+		text-decoration: none;
+		background-color: #181818;
+		transition: background-color 0.2s ease-in;
+		padding-top: 0.7em;
+		padding-bottom: 0.7em;
+		/* 
+	margin-right: 1em; */
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		& > * {
+			width: 80%;
+		}
+		& > div {
+			p:nth-of-type(1) {
+				color: var(--font-white);
+				padding: 0.8em 0;
+				min-height: 16px;
+				white-space: nowrap;
+				font-weight: 500;
+				/* overflow-x: scroll; */
+				overflow-x: hidden;
+				overflow-y: hidden;
+				/* border: 1px solid rebeccapurple; */
+				::-webkit-scrollbar {
+					width: 1px;
+					height: 1px;
+				}
+
+				::-webkit-scrollbar-track {
+					background-color: #acabab;
+				}
+
+				::-webkit-scrollbar-thumb {
+					background-color: green;
+				}
+			}
+			/* p:nth-of-type(2) {
+			color: var(--font-grey);
+			font-size: 0.7rem;
+			transform: scale(0.9);
+			transform-origin: top left;
+			& > span {
+				text-transform: capitalize;
+			}
+		} */
+		}
+		&:hover {
+			background-color: #303030;
+			img ~ div {
+				visibility: visible;
+				translate: 0 -10px;
+				filter: brightness(110%);
+			}
+		}
 	}
 `;
 
 //----- card -----
 export const Card = styled.a`
-	/* height: fit-content; */
+	height: fit-content;
 	/* border: 1px solid goldenrod; */
 	margin-right: 0.3em;
 	text-decoration: none;

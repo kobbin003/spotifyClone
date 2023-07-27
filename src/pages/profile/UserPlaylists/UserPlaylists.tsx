@@ -32,8 +32,8 @@ const UserPlaylists = () => {
 			<AlbumsContainer>
 				{data &&
 					data.items.map((item) => (
-						<Card
-							href=""
+						<Link
+							to={`/me/playlist/${item.id}`}
 							key={item.id}
 						>
 							<ImageContainer>
@@ -54,7 +54,7 @@ const UserPlaylists = () => {
 									<b>{item.name}</b>
 								</p>
 							</div>
-						</Card>
+						</Link>
 					))}
 			</AlbumsContainer>
 		</Container>
