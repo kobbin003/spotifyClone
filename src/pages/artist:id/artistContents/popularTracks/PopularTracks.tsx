@@ -23,7 +23,7 @@ const PopularTracks = () => {
 					<div>
 						<img src={track.album.images[0].url} />
 						<div>
-							<Link to="/n">
+							<Link to="">
 								<span>{track.name}</span>
 							</Link>
 						</div>
