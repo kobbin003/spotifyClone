@@ -5,7 +5,7 @@ import {
 	SelectContainer,
 } from "./userLibrary.style";
 import ItemLibrary from "./LibraryItems/LibraryItem";
-import { FollowedArtistItem } from "../../../../hooks/spotify-data/getFollowedArtist";
+import { FollowedArtistItem } from "../../../../hooks/spotify-data/getFollowedArtists";
 import { UserAlbums } from "../../../../hooks/spotify-data/getUserAlbums";
 import { UserSavedTracks } from "../../../../hooks/spotify-data/getUserSavedTracks";
 import {
