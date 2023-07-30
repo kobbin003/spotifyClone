@@ -7,7 +7,7 @@ import {
 import { FetchedData } from "../UserLibrary";
 import { LibraryItemStyle } from "./LibraryItem.style";
 import { Link } from "react-router-dom";
-import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtist";
+import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtists";
 import { AlbumItems } from "./AlbumItems";
 import { ArtistItems } from "./ArtistItems";
 import PlaylistItems from "./PlaylistItems";
