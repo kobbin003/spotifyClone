@@ -66,8 +66,11 @@ export const Container = styled.div`
 			flex: 1;
 			display: flex;
 			align-items: center;
-			font-size: 3vw;
-			white-space: nowrap;
+			font-size: 2.5vw;
+			/* white-space: nowrap; */
+			& > h1 {
+				/* white-space: nowrap; */
+			}
 			@media screen and (max-width: 540px) {
 				font-size: 1.1rem;
 				padding-top: 1em;
@@ -75,11 +78,11 @@ export const Container = styled.div`
 			}
 			@media (min-width: 540px) and (max-width: 750px) {
 				/* color: red; */
-				font-size: 2rem;
+				font-size: 1.3rem;
 			}
 			@media (min-width: 750px) and (max-width: 850px) {
 				/* color: red; */
-				font-size: 4vw;
+				font-size: 1.4rem;
 			}
 		}
 
