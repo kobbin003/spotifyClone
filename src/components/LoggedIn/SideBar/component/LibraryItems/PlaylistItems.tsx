@@ -4,7 +4,7 @@ import {
 	UserPlaylistItem,
 } from "../../../../../hooks/spotify-data/getUserPlaylist";
 import { UserAlbums } from "../../../../../hooks/spotify-data/getUserAlbums";
-import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtist";
+import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtists";
 import { UserSavedTracks } from "../../../../../hooks/spotify-data/getUserSavedTracks";
 import { LibraryItemStyle } from "./LibraryItem.style";
 import { Link } from "react-router-dom";
@@ -28,7 +28,7 @@ const PlaylistItems = ({
 			<>
 				<LibraryItemStyle>
 					<Link
-						to={`/me/savedtracks`}
+						to={`/me/savedtracks/${savedTracks.total}`}
 						state={savedTracks}
 					>
 						<div>
