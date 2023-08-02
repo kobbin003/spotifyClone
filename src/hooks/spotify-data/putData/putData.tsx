@@ -3,7 +3,8 @@ const putData = (
 	method: string,
 	body: { ids: string[] },
 	accessToken: string,
-	setAccessToken: React.Dispatch<React.SetStateAction<string>>
+	setAccessToken: React.Dispatch<React.SetStateAction<string>>,
+	callback?: () => void
 ) => {
 	let datafetched;
 	// let errorfetched;
@@ -20,6 +21,10 @@ const putData = (
 		fetch(url, options)
 			.then((response) => {
 				if (response.ok) {
+					console.log(response.status);
+					if (callback) {
+						callback();
+					}
 					return response.text();
 				} else {
 					console.log(response);
