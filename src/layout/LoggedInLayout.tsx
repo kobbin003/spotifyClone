@@ -16,25 +16,17 @@ const LoggedInLayout: React.FC = () => {
 	const { data, error, isLoading } = useGetAccessToken();
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		!isDraggable ? setIsDraggable(true) : setIsDraggable(false);
-		console.log("mouse enter", isDraggable);
+		// console.log("mouse enter", isDraggable);
 	};
 	const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>): void => {
 		if (isDraggable) {
 			const newWidth = e.clientX / 16;
 			setWidth(newWidth);
-			console.log("mouse move", isDraggable, e);
 		}
 	};
-
 	useEffect(() => {
-		// if code not found, then navigate to "/"
+		//* if code not found, then navigate to "/"
 		if (!localStorage.getItem("code")) navigate("/");
-		// console.log(
-		// 	"logggedinlayout",
-		// 	localStorage.getItem("accessToken"),
-		// 	data?.access_token
-		// );
-		console.log("loggein", { data, error, isLoading });
 		if (data?.access_token) {
 			setTokenSet(true);
 		}
