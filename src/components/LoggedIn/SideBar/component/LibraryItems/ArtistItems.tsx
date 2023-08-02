@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { LibraryItemStyle } from "./LibraryItem.style";
 import { UserAlbums } from "../../../../../hooks/spotify-data/getUserAlbums";
-import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtist";
+import { FollowedArtistItem } from "../../../../../hooks/spotify-data/getFollowedArtists";
 import {
 	UserPlaylist,
 	UserPlaylistItem,
@@ -14,7 +14,7 @@ export const ArtistItems = ({
 	data:
 		| UserAlbums
 		| { items: FollowedArtistItem[] }
-		| { playlists: UserPlaylist; savedTracks: UserSavedTracks };
+		| { playlists: UserPlaylist };
 }) => {
 	const artists = data as { items: FollowedArtistItem[] };
 	return (

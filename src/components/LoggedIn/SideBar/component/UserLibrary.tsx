@@ -17,7 +17,7 @@ export type FetchedData = {
 	data:
 		| UserAlbums
 		| { items: FollowedArtistItem[] }
-		| { playlists: UserPlaylist; savedTracks: UserSavedTracks }
+		| { playlists: UserPlaylist }
 		| null;
 };
 const UserLibrary = ({
@@ -28,7 +28,7 @@ const UserLibrary = ({
 {
 	artists: { items: FollowedArtistItem[] };
 	albums: UserAlbums;
-	playlists: { playlists: UserPlaylist; savedTracks: UserSavedTracks };
+	playlists: { playlists: UserPlaylist };
 	// savedTracks: UserSavedTracks;
 }) => {
 	const [libraryItemType, setLibraryItemType] = useState<string>("playlists");

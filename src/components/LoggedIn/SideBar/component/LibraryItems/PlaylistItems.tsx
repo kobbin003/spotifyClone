@@ -9,6 +9,7 @@ import { UserSavedTracks } from "../../../../../hooks/spotify-data/getUserSavedT
 import { LibraryItemStyle } from "./LibraryItem.style";
 import { Link } from "react-router-dom";
 import { Pindiv } from "./playlistItems.style";
+import SavedTrackItems from "./SavedTrackItems";
 
 const PlaylistItems = ({
 	data,
@@ -16,34 +17,16 @@ const PlaylistItems = ({
 	data:
 		| UserAlbums
 		| { items: FollowedArtistItem[] }
-		| { playlists: UserPlaylist; savedTracks: UserSavedTracks };
+		| { playlists: UserPlaylist };
 }) => {
-	const { playlists, savedTracks } = data as {
+	const { playlists } = data as {
 		playlists: UserPlaylist;
-		savedTracks: UserSavedTracks;
 	};
-	const numSavedSongs = savedTracks && savedTracks.items.length;
 	return (
 		<>
 			<>
 				<LibraryItemStyle>
-					<Link
-						to={`/me/savedtracks/${savedTracks.total}`}
-						state={savedTracks}
-					>
-						<div>
-							<img src={"/public/icons/heartsquare.svg"} />
-						</div>
-						<div>
-							<div>Liked Songs</div>
-							<Pindiv>
-								<img src={"/public/icons/pin.svg"} />
-								<span>&nbsp;playlist</span>
-								<b>&nbsp; . &nbsp;</b>
-								<span>{playlists.total} songs</span>
-							</Pindiv>
-						</div>
-					</Link>
+					<SavedTrackItems />
 				</LibraryItemStyle>
 			</>
 			<>

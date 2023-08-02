@@ -39,15 +39,11 @@ const LibraryItem = ({
 	fetchedData: FetchedData;
 }) => {
 	const { data } = fetchedData;
-	// console.log("fetch-data", fetchedData);
 	return (
 		<>
 			{itemType == "albums" && data && <AlbumItems data={data} />}
 			{itemType == "artists" && data && <ArtistItems data={data} />}
 			{itemType == "playlists" && data && <PlaylistItems data={data} />}
-			{/* {data && isOfTypeAlbum(data) && <AlbumItems data={data} />}
-			{data && isOfTypeArtist(data) && <ArtistItems data={data} />}
-			{data && isOfTypePlaylists(data) && <PlaylistItems data={data} />} */}
 		</>
 	);
 };
