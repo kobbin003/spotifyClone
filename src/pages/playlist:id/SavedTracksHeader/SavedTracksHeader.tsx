@@ -24,11 +24,7 @@ const SavedTrackHeader = ({ tracks }: { tracks: number }) => {
 						{data ? data?.display_name : ""}
 						&nbsp;<BoldDot>.</BoldDot>&nbsp;
 					</p>
-					<p>{tracks} songs</p>
-					<p>
-						{/* <span>{msToMin(albumDuration).split(".")[0]}&nbsp;hr&nbsp;</span>
-						<span>{msToMin(albumDuration).split(".")[1]}&nbsp;min&nbsp;</span> */}
-					</p>
+					<p>{tracks ? tracks : ""} songs</p>
 				</div>
 			</div>
 		</Container>

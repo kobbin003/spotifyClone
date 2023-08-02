@@ -3,31 +3,20 @@ import { Container, MidContainer } from "./style";
 import SavedTrackHeader from "./SavedTracksHeader/SavedTracksHeader";
 import SavedTracksTracks from "./SavedTracksTracks/SavedTracksTracks";
 import getUserSavedTracks from "../../hooks/spotify-data/getUserSavedTracks";
+import { useState } from "react";
 
 const SavedTracks = () => {
-	// const { someParam } = useParams();
-	// const total = someParam && parseInt(someParam);
-	const { data, error, isLoading } = getUserSavedTracks();
-
-	const total = data && data.total;
-	// console.log("savedTracks", typeof someParam);
+	const [total, setTotal] = useState<number>();
 	return (
 		<Container>
-			{total && (
-				<>
-					<SavedTrackHeader tracks={total} />
-					<MidContainer>
-						<img
-							src="/icons/spotify_play.svg"
-							alt="play button"
-							// height={50}
-							// width={50}
-						/>
-					</MidContainer>
-					{isLoading ? <p>Loading..</p> : <SavedTracksTracks tracks={data} />}
-					{/* <AlbumTracks<UserAlbumTracksItems> tracks={tracks.items} /> */}
-				</>
-			)}
+			<SavedTrackHeader tracks={total || 0} />
+			<MidContainer>
+				<img
+					src="/icons/spotify_play.svg"
+					alt="play button"
+				/>
+			</MidContainer>
+			<SavedTracksTracks setTotal={setTotal} />
 		</Container>
 	);
 };

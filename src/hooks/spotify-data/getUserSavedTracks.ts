@@ -111,7 +111,7 @@ export type UserSavedTracksError = {
 };
 
 const getUserSavedTracks = (
-	rerender: boolean
+	rerender?: boolean
 ): {
 	data: UserSavedTracks | null;
 	error: UserSavedTracksError | null;
