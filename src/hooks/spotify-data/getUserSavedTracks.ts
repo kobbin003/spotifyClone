@@ -1,4 +1,5 @@
 import useFetchData from "../useFetchData";
+import useFetchDataDependent from "../useFetchDataDependent";
 
 export type UserSavedTracks = {
 	href: string;
@@ -109,18 +110,21 @@ export type UserSavedTracksError = {
 	message: string;
 };
 
-const getUserSavedTracks = (): {
+const getUserSavedTracks = (
+	rerender: boolean
+): {
 	data: UserSavedTracks | null;
 	error: UserSavedTracksError | null;
 	isLoading: boolean;
 } => {
 	// console.log("accesstoken", accessToken);
+	// console.log("userSavedTracks - called");
+
 	const url = `https://api.spotify.com/v1/me/tracks?limit=10&offset=0`;
-	const { data, error, isLoading } = useFetchData<
+	const { data, error, isLoading } = useFetchDataDependent<
 		UserSavedTracks,
 		UserSavedTracksError
-	>(url, "GET");
-	// console.log("getUserSavedTracks", { data, error, isLoading });
+	>(url, "GET", [rerender]);
 	return { data, error, isLoading };
 };
 
