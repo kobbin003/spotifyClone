@@ -1,25 +1,19 @@
-import React from "react";
-import { useLocation, useParams } from "react-router-dom";
-import {
-	PlaylistType,
-	getPlaylist,
-} from "../../hooks/spotify-data/getPlaylist";
-import PlaylistHeader from "./PlaylistHeader/PlaylistHeader";
+import { useParams } from "react-router-dom";
 import { Container, MidContainer } from "./style";
-import { UserSavedTracks } from "../../hooks/spotify-data/getUserSavedTracks";
 import SavedTrackHeader from "./SavedTracksHeader/SavedTracksHeader";
 import SavedTracksTracks from "./SavedTracksTracks/SavedTracksTracks";
+import getUserSavedTracks from "../../hooks/spotify-data/getUserSavedTracks";
 
 const SavedTracks = () => {
-	console.log("savedTracks");
-	const { state } = useLocation();
-	// Destructuring:
-	const { total } = state as UserSavedTracks;
-	if (!state) return <></>;
+	// const { someParam } = useParams();
+	// const total = someParam && parseInt(someParam);
+	const { data, error, isLoading } = getUserSavedTracks();
 
+	const total = data && data.total;
+	// console.log("savedTracks", typeof someParam);
 	return (
 		<Container>
-			{state && (
+			{total && (
 				<>
 					<SavedTrackHeader tracks={total} />
 					<MidContainer>
@@ -30,7 +24,7 @@ const SavedTracks = () => {
 							// width={50}
 						/>
 					</MidContainer>
-					<SavedTracksTracks />
+					{isLoading ? <p>Loading..</p> : <SavedTracksTracks tracks={data} />}
 					{/* <AlbumTracks<UserAlbumTracksItems> tracks={tracks.items} /> */}
 				</>
 			)}

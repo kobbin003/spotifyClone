@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { msToMin } from "../../../utils/msToMin";
 import { Container } from "../style";
 import { Header, TrackItem } from "./style";
-import getUserSavedTracks from "../../../hooks/spotify-data/getUserSavedTracks";
+import getUserSavedTracks, {
+	UserSavedTracks,
+} from "../../../hooks/spotify-data/getUserSavedTracks";
 
-const SavedTracksTracks = () => {
+const SavedTracksTracks = ({ tracks }: { tracks: UserSavedTracks }) => {
 	const { data, error, isLoading } = getUserSavedTracks();
 	return (
 		<Container>

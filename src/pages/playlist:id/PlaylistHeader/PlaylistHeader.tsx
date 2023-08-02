@@ -53,5 +53,4 @@ const PlaylistHeader = ({
 		</Container>
 	);
 };
-
 export default PlaylistHeader;

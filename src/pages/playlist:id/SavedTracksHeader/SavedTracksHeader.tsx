@@ -6,6 +6,8 @@ import getUserProfile from "../../../hooks/spotify-data/getUserProfile";
 
 const SavedTrackHeader = ({ tracks }: { tracks: number }) => {
 	const { data, error, isLoading } = getUserProfile();
+	//! make sidebar responsive to localstorage.
+
 	return (
 		<Container>
 			<div>
