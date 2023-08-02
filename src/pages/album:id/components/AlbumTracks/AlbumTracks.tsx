@@ -1,7 +1,9 @@
-import React from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { Container, Header, TrackItem } from "./style";
 import { msToMin } from "../../../../utils/msToMin";
 import { Link } from "react-router-dom";
+import putData from "../../../../hooks/spotify-data/putData/putData";
+import checkUserHasTracks from "../../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
 
 const AlbumTracks = <
 	T extends {
@@ -16,6 +18,64 @@ const AlbumTracks = <
 }: {
 	tracks: T;
 }) => {
+	const [accessToken, setAccessToken] = useState<string>(
+		localStorage.getItem("accessToken") || ""
+	);
+	// rerender to check "green" or "transparent"
+	const [rerender, setRerender] = useState<boolean>();
+
+	const [userLikedTrackArray, setUserLikedTrackArray] = useState<string[]>([]);
+	const handleTrackLike = (trackId: string) => {
+		const url = `https://api.spotify.com/v1/me/tracks`;
+
+		const body = {
+			ids: [trackId],
+		};
+		putData(url, "PUT", body, accessToken, setAccessToken, () => {
+			//* refresh the copmonent
+			setRerender((prev) => {
+				console.log("rerender like");
+				return !prev;
+			});
+		});
+		window.dispatchEvent(new Event("libraryModified"));
+	};
+	const handleTrackUnLike = (trackId: string) => {
+		const url = `https://api.spotify.com/v1/me/tracks`;
+
+		const body = {
+			ids: [trackId],
+		};
+		putData(url, "DELETE", body, accessToken, setAccessToken, () => {
+			//* refresh the component
+			setRerender((prev) => {
+				console.log("rerender delete");
+				return !prev;
+			});
+		});
+		window.dispatchEvent(new Event("libraryModified"));
+	};
+
+	useEffect(() => {
+		const tracksIdArray: string[] = [];
+		tracks.forEach((track) => tracksIdArray.push(track.id));
+
+		const tracksIdQueries = tracksIdArray.join(",");
+		const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${tracksIdQueries}`;
+		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
+			setUserLikedTrackArray(data);
+		});
+	}, [rerender]);
+
+	useEffect(() => {
+		if (localStorage.getItem("accessToken")) {
+			// console.log("YES-accesstoken-fetchdata");
+			setAccessToken(localStorage.getItem("accessToken") || "");
+		} else {
+			console.log("NO-accesstoken-fetchdata");
+		}
+	}, []);
+
 	return (
 		<Container>
 			<ul>
@@ -29,8 +89,7 @@ const AlbumTracks = <
 						/>
 					</div>
 				</Header>
-
-				{tracks.map((track) => (
+				{tracks.map((track, index) => (
 					<TrackItem key={track.id}>
 						<div>
 							<span>{track.track_number}</span>
@@ -55,10 +114,24 @@ const AlbumTracks = <
 						</div>
 						<div>
 							<button>
-								<img src="/icons/heart.svg" />
+								{userLikedTrackArray[index] ? (
+									<img
+										src="/public/icons/heartGreen.svg"
+										onClick={() => handleTrackUnLike(track.id)}
+									/>
+								) : (
+									<img
+										src="/icons/heart.svg"
+										onClick={() => handleTrackLike(track.id)}
+									/>
+								)}
 							</button>
 							<span>{msToMin(track.duration_ms)}</span>
-							<button>
+							<button
+								onClick={() => {
+									console.log("click working");
+								}}
+							>
 								<img src="/icons/threedots.svg" />
 							</button>
 						</div>

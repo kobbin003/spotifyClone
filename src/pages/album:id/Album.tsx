@@ -31,7 +31,7 @@ const Album = () => {
 		tracks,
 	} = data as AlbumType;
 	if (!data) return <></>;
-	console.log("album", data, name, release_date);
+	// console.log("album", data, name, release_date);
 
 	// console.log(albumDuration);
 	const albumDuration =
@@ -41,6 +41,7 @@ const Album = () => {
 		<Container>
 			{data && (
 				<>
+					{/* <p>ALBUM</p> */}
 					<AlbumHeader
 						images={images}
 						albumType={album_type}

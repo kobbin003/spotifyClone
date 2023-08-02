@@ -41,7 +41,7 @@ export const Header = styled(Row)`
 	& > div:nth-of-type(3) {
 		display: flex;
 		justify-content: center;
-		background-color: aqua;
+		/* background-color: aqua; */
 		img {
 			height: 15px;
 		}
