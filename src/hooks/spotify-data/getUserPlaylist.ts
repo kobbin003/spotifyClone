@@ -50,7 +50,6 @@ const getUserPlaylist = (): {
 	error: UserPlaylistError | null;
 	isLoading: boolean;
 } => {
-	// console.log("accesstoken", accessToken);
 	const url = `https://api.spotify.com/v1/me/playlists?limit=10&offset=0`;
 	const { data, error, isLoading } = useFetchData<
 		UserPlaylist,
