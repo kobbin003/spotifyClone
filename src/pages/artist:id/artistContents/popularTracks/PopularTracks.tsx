@@ -18,16 +18,13 @@ const PopularTracks = () => {
 	);
 	const artistTopTracks = getArtistTopTracks(params.id || "");
 	const handleTrackLike = (trackId: string) => {
-		console.log("click popular track");
 		const url = `https://api.spotify.com/v1/me/tracks`;
-
 		const body = {
 			ids: [trackId],
 		};
 		putData(url, "PUT", body, accessToken, setAccessToken, () => {
 			//* refresh the copmonent
 			setRerender((prev) => {
-				console.log("rerender like");
 				return !prev;
 			});
 		});
@@ -42,7 +39,6 @@ const PopularTracks = () => {
 		putData(url, "DELETE", body, accessToken, setAccessToken, () => {
 			//* refresh the component
 			setRerender((prev) => {
-				console.log("rerender delete");
 				return !prev;
 			});
 		});
@@ -52,7 +48,6 @@ const PopularTracks = () => {
 		const tracksIdArray: string[] = [];
 		artistTopTracks.data?.tracks.forEach((track) => {
 			tracksIdArray.push(track.id);
-			// console.log("items", track);
 		});
 
 		const tracksIdQueries = tracksIdArray.join(",");
@@ -60,17 +55,16 @@ const PopularTracks = () => {
 		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
 			setUserLikedTrackArray(data);
 		});
-		console.log("userLikedTrackArray", userLikedTrackArray);
-	}, [rerender]);
-	// console.log(artistTopTracks);
+	}, [rerender, artistTopTracks.data]);
+
 	useEffect(() => {
 		if (localStorage.getItem("accessToken")) {
-			// console.log("YES-accesstoken-fetchdata");
 			setAccessToken(localStorage.getItem("accessToken") || "");
 		} else {
 			console.log("NO-accesstoken-fetchdata");
 		}
 	}, []);
+
 	if (artistTopTracks.isLoading) return <p>Loading...</p>;
 	return (
 		<Container>
@@ -95,7 +89,7 @@ const PopularTracks = () => {
 
 						<div>
 							<button>
-								{userLikedTrackArray[index] ? (
+								{userLikedTrackArray && userLikedTrackArray[index] ? (
 									<img
 										src="/public/icons/heartGreen.svg"
 										onClick={() => handleTrackUnLike(track.id)}
