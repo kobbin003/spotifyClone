@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import Sidebar from "../components/LoggedIn/SideBar/Sidebar";
 import MainContent from "../components/LoggedIn/MainContent/MainContent";
 import { Container, LoadingMsg } from "./LoggedInLayout.style";
@@ -31,7 +31,6 @@ const LoggedInLayout: React.FC = () => {
 			setTokenSet(true);
 		}
 	}, [data]);
-
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
 			<Container>
@@ -60,4 +59,3 @@ const LoggedInLayout: React.FC = () => {
 	);
 };
 export default LoggedInLayout;
-// #4b49492c
