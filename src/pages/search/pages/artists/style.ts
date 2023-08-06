@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 export const Title = styled.h2`
 	padding-top: 0.5em;
-	padding-bottom: 0.5em;
+	padding-bottom: 0.7em;
 `;
 export const CardsContainer = styled.div`
 	display: grid;
 	width: 100%;
 	position: relative;
 	cursor: pointer;
+	/* padding-top: 1em; */
 	/* grid: repeat(2, 1fr) / repeat(4, minmax(150px, 300px)); */
 	/* min-width: 200px; */
 	@media only screen and (max-width: 500px) {
@@ -122,6 +123,7 @@ export const ResultCard = styled.div`
 		}
 	}
 `;
+
 export const ImageContainer = styled.div`
 	position: relative;
 	/* height: 80%; */
@@ -152,9 +154,3 @@ export const ImageContainer = styled.div`
 		height: 70%;
 	}
 `;
-// export const Songs = styled.div`
-// 	background-color: yellow;
-// 	width: 45%;
-// 	height: 100%;
-// `;
-// #5d5d5d
