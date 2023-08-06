@@ -5,7 +5,21 @@ export const Container = styled.div`
 	position: relative;
 	height: 200px;
 	display: flex;
-	border: 1px solid #1ed76069;
+	/* border: 1px solid #1ed76069; */
+	background-color: transparent;
+	/* background-image: linear-gradient(
+		225deg,
+		white 0%,
+		#d3d3d3 5%,
+		transparent 100%
+	); */
+	background-image: linear-gradient(
+		225deg,
+		#d3d3d3 0%,
+		#d3d3d3 20%,
+		#d3d3d3af 50%,
+		#d3d3d313 85%
+	);
 	width: 98%;
 	/* padding: 1em; */
 	padding-top: 3em;
@@ -23,17 +37,14 @@ export const Container = styled.div`
 		min-width: 200px;
 		padding-right: 1em;
 		padding-left: 1em;
-		/* background-color: aqua; */
 		@media screen and (max-width: 540px) {
 			padding-left: 0;
 			min-width: 250px;
 			display: block;
 		}
-		/* background-color: yellow; */
-		/* border: 2px solid goldenrod; */
 		img {
 			height: 200px;
-			border: 1px solid #1ed76099;
+			box-shadow: 0px 0px 15px 0px #d3d3d3;
 			border-radius: 50%;
 			@media screen and (max-width: 600px) {
 				/* height: 250px;

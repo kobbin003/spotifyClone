@@ -5,13 +5,13 @@ export const Container = styled.div`
 	position: relative;
 	height: 200px;
 	display: flex;
-	/* border: 1px solid #1ed76069; */
-	background: rgb(49, 47, 50);
-	background: linear-gradient(
-		190deg,
-		rgba(49, 50, 50, 0.5) 0%,
-		rgb(0, 100, 0) 60%,
-		rgb(0, 180, 0) 100%
+	background-color: transparent;
+	background-image: linear-gradient(
+		225deg,
+		#d3d3d3 0%,
+		#d3d3d3ac 20%,
+		#d3d3d36f 50%,
+		#d3d3d313 80%
 	);
 	width: 98%;
 	/* padding: 1em; */
@@ -41,7 +41,9 @@ export const Container = styled.div`
 		img {
 			height: 200px;
 			/* border: 2px solid #1ed76099; */
-			box-shadow: 0px 0px 13px 1px black;
+			/* box-shadow: 0px 0px 15px 0px black; */
+			box-shadow: 0px 0px 15px 0px #888777;
+
 			@media screen and (max-width: 600px) {
 				/* height: 250px;
 				width: 300px; */
