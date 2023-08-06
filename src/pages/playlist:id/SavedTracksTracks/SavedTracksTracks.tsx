@@ -10,15 +10,9 @@ import putData from "../../../hooks/spotify-data/putData/putData";
 import checkUserHasTracks from "../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
 import TrackRow from "./TrackRow";
 
-const SavedTracksTracks = ({
-	setTotal,
-}: {
-	setTotal: React.Dispatch<React.SetStateAction<number | undefined>>;
-}) => {
+const SavedTracksTracks = () => {
 	const { data, error, isLoading } = getUserSavedTracks();
-	if (data) {
-		setTotal(data.total);
-	}
+
 	// useEffect(()=>{},[])
 	return (
 		<Container>
@@ -34,16 +28,7 @@ const SavedTracksTracks = ({
 					/>
 				</div>
 			</Header>
-			{isLoading ? (
-				<p>Loading...</p>
-			) : (
-				data && (
-					<TrackRow
-						data={data}
-						setTotal={setTotal}
-					/>
-				)
-			)}
+			{isLoading ? <p>Loading...</p> : data && <TrackRow data={data} />}
 		</Container>
 	);
 };

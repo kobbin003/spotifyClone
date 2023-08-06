@@ -6,7 +6,7 @@ import getUserProfile from "../../../hooks/spotify-data/getUserProfile";
 import getUserSavedTracks from "../../../hooks/spotify-data/getUserSavedTracks";
 import TrackCount from "./TrackCount";
 
-const SavedTrackHeader = ({ tracks }: { tracks: number }) => {
+const SavedTrackHeader = () => {
 	const { data, error, isLoading } = getUserProfile();
 	//! make sidebar responsive to localstorage.
 	return (
@@ -31,5 +31,4 @@ const SavedTrackHeader = ({ tracks }: { tracks: number }) => {
 		</Container>
 	);
 };
-
 export default SavedTrackHeader;

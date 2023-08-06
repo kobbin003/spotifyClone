@@ -6,9 +6,8 @@ import { UserSavedTracks } from "../../../hooks/spotify-data/getUserSavedTracks"
 import putData from "../../../hooks/spotify-data/putData/putData";
 type TrackRowType = {
 	data: UserSavedTracks;
-	setTotal: React.Dispatch<React.SetStateAction<number | undefined>>;
 };
-const TrackRow = ({ data, setTotal }: TrackRowType) => {
+const TrackRow = ({ data }: TrackRowType) => {
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
 	);
@@ -31,7 +30,6 @@ const TrackRow = ({ data, setTotal }: TrackRowType) => {
 			});
 		});
 		window.dispatchEvent(new Event("libraryModified"));
-		setTotal(trackItems.length);
 		//* delete from the list in trackItems array
 		setTrackItems((prev) => prev.filter((item) => item.track.id !== trackId));
 	};

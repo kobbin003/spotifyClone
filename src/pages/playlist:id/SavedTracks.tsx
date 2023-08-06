@@ -6,17 +6,16 @@ import getUserSavedTracks from "../../hooks/spotify-data/getUserSavedTracks";
 import { useState } from "react";
 
 const SavedTracks = () => {
-	const [total, setTotal] = useState<number>();
 	return (
 		<Container>
-			<SavedTrackHeader tracks={total || 0} />
+			<SavedTrackHeader />
 			<MidContainer>
 				<img
 					src="/icons/spotify_play.svg"
 					alt="play button"
 				/>
 			</MidContainer>
-			<SavedTracksTracks setTotal={setTotal} />
+			<SavedTracksTracks />
 		</Container>
 	);
 };
