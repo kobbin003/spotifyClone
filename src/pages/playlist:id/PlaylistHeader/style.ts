@@ -5,7 +5,14 @@ export const Container = styled.div`
 	position: relative;
 	height: 200px;
 	display: flex;
-	border: 1px solid #1ed76069;
+	/* border: 1px solid #1ed76069; */
+	background: rgb(49, 47, 50);
+	background: linear-gradient(
+		190deg,
+		rgba(49, 50, 50, 0.5) 0%,
+		rgb(0, 100, 0) 60%,
+		rgb(0, 180, 0) 100%
+	);
 	width: 98%;
 	/* padding: 1em; */
 	padding-top: 3em;
@@ -33,7 +40,8 @@ export const Container = styled.div`
 		/* border: 2px solid goldenrod; */
 		img {
 			height: 200px;
-			border: 1px solid #1ed76099;
+			/* border: 2px solid #1ed76099; */
+			box-shadow: 0px 0px 13px 1px black;
 			@media screen and (max-width: 600px) {
 				/* height: 250px;
 				width: 300px; */
