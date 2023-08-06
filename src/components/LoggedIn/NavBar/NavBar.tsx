@@ -101,7 +101,14 @@ const NavBar = ({
 						></SearchBar>
 					)}
 					<ProfileContainer>
-						{!isInSearchRoute && <UpgradeLink href="">Upgrade</UpgradeLink>}
+						{!isInSearchRoute && (
+							<UpgradeLink
+								href="https://www.spotify.com/us/premium/?utm_source=app&utm_medium=desktop&utm_campaign=upgrade&ref=web_loggedin_upgrade_button"
+								target="blank"
+							>
+								Explore Premium
+							</UpgradeLink>
+						)}
 						<InstallAppLink
 							href="https://www.spotify.com/us/download/linux/"
 							target="_blank"
