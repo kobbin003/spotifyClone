@@ -16,7 +16,7 @@ const Playlist = () => {
 	return (
 		<Container>
 			{!queryFromSearchBar ? (
-				<p>search</p>
+				<p>Please search for artist in the searchbox&#9757;</p>
 			) : isLoading ? (
 				<p>Loading...</p>
 			) : (

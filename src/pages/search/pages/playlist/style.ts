@@ -5,6 +5,7 @@ export const Container = styled.div`
 	grid-gap: 20px 0px;
 	padding-bottom: 2em;
 	padding-top: 2em;
+	white-space: nowrap;
 	@media only screen and (max-width: 490px) {
 		grid: auto/minmax(auto, 100%);
 	}
@@ -43,7 +44,6 @@ export const Container = styled.div`
 		/* grid: auto/ auto auto auto auto auto auto; */
 		grid: auto/repeat(6, minmax(auto, calc(100 / 6) * 1%));
 	}
-	& > a {
-		/* border: 1px solid yellowgreen; */
+	& > p {
 	}
 `;
