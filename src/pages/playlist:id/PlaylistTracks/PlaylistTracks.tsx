@@ -1,14 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { msToMin } from "../../../utils/msToMin";
 import { Container } from "../style";
 import { Header, TrackItem } from "./style";
 import getUserSavedTracks from "../../../hooks/spotify-data/getUserSavedTracks";
 import { getPlaylist } from "../../../hooks/spotify-data/getPlaylist";
+import putData from "../../../hooks/spotify-data/putData/putData";
+import checkUserHasTracks from "../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
 
 const PlaylistsTracks = () => {
 	const { id } = useParams();
 	const { data, error, isLoading } = getPlaylist(id || "");
+	const [rerender, setRerender] = useState<boolean>();
+
+	const [userLikedTrackArray, setUserLikedTrackArray] = useState<string[]>([]);
+
+	const [accessToken, setAccessToken] = useState<string>(
+		localStorage.getItem("accessToken") || ""
+	);
+	const handleTrackLike = (trackId: string) => {
+		const url = `https://api.spotify.com/v1/me/tracks`;
+		const body = {
+			ids: [trackId],
+		};
+		putData(url, "PUT", body, accessToken, setAccessToken, () => {
+			//* refresh the copmonent
+			setRerender((prev) => {
+				return !prev;
+			});
+		});
+		window.dispatchEvent(new Event("libraryModified"));
+	};
+	const handleTrackUnLike = (trackId: string) => {
+		const url = `https://api.spotify.com/v1/me/tracks`;
+
+		const body = {
+			ids: [trackId],
+		};
+		putData(url, "DELETE", body, accessToken, setAccessToken, () => {
+			//* refresh the component
+			setRerender((prev) => {
+				return !prev;
+			});
+		});
+		window.dispatchEvent(new Event("libraryModified"));
+	};
+	useEffect(() => {
+		const tracksIdArray: string[] = [];
+		data?.tracks.items.forEach((track) => {
+			tracksIdArray.push(track.track.id);
+		});
+
+		const tracksIdQueries = tracksIdArray.join(",");
+		const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${tracksIdQueries}`;
+		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
+			setUserLikedTrackArray(data);
+		});
+	}, [rerender, data?.tracks.items]);
+
+	useEffect(() => {
+		if (localStorage.getItem("accessToken")) {
+			setAccessToken(localStorage.getItem("accessToken") || "");
+		} else {
+			console.log("NO-accesstoken-fetchdata");
+		}
+	}, []);
 	return (
 		<Container>
 			<Header>
@@ -65,7 +121,17 @@ const PlaylistsTracks = () => {
 
 						<div>
 							<button>
-								<img src="/icons/heart.svg" />
+								{userLikedTrackArray && userLikedTrackArray[index] ? (
+									<img
+										src="/public/icons/heartGreen.svg"
+										onClick={() => handleTrackUnLike(track.id)}
+									/>
+								) : (
+									<img
+										src="/icons/heart.svg"
+										onClick={() => handleTrackLike(track.id)}
+									/>
+								)}
 							</button>
 							<span>{msToMin(track.duration_ms)}</span>
 							<button>
