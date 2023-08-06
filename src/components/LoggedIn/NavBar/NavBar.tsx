@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import {
 	NavArrowIcon,
@@ -32,10 +32,17 @@ const NavBar = ({
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
+	const [profileIconButton, setProfileIconButton] = useState<HTMLElement>();
+	const [outsideProfileIconButton, setOutsideProfileIconButton] =
+		useState<HTMLElement>();
 	const location = window.location.pathname;
 	const isInSearchRoute = /^\/me\/search.*/.test(location);
 	const navigate = useNavigate();
-	const handleDropDownMenu = () => {
+	const handleDropDownMenu = (e: MouseEvent<HTMLImageElement>) => {
+		const element = e.currentTarget as HTMLElement;
+		// set the target element as the clickElement
+		setProfileIconButton(element);
+		// set the dropDownVisibility
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
 	};
 	const handleLogOut = () => {
@@ -44,6 +51,24 @@ const NavBar = ({
 		localStorage.removeItem("refreshToken");
 		navigate("/");
 	};
+	const handleNavigateBack = () => {
+		window.history.back();
+	};
+	const handleNavigateFront = () => {
+		window.history.forward();
+	};
+	useEffect(() => {
+		if (outsideProfileIconButton !== profileIconButton) {
+			setDropDownVisibility("hidden");
+		}
+	}, [profileIconButton, outsideProfileIconButton]);
+	useEffect(() => {
+		const handleClickOutside = (e: any) => {
+			setOutsideProfileIconButton(e.target);
+		};
+		window.addEventListener("click", handleClickOutside);
+		return () => window.removeEventListener("click", handleClickOutside);
+	}, []);
 
 	return (
 		<>
@@ -54,18 +79,18 @@ const NavBar = ({
 			>
 				<div>
 					<NavigatePageSection>
-						<a href="">
+						<button onClick={handleNavigateBack}>
 							<NavArrowIcon
 								src="/icons/navBar/arrow-circle-left.svg"
 								direction="left"
 							/>
-						</a>
-						<a href="">
+						</button>
+						<button onClick={handleNavigateFront}>
 							<NavArrowIcon
 								src="/icons/navBar/arrow-circle-right.svg"
 								direction="right"
 							/>
-						</a>
+						</button>
 					</NavigatePageSection>
 					{isInSearchRoute && (
 						<SearchBar
@@ -77,7 +102,10 @@ const NavBar = ({
 					)}
 					<ProfileContainer>
 						{!isInSearchRoute && <UpgradeLink href="">Upgrade</UpgradeLink>}
-						<InstallAppLink href="">
+						<InstallAppLink
+							href="https://www.spotify.com/us/download/linux/"
+							target="_blank"
+						>
 							<Icon
 								src="/icons/navBar/download.svg"
 								globe

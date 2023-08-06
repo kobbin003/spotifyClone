@@ -45,16 +45,17 @@ export const NavigatePageSection = styled.section`
 	align-items: center;
 	align-content: center;
 	/* background-color: yellow; */
-	a {
+	button {
 		position: relative;
-		text-decoration: none;
-		color: #ffffff;
+		background-color: transparent;
+		border: none;
 		height: 100%;
-		display: inline-flex;
+		cursor: pointer;
+		/* display: inline-flex;
 		justify-content: center;
-		align-items: flex-end;
+		align-items: flex-end; */
 	}
-	a:hover {
+	button:hover {
 		filter: brightness(200%);
 	}
 `;
