@@ -10,6 +10,7 @@ export const Container = styled.div`
 	padding-bottom: 2em;
 	padding-top: 1em;
 	/* background-color: coral; */
+	white-space: nowrap;
 	@media only screen and (max-width: 490px) {
 		grid: auto/minmax(auto, 100%);
 	}
