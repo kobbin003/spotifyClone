@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
+export const Title = styled.h2`
+	padding-top: 0.5em;
+	/* padding-bottom: 0.5em; */
+`;
 export const Container = styled.div`
 	display: grid;
 	grid-gap: 20px 0px;
 	padding-bottom: 2em;
-	padding-top: 2em;
+	padding-top: 1em;
 	white-space: nowrap;
 	@media only screen and (max-width: 490px) {
 		grid: auto/minmax(auto, 100%);
