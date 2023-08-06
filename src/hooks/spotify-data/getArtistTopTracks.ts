@@ -102,13 +102,32 @@ export type ArtistTopTracksError = {
 	status: string;
 	message: string;
 };
-const getArtistTopTracks = (id: string) => {
+type CallbackType = {
+	data: ArtistTopTracks;
+	error: ArtistTopTracksError;
+	IsLoading: boolean;
+};
+const getArtistTopTracks = (
+	id: string,
+	callback?: ({ data, error, IsLoading }: CallbackType) => void
+) => {
 	const url = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`;
 	const { data, error, isLoading } = useFetchData<
 		ArtistTopTracks,
 		ArtistTopTracksError
 	>(url, "GET");
 	return { data, error, isLoading };
+};
+export const getArtistTopTracksPromise = (
+	id: string,
+	callback?: ({ data, error, IsLoading }: CallbackType) => void
+) => {
+	const url = `https://api.spotify.com/v1/artists/${id}/top-tracks?market=ES`;
+	const { data, error, isLoading } = useFetchData<
+		ArtistTopTracks,
+		ArtistTopTracksError
+	>(url, "GET");
+	return Promise.resolve({ data, error, isLoading });
 };
 
 export default getArtistTopTracks;
