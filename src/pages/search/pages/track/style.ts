@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 	position: relative;
 	width: 100%;
+	/* padding-top: 1em; */
 	/* max-width: inherit; */
 	font-weight: 500;
 	font-size: 0.8rem;
@@ -11,6 +12,7 @@ export const Container = styled.div`
 `;
 export const Message = styled.div`
 	padding-top: 25px;
+	font-size: 1rem;
 `;
 export const Row = styled.div`
 	display: flex;

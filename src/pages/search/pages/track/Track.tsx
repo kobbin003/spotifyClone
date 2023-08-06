@@ -86,79 +86,81 @@ const Track = () => {
 	}, [userLikedTrackArray]);
 
 	return (
-		<Container>
-			{queryFromSearchBar.length == 0 ? (
-				<Message>Please search for tracks in the searchbox&#9757;</Message>
-			) : isLoading ? (
-				<Message>loading...</Message>
-			) : data ? (
-				<>
-					<Header
-						left={left}
-						widthHandleDragger={widthHandleDragger}
-					>
-						<div>#</div>
-						<div>Title</div>
-						<div>Album</div>
-						<div>
-							<img src="/icons/clock.svg" />
-						</div>
-					</Header>
-					<TrackBody>
-						{data.tracks.items.map((item, index) => (
-							<TrackItem key={item.id}>
-								<div>
-									<span>{index + 1}</span>
-									<button>
-										<img src="/icons/playTrack.svg" />
-									</button>
-								</div>
-								<div>
-									<img src={item.album.images[0].url} />
+		<>
+			<Container>
+				{queryFromSearchBar.length == 0 ? (
+					<Message>Please search for tracks in the searchbox&#9757;</Message>
+				) : isLoading ? (
+					<Message>loading...</Message>
+				) : data ? (
+					<>
+						<Header
+							left={left}
+							widthHandleDragger={widthHandleDragger}
+						>
+							<div>#</div>
+							<div>Title</div>
+							<div>Album</div>
+							<div>
+								<img src="/icons/clock.svg" />
+							</div>
+						</Header>
+						<TrackBody>
+							{data.tracks.items.map((item, index) => (
+								<TrackItem key={item.id}>
 									<div>
-										<Link to={``}>
-											<span>{item.name}</span>
-										</Link>
-										{item.artists.map((artist) => (
-											<Link
-												to={`/me/artist/${artist.name}`}
-												key={artist.id}
-											>
-												<span>{artist.name}</span>
+										<span>{index + 1}</span>
+										<button>
+											<img src="/icons/playTrack.svg" />
+										</button>
+									</div>
+									<div>
+										<img src={item.album.images[0].url} />
+										<div>
+											<Link to={``}>
+												<span>{item.name}</span>
 											</Link>
-										))}
+											{item.artists.map((artist) => (
+												<Link
+													to={`/me/artist/${artist.name}`}
+													key={artist.id}
+												>
+													<span>{artist.name}</span>
+												</Link>
+											))}
+										</div>
 									</div>
-								</div>
-								<div>
-									<Link to={`/me/album/${item.album.id}`}>
-										<span>{item.album.name}</span>
-									</Link>
-								</div>
-								<div>
 									<div>
-										{userLikedTrackArray && userLikedTrackArray[index] ? (
-											<img
-												src="/public/icons/heartGreen.svg"
-												onClick={() => handleTrackUnLike(item.id)}
-											/>
-										) : (
-											<img
-												src="/icons/heart.svg"
-												onClick={() => handleTrackLike(item.id)}
-											/>
-										)}
+										<Link to={`/me/album/${item.album.id}`}>
+											<span>{item.album.name}</span>
+										</Link>
 									</div>
-									<span>{msToMin(item.duration_ms)}</span>
-									<img src="/icons/threedots.svg" />
-								</div>
-							</TrackItem>
-						))}
-					</TrackBody>
-				</>
-			) : (
-				<div>No more results</div>
-			)}
-		</Container>
+									<div>
+										<div>
+											{userLikedTrackArray && userLikedTrackArray[index] ? (
+												<img
+													src="/public/icons/heartGreen.svg"
+													onClick={() => handleTrackUnLike(item.id)}
+												/>
+											) : (
+												<img
+													src="/icons/heart.svg"
+													onClick={() => handleTrackLike(item.id)}
+												/>
+											)}
+										</div>
+										<span>{msToMin(item.duration_ms)}</span>
+										<img src="/icons/threedots.svg" />
+									</div>
+								</TrackItem>
+							))}
+						</TrackBody>
+					</>
+				) : (
+					<div>No more results</div>
+				)}
+			</Container>
+		</>
 	);
 };
 
