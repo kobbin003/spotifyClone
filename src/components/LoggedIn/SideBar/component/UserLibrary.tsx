@@ -12,6 +12,9 @@ import {
 	UserPlaylist,
 	UserPlaylistItem,
 } from "../../../../hooks/spotify-data/getUserPlaylist";
+import { reducer } from "./userLibraryReducer";
+import { useLocation } from "react-router-dom";
+import { setUpInitialState } from "./setUpInitialState";
 
 export type FetchedData = {
 	data:
@@ -24,36 +27,32 @@ const UserLibrary = ({
 	artists,
 	albums,
 	playlists,
-}: // savedTracks,
-{
+}: {
 	artists: { items: FollowedArtistItem[] };
 	albums: UserAlbums;
 	playlists: { playlists: UserPlaylist };
-	// savedTracks: UserSavedTracks;
 }) => {
-	const [libraryItemType, setLibraryItemType] = useState<string>("playlists");
-	const [fetchedData, setFetchedData] = useState<FetchedData>({
-		data: playlists,
-	});
-	type INITIALSTATE = { name: string; active: boolean }[];
-	type ACTIONTYPE = { type: string; payload: { name: string } };
-	const initialState = [
-		{ name: "playlists", active: true },
-		{ name: "albums", active: false },
-		{ name: "artists", active: false },
-	];
-	const reducer = (state: INITIALSTATE, action: ACTIONTYPE) => {
-		switch (action.type) {
-			case "ACTIVATE":
-				return state.map((item) => {
-					if (item.name == action.payload.name) {
-						return { ...item, active: true };
-					} else return { ...item, active: false };
-				});
-			default:
-				return state;
-		}
+	const libData: { [key: string]: FetchedData["data"] } = {
+		artists,
+		albums,
+		playlists,
 	};
+	const location = useLocation();
+	const pathName: string = location.pathname.split("/")[2] || "playlist";
+	const initialState = setUpInitialState(pathName);
+	const initialLibraryItemType = initialState.find(
+		(state) => state.active
+	)?.name;
+	const [libraryItemType, setLibraryItemType] = useState<string>(
+		initialLibraryItemType ||
+			"playlists" /** //? set "playlists" as default "libraryItemType" if there is no pathName*/
+	);
+	const [fetchedData, setFetchedData] = useState<FetchedData | { data: {} }>({
+		data: libData[
+			initialLibraryItemType || "playlist"
+		] /** //? set libData["playlists"] as default "fetchedData" if there is no pathName*/,
+	});
+
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		const target = e.target as HTMLElement;
@@ -74,11 +73,6 @@ const UserLibrary = ({
 			});
 		}
 	};
-	useEffect(() => {
-		setFetchedData({
-			data: playlists ? playlists : null,
-		});
-	}, []);
 
 	return (
 		<div>
@@ -94,10 +88,12 @@ const UserLibrary = ({
 				))}
 			</SelectContainer>
 			<ContainerLibrary>
-				<ItemLibrary
-					itemType={libraryItemType}
-					fetchedData={fetchedData}
-				></ItemLibrary>
+				{fetchedData && (
+					<ItemLibrary
+						itemType={libraryItemType}
+						fetchedData={fetchedData}
+					></ItemLibrary>
+				)}
 			</ContainerLibrary>
 		</div>
 	);

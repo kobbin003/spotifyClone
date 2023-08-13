@@ -7,6 +7,7 @@ import getUserSavedTracks from "../../../../hooks/spotify-data/getUserSavedTrack
 import { useEffect, useState } from "react";
 
 const UserLibraryContainer = () => {
+	const [rerender, setRerender] = useState(false);
 	const {
 		data: artistsData,
 		error: artistsError,
@@ -17,14 +18,25 @@ const UserLibraryContainer = () => {
 		data: albumsData,
 		error: albumsError,
 		isLoading: albumsIsLoading,
-	} = getUserAlbums();
+	} = getUserAlbums(rerender);
 
 	const {
 		data: playlistsData,
 		error: playlistsError,
 		isLoading: playlistsIsLoading,
 	} = getUserPlaylist();
-
+	useEffect(() => {
+		const storageHandler = () => {
+			// const value = localStorage.getItem("trial");
+			setRerender((prev) => !prev);
+			console.log("albumLibraryModified event triggered");
+		};
+		window.addEventListener("albumLibraryModified", storageHandler);
+		return () => {
+			// localStorage.removeItem("trial");
+			window.removeEventListener("albumLibraryModified", storageHandler);
+		};
+	}, []);
 	if (albumsIsLoading || artistsIsLoading || playlistsIsLoading) {
 		return <p>Loading...</p>;
 	}

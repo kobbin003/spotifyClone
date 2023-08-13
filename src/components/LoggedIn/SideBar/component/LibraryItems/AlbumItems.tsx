@@ -7,6 +7,7 @@ import {
 	UserPlaylistItem,
 } from "../../../../../hooks/spotify-data/getUserPlaylist";
 import { UserSavedTracks } from "../../../../../hooks/spotify-data/getUserSavedTracks";
+import { useEffect, useState } from "react";
 
 export const AlbumItems = ({
 	data,
@@ -14,9 +15,11 @@ export const AlbumItems = ({
 	data:
 		| UserAlbums
 		| { items: FollowedArtistItem[] }
-		| { playlists: UserPlaylist };
+		| { playlists: UserPlaylist }
+		| {};
 }) => {
 	const albums = data as UserAlbums;
+	// console.log("album item", albums);
 	return (
 		<>
 			{albums &&

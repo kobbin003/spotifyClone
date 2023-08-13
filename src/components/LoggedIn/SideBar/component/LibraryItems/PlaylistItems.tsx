@@ -17,7 +17,8 @@ const PlaylistItems = ({
 	data:
 		| UserAlbums
 		| { items: FollowedArtistItem[] }
-		| { playlists: UserPlaylist };
+		| { playlists: UserPlaylist }
+		| {};
 }) => {
 	const { playlists } = data as {
 		playlists: UserPlaylist;

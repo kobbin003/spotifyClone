@@ -14,7 +14,8 @@ export const ArtistItems = ({
 	data:
 		| UserAlbums
 		| { items: FollowedArtistItem[] }
-		| { playlists: UserPlaylist };
+		| { playlists: UserPlaylist }
+		| {};
 }) => {
 	const artists = data as { items: FollowedArtistItem[] };
 	return (

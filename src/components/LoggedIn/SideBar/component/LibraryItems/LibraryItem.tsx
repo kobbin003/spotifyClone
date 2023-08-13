@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useEffect, useState } from "react";
 import {
 	UserAlbumItem,
 	UserAlbums,
@@ -36,18 +36,27 @@ const LibraryItem = ({
 	fetchedData,
 }: {
 	itemType: string;
-	fetchedData: FetchedData;
+	fetchedData: FetchedData | { data: {} };
 }) => {
 	const { data } = fetchedData;
 	return (
 		<>
-			{itemType == "albums" && data && <AlbumItems data={data} />}
-			{itemType == "artists" && data && <ArtistItems data={data} />}
-			{itemType == "playlists" && data && <PlaylistItems data={data} />}
+			{data && (
+				<>
+					{itemType == "albums" && data && <AlbumItems data={data} />}
+					{itemType == "artists" && data && <ArtistItems data={data} />}
+					{itemType == "playlists" && data && <PlaylistItems data={data} />}
+				</>
+			)}
 		</>
 	);
 };
 
+const isEmpty = (obj: any) => {
+	for (const el in obj) return false;
+	return true;
+};
+// console.log(isEmpty({ X: 1 }));
 export default LibraryItem;
 {
 	/* 
