@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useOutletContext, useParams } from "react-router-dom";
 import { Container } from "./style";
 import Track from "../search/pages/track/Track";
@@ -16,7 +16,7 @@ import getAlbum, {
 } from "../../hooks/spotify-data/getAlbum";
 
 const Album = () => {
-	console.log("album/:id");
+	// console.log("album/:id");
 	const { id } = useParams();
 	const { data, error, isLoading } = getAlbum(`${id}`);
 	// Destructuring:
@@ -31,12 +31,13 @@ const Album = () => {
 		tracks,
 	} = data as AlbumType;
 	if (!data) return <></>;
-	// console.log("album", data, name, release_date);
+	// console.log("album", data);
 
 	// console.log(albumDuration);
 	const albumDuration =
 		data &&
 		data.tracks.items.reduce((total, track) => total + track.duration_ms, 0);
+
 	return (
 		<Container>
 			{data && (
@@ -51,7 +52,7 @@ const Album = () => {
 						artists={artists}
 						albumDuration={albumDuration}
 					/>
-					<AlbumActions />
+					<AlbumActions id={id} />
 					<AlbumTracks<UserAlbumTracksItems> tracks={tracks.items} />
 				</>
 			)}

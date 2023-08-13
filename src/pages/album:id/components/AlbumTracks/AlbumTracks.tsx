@@ -24,7 +24,7 @@ const AlbumTracks = <
 	// rerender to check "green" or "transparent"
 	const [rerender, setRerender] = useState<boolean>();
 
-	const [userLikedTrackArray, setUserLikedTrackArray] = useState<string[]>([]);
+	const [userLikedTrackArray, setUserLikedTrackArray] = useState<boolean[]>([]);
 	const handleTrackLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 
@@ -63,7 +63,8 @@ const AlbumTracks = <
 		const tracksIdQueries = tracksIdArray.join(",");
 		const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${tracksIdQueries}`;
 		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
-			setUserLikedTrackArray(data);
+			// console.log("album tracks data type", typeof data?.[0]);
+			setUserLikedTrackArray(data as boolean[]);
 		});
 	}, [rerender]);
 

@@ -35,18 +35,18 @@ export const DropDown = styled.div<{
 	position: relative;
 	background-color: var(--profile-dropdown);
 	/** //! adjust right and top */
-	top: 100%;
-	left: -50px;
+	top: calc(15vh / 2.5);
+	/* left: -50px; */
 	border-radius: 5px 5px 5px 5px;
 	visibility: ${(prop) => prop.dropDownVisibility};
 	display: flex;
 	flex-direction: column;
+	padding-bottom: 5px;
 	z-index: 2;
-	height: 100px;
-	a {
-		text-decoration: none;
-		display: inline-block;
+	button {
 		border-radius: 2px;
+		background-color: transparent;
+		border: none;
 		color: var(--profile-dropdown-font);
 		font-weight: 500;
 		font-size: 0.8rem;
@@ -55,13 +55,11 @@ export const DropDown = styled.div<{
 		padding-top: 0.35em;
 		padding-bottom: 0.35em;
 		margin: 0 0.4em;
+		cursor: pointer;
 		&:first-child {
 			margin-top: 0.4em;
 		}
-		/* &:last-child {
-			border-top: 1px solid #d1cbcb5f;
-			margin-bottom: 0.4em;
-		} */
+
 		&:hover {
 			background-color: #d1cbcb5f;
 		}
