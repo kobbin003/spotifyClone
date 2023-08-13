@@ -7,34 +7,48 @@ import getUserSavedTracks from "../../../../hooks/spotify-data/getUserSavedTrack
 import { useEffect, useState } from "react";
 
 const UserLibraryContainer = () => {
-	const [rerender, setRerender] = useState(false);
+	// const [rerender, setRerender] = useState(false);
+	const [refetchArtist, setRefetchArtist] = useState(false);
+	const [refetchAlbum, setRefetchAlbum] = useState(false);
+	const [refetchPlaylist, setRefetchPlaylist] = useState(false);
 	const {
 		data: artistsData,
 		error: artistsError,
 		isLoading: artistsIsLoading,
-	} = getFollowedArtists();
+	} = getFollowedArtists(refetchArtist);
+	// console.log(artistsData);
 
 	const {
 		data: albumsData,
 		error: albumsError,
 		isLoading: albumsIsLoading,
-	} = getUserAlbums(rerender);
+	} = getUserAlbums(refetchAlbum);
 
 	const {
 		data: playlistsData,
 		error: playlistsError,
 		isLoading: playlistsIsLoading,
-	} = getUserPlaylist();
+	} = getUserPlaylist(refetchPlaylist);
 	useEffect(() => {
-		const storageHandler = () => {
+		const storageHandler = (e: any) => {
 			// const value = localStorage.getItem("trial");
-			setRerender((prev) => !prev);
-			console.log("albumLibraryModified event triggered");
+			setRefetchAlbum((prev) => !prev);
+			setRefetchArtist((prev) => !prev);
+			setRefetchPlaylist((prev) => !prev);
+
+			if (e.type == "albumLibraryModified") {
+				console.log("albumLibraryModified event triggered");
+			}
+			if (e.type == "artistLibraryModified") {
+				console.log("artistLibraryModified event triggered");
+			}
 		};
 		window.addEventListener("albumLibraryModified", storageHandler);
+		window.addEventListener("artistLibraryModified", storageHandler);
 		return () => {
 			// localStorage.removeItem("trial");
 			window.removeEventListener("albumLibraryModified", storageHandler);
+			window.removeEventListener("artistLibraryModified", storageHandler);
 		};
 	}, []);
 	if (albumsIsLoading || artistsIsLoading || playlistsIsLoading) {

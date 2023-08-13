@@ -23,6 +23,11 @@ export type FetchedData = {
 		| { playlists: UserPlaylist }
 		| null;
 };
+const pathNameGuard = (pathSegment: string) =>
+	pathSegment == "playlist" ||
+	pathSegment == "album" ||
+	pathSegment == "artist";
+
 const UserLibrary = ({
 	artists,
 	albums,
@@ -38,19 +43,22 @@ const UserLibrary = ({
 		playlists,
 	};
 	const location = useLocation();
-	const pathName: string = location.pathname.split("/")[2] || "playlist";
-	const initialState = setUpInitialState(pathName);
+	const secondPathSegment = location.pathname.split("/")[2];
+	const pathSegment = pathNameGuard(secondPathSegment)
+		? secondPathSegment
+		: "playlist";
+	const initialState = setUpInitialState(pathSegment);
 	const initialLibraryItemType = initialState.find(
 		(state) => state.active
 	)?.name;
 	const [libraryItemType, setLibraryItemType] = useState<string>(
 		initialLibraryItemType ||
-			"playlists" /** //? set "playlists" as default "libraryItemType" if there is no pathName*/
+			"playlists" /** //? set "playlists" as default "libraryItemType" if there is no pathSegment*/
 	);
 	const [fetchedData, setFetchedData] = useState<FetchedData | { data: {} }>({
 		data: libData[
 			initialLibraryItemType || "playlist"
-		] /** //? set libData["playlists"] as default "fetchedData" if there is no pathName*/,
+		] /** //? set libData["playlists"] as default "fetchedData" if there is no pathSegment*/,
 	});
 
 	const [state, dispatch] = useReducer(reducer, initialState);
