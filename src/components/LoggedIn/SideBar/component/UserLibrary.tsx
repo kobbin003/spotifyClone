@@ -12,9 +12,9 @@ import {
 	UserPlaylist,
 	UserPlaylistItem,
 } from "../../../../hooks/spotify-data/getUserPlaylist";
-import { reducer } from "./userLibraryReducer";
+import { reducer } from "./reducers/userLibraryReducer";
 import { useLocation } from "react-router-dom";
-import { setUpInitialState } from "./setUpInitialState";
+import { setUpInitialState } from "./reducers/setUpInitialState";
 
 export type FetchedData = {
 	data:
