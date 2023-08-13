@@ -15,7 +15,7 @@ const Artist = () => {
 	return (
 		<div>
 			<ArtistHeader artistHeaderData={artistHeaderData} />
-			<ArtistActions />
+			{id ? <ArtistActions id={id} /> : <p>artist id not found</p>}
 			{artistHeaderData.data && (
 				<ArtistContents artistName={artistHeaderData.data?.name} />
 			)}

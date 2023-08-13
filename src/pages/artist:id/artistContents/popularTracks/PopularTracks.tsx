@@ -11,7 +11,7 @@ const PopularTracks = () => {
 	// rerender to check "green" or "transparent"
 	const [rerender, setRerender] = useState<boolean>();
 
-	const [userLikedTrackArray, setUserLikedTrackArray] = useState<string[]>([]);
+	const [userLikedTrackArray, setUserLikedTrackArray] = useState<boolean[]>([]);
 
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
