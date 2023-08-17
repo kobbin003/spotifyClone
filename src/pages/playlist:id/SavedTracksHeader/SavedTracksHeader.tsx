@@ -20,7 +20,7 @@ const SavedTrackHeader = () => {
 					<h1>Liked Songs</h1>
 				</div>
 				<div>
-					<span>{/* <img src={artists[0].images[0].url} />{" "} */}</span>
+					<img src={data?.images[0].url} />{" "}
 					<p>
 						{data ? data?.display_name : ""}
 						&nbsp;<BoldDot>.</BoldDot>&nbsp;

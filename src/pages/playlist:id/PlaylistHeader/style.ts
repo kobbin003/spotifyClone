@@ -107,6 +107,11 @@ export const Container = styled.div`
 			@media screen and (max-width: 540px) {
 				font-size: 0.5rem;
 			}
+			& > img {
+				height: 1.2em;
+				border-radius: 50%;
+				margin-right: 0.2em;
+			}
 			& > p {
 				/* background-color: darkcyan; */
 				white-space: nowrap;
