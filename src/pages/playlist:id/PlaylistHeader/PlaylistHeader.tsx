@@ -18,7 +18,7 @@ const PlaylistHeader = ({
 	owner: Owner;
 	albumDuration: number;
 }) => {
-	console.log("albumduration", albumDuration);
+	// console.log("albumduration", albumDuration);
 	return (
 		<Container>
 			<div>
