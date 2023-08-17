@@ -42,13 +42,18 @@ const UserLibraryContainer = () => {
 			if (e.type == "artistLibraryModified") {
 				console.log("artistLibraryModified event triggered");
 			}
+			if (e.type == "playlistLibraryModified") {
+				console.log("playlistLibraryModified event triggered");
+			}
 		};
 		window.addEventListener("albumLibraryModified", storageHandler);
 		window.addEventListener("artistLibraryModified", storageHandler);
+		window.addEventListener("playlistLibraryModified", storageHandler);
 		return () => {
 			// localStorage.removeItem("trial");
 			window.removeEventListener("albumLibraryModified", storageHandler);
 			window.removeEventListener("artistLibraryModified", storageHandler);
+			window.removeEventListener("playlistLibraryModified", storageHandler);
 		};
 	}, []);
 	if (albumsIsLoading || artistsIsLoading || playlistsIsLoading) {
