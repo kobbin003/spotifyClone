@@ -1,4 +1,5 @@
 import useFetchData from "../useFetchData";
+import useFetchDataDependent from "../useFetchDataDependent";
 export type UserAlbumArtists = {
 	id: string;
 	images: { url: string; height: number; width: number }[];
@@ -49,17 +50,23 @@ export type UserAlbumsError = {
 	message: string;
 };
 
-const getUserAlbums = (): {
+const getUserAlbums = (
+	rerender: boolean
+): {
 	data: UserAlbums | null;
 	error: UserAlbumsError | null;
 	isLoading: boolean;
 } => {
-	console.log("getUserAlbum");
+	// console.log("getUserAlbum");
 	const url = `https://api.spotify.com/v1/me/albums`;
-	const { data, error, isLoading } = useFetchData<UserAlbums, UserAlbumsError>(
+	const { data, error, isLoading } = useFetchDataDependent<
+		UserAlbums,
+		UserAlbumsError
+	>(
 		url,
 		// accessToken,
-		"GET"
+		"GET",
+		[rerender]
 	);
 	// console.log("getUserAlbums", { data, error, isLoading });
 	return { data, error, isLoading };

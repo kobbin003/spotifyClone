@@ -1,6 +1,8 @@
 import React from "react";
 import useFetchData from "../useFetchData";
 import { getTopSearch } from "../../utils/getTopSearchItem";
+import useFetchDataDependent from "../useFetchDataDependent";
+import useSearchDataDependent from "../useSearchDataDependent";
 export interface ExternalUrls {
 	spotify: string;
 }
@@ -204,7 +206,11 @@ type Error = {
 
 const getSearchItem = <T>(query: string, type: SearchTypes) => {
 	const url = `https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=10&offset=0`;
-	const { data, error, isLoading } = useFetchData<T, Error>(url, "GET");
+	const { data, error, isLoading } = useSearchDataDependent<T, Error>(
+		url,
+		"GET",
+		[query]
+	);
 
 	// console.log("getSearchItem", data, error, isLoading);
 	return { data, error, isLoading };

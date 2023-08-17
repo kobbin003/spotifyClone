@@ -1,4 +1,5 @@
 import useFetchData from "../useFetchData";
+import useFetchDataDependent from "../useFetchDataDependent";
 
 export type UserPlaylist = {
 	href: string;
@@ -45,16 +46,18 @@ export type UserPlaylistError = {
 	message: string;
 };
 
-const getUserPlaylist = (): {
+const getUserPlaylist = (
+	refetch: boolean
+): {
 	data: UserPlaylist | null;
 	error: UserPlaylistError | null;
 	isLoading: boolean;
 } => {
 	const url = `https://api.spotify.com/v1/me/playlists?limit=10&offset=0`;
-	const { data, error, isLoading } = useFetchData<
+	const { data, error, isLoading } = useFetchDataDependent<
 		UserPlaylist,
 		UserPlaylistError
-	>(url, "GET");
+	>(url, "GET", [refetch]);
 	// console.log("getCurrentUserPlaylist", { data, error, isLoading });
 	return { data, error, isLoading };
 };

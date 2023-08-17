@@ -1,4 +1,5 @@
 import useFetchData from "../useFetchData";
+import useFetchDataDependent from "../useFetchDataDependent";
 
 export type FollowedArtist = {
 	artists: {
@@ -38,17 +39,19 @@ export type FollowedArtistItem = {
 };
 export type FollowedArtistError = { status: number; message: string };
 
-const getFollowedArtist = (): {
+const getFollowedArtist = (
+	refetchArtist: boolean
+): {
 	data: { items: FollowedArtistItem[] } | null;
 	error: FollowedArtistError | null;
 	isLoading: boolean;
 } => {
-	console.log("getFollowedArtist");
+	// console.log("getFollowedArtist");
 	const url = `https://api.spotify.com/v1/me/following?type=artist&limit=10`;
-	const { data, error, isLoading } = useFetchData<
+	const { data, error, isLoading } = useFetchDataDependent<
 		FollowedArtist,
 		FollowedArtistError
-	>(url, "GET");
+	>(url, "GET", [refetchArtist]);
 	// console.log("getFollowedArtist", { data, error, isLoading });
 	return { data: data && { items: data.artists.items }, error, isLoading };
 };
