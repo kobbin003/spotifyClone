@@ -32,7 +32,7 @@ const SideBar = ({
 		setTop(clientDimension.top - clientDimension.height * 2);
 
 		setTimeout(() => {
-			console.log("setting true");
+			// console.log("setting true");
 			setVisibility(true);
 		}, 10);
 
@@ -48,9 +48,9 @@ const SideBar = ({
 		return () => document.removeEventListener("click", handleClickedOutside);
 	}, []);
 	useEffect(() => {
-		console.log("element change", element, outsideElement);
+		// console.log("element change", element, outsideElement);
 		if (element !== outsideElement) {
-			console.log("setting false");
+			// console.log("setting false");
 			setVisibility(false);
 		}
 	}, [element, outsideElement]);
