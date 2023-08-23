@@ -18,10 +18,10 @@ const useFetchData = <T, U extends {}>(
 	);
 	useEffect(() => {
 		if (localStorage.getItem("accessToken")) {
-			console.log("YES-accesstoken-fetchdata");
+			// console.log("YES-accesstoken-fetchdata");
 			setAccessToken(localStorage.getItem("accessToken") || "");
 		} else {
-			console.log("NO-accesstoken-fetchdata");
+			// console.log("NO-accesstoken-fetchdata");
 		}
 	}, []);
 
@@ -35,7 +35,7 @@ const useFetchData = <T, U extends {}>(
 			},
 		};
 		if (accessToken) {
-			console.log("accesstoken-fetchdata");
+			// console.log("accesstoken-fetchdata");
 			fetch(url, options)
 				.then((response) => {
 					return response.json();
@@ -54,7 +54,7 @@ const useFetchData = <T, U extends {}>(
 				})
 				.then((res) => {
 					if (res === ("The access token expired" || "Invalid access token")) {
-						console.log("useFetchData: access token expired");
+						// console.log("useFetchData: access token expired");
 						//! USE refresh token to get a new access_token
 						const client_id = import.meta.env.VITE_CLIENT_ID;
 						const client_secret = import.meta.env.VITE_CLIENT_SECRET;
@@ -84,7 +84,7 @@ const useFetchData = <T, U extends {}>(
 						// set acces token ao that fetch is re-performed with the "renewed" token
 						setAccessToken(res?.access_token);
 					} else {
-						console.log("token not expired");
+						// console.log("token not expired");
 					}
 				})
 				.catch((err) => {
