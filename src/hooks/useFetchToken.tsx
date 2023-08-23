@@ -42,7 +42,7 @@ export const useFetchToken = <T, U, E extends {}>(
 		// OR ELSE it will print invalid authorization code
 		// SINCE one code can generate only one access_token.
 		if (localStorage.getItem("accessToken")) {
-			console.log("access token found!");
+			// console.log("access token found!");
 			// return data as if accesstoken was fetched or else it wont display <MainContent>
 			setData({
 				access_token: localStorage.getItem("accessToken"),
@@ -52,14 +52,14 @@ export const useFetchToken = <T, U, E extends {}>(
 
 			setError(null);
 			setIsLoading(false);
-			console.log("token present");
+			// console.log("token present");
 			return;
 		}
 		////////////////
-		console.log("token not present");
+		// console.log("token not present");
 		//* fethc only if code present
 		if (code) {
-			console.log("code present");
+			// console.log("code present");
 			fetch(url, options)
 				.then((res) => {
 					// if (res.ok) { //! putting this will not let you get error

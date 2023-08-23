@@ -46,6 +46,7 @@ export const useGetAccessToken = () => {
 
 		if (data && "refresh_token" in data) {
 			// console.log("DATA", data, error);
+			dispatchEvent(new Event("accessTokenSet"));
 			localStorage.setItem("accessToken", (data as TokenData).access_token);
 			localStorage.setItem("refreshToken", (data as TokenData).refresh_token);
 		} else if (data && !("refresh_token" in data)) {
@@ -54,6 +55,7 @@ export const useGetAccessToken = () => {
 				"accessToken",
 				(data as AccessTokenLocalStorage).access_token
 			);
+			// dispatchEvent(new Event("accessTokenSet"));
 		}
 	}, [data?.access_token]);
 

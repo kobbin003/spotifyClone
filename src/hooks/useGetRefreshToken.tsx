@@ -20,7 +20,7 @@ const useGetRefreshToken = (accessTokenExpired: boolean) => {
 	queryParams.set("grant_type", "refresh_token");
 	queryParams.set("refresh_token", refreshToken || "");
 	const data = useFetchToken(queryParams);
-	console.log("refreshtoken", data);
+	// console.log("refreshtoken", data);
 };
 
 export default useGetRefreshToken;
