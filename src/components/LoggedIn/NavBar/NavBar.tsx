@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
 	NavArrowIcon,
@@ -32,16 +32,11 @@ const NavBar = ({
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
-	const [profileIconButton, setProfileIconButton] = useState<HTMLElement>();
-	const [outsideProfileIconButton, setOutsideProfileIconButton] =
-		useState<HTMLElement>();
 	const location = window.location.pathname;
 	const isInSearchRoute = /^\/me\/search.*/.test(location);
 	const navigate = useNavigate();
+	const profileButtonRef = useRef<HTMLImageElement>(null);
 	const handleDropDownMenu = (e: MouseEvent<HTMLImageElement>) => {
-		const element = e.currentTarget as HTMLElement;
-		// set the target element as the clickElement
-		setProfileIconButton(element);
 		// set the dropDownVisibility
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
 	};
@@ -57,14 +52,13 @@ const NavBar = ({
 	const handleNavigateFront = () => {
 		window.history.forward();
 	};
-	useEffect(() => {
-		if (outsideProfileIconButton !== profileIconButton) {
-			setDropDownVisibility("hidden");
-		}
-	}, [profileIconButton, outsideProfileIconButton]);
+
 	useEffect(() => {
 		const handleClickOutside = (e: any) => {
-			setOutsideProfileIconButton(e.target);
+			const currentEl = e.target;
+			if (currentEl !== profileButtonRef.current) {
+				setDropDownVisibility("hidden");
+			}
 		};
 		window.addEventListener("click", handleClickOutside);
 		return () => window.removeEventListener("click", handleClickOutside);
@@ -124,6 +118,7 @@ const NavBar = ({
 								src="/icons/navBar/profile.svg"
 								user
 								onClick={handleDropDownMenu}
+								ref={profileButtonRef}
 							></Icon>
 						</ProfileButton>
 					</ProfileContainer>
@@ -141,8 +136,6 @@ const NavBar = ({
 				</a>
 			</DropDown>
 		</>
-		// <h1>navbar</h1>
 	);
 };
-// #d1cbcb5f
 export default NavBar;
