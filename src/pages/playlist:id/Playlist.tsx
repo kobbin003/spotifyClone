@@ -15,7 +15,7 @@ const Playlist = () => {
 	const { id } = useParams();
 	const { data, error, isLoading } = getPlaylist(`${id}`);
 	const userProfileData = getUserProfile();
-	console.log(userProfileData);
+	// console.log(userProfileData);
 	// Destructuring:
 	if (isLoading || !data) return <p>Loading...</p>;
 	const { images, type, name, tracks, owner } = data as PlaylistType;
@@ -49,6 +49,7 @@ const Playlist = () => {
 							<PlayListActions
 								playlistId={id}
 								userId={userProfileData.data.id}
+								ownerId={data.owner.id}
 							/>
 						)
 					)}

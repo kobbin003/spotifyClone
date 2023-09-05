@@ -1,14 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DropDown, MidContainer } from "../style";
 import putData from "../../../hooks/spotify-data/putData/putData";
 import checkUserHas from "../../../hooks/spotify-data/check/checkUserHas";
+import { ShowModalContext } from "../../../layout/LoggedInLayout";
 
 const PlayListActions = ({
 	playlistId,
 	userId,
+	ownerId,
 }: {
 	playlistId: string;
 	userId: string;
+	ownerId: string;
 }) => {
 	const [dropDownVisibility, setDropDownVisibility] = useState<
 		"visible" | "hidden"
@@ -17,7 +20,7 @@ const PlayListActions = ({
 		localStorage.getItem("accessToken") || ""
 	);
 	const [playlistIsSaved, setPlaylistIsSaved] = useState(false);
-
+	const setShowModal = useContext(ShowModalContext)?.setShowModal;
 	const kebabRef = useRef<HTMLImageElement>(null);
 
 	const handleDropDownMenu = () => {
@@ -44,6 +47,11 @@ const PlayListActions = ({
 			});
 		}
 	};
+
+	const handleEditPlaylist = () => {
+		setShowModal && setShowModal({ show: true, playlistId });
+	};
+
 	// addEventListener - "click" , to find which element was clicked
 	useEffect(() => {
 		const handleClickedElementFinder = (e: any) => {
@@ -57,6 +65,7 @@ const PlayListActions = ({
 		return () =>
 			window.removeEventListener("click", handleClickedElementFinder);
 	}, []);
+
 	// Check if user has the playlist saved
 	useEffect(() => {
 		const userIdQueries = userId;
@@ -67,6 +76,7 @@ const PlayListActions = ({
 			// console.log(data);
 		});
 	}, []);
+
 	return (
 		<MidContainer>
 			<img
@@ -104,6 +114,9 @@ const PlayListActions = ({
 					<button onClick={handleSavePlaylist}>Remove From Your Library</button>
 				) : (
 					<button onClick={handleSavePlaylist}>Add To Your Library</button>
+				)}
+				{ownerId == userId && (
+					<button onClick={handleEditPlaylist}>Edit Library</button>
 				)}
 			</DropDown>
 		</MidContainer>
