@@ -13,7 +13,7 @@ const PlaylistsTracks = () => {
 	const { data, error, isLoading } = getPlaylist(id || "");
 	const [rerender, setRerender] = useState<boolean>();
 
-	const [userLikedTrackArray, setUserLikedTrackArray] = useState<string[]>([]);
+	const [userLikedTrackArray, setUserLikedTrackArray] = useState<boolean[]>([]);
 
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
@@ -52,9 +52,14 @@ const PlaylistsTracks = () => {
 		});
 
 		const tracksIdQueries = tracksIdArray.join(",");
+		// console.log("tracksIdQueries", tracksIdQueries);
 		const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${tracksIdQueries}`;
-		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
-			setUserLikedTrackArray(data);
+		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data, err) => {
+			if (data) {
+				setUserLikedTrackArray(data);
+			} else if (err) {
+				console.log("error", err);
+			}
 		});
 	}, [rerender, data?.tracks.items]);
 
