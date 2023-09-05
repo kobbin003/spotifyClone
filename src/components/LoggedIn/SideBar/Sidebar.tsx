@@ -13,7 +13,8 @@ import {
 } from "./style";
 import { Link } from "react-router-dom";
 import UserLibraryContainer from "./component/UserLibraryContainer";
-
+import CreatePlaylistButton from "./component/createPlaylistButton/CreatePlaylistButton";
+import getUserProfile from "../../../hooks/spotify-data/getUserProfile";
 export type sideBarProps = {
 	width: number;
 	widthHandleDragger: number;
@@ -28,6 +29,7 @@ const Sidebar = ({
 	handleMouseMove,
 	tokenSet,
 }: sideBarProps): JSX.Element => {
+	const { data, error, isLoading } = getUserProfile();
 	return (
 		<>
 			<Container width={width}>
@@ -49,9 +51,7 @@ const Sidebar = ({
 							<Icon src="/icons/library.svg"></Icon>
 							<a href="">Your Library</a>
 							<CreatePlaylist>
-								<button>
-									<img src="/icons/AddLibrary/add.svg" />
-								</button>
+								{data && <CreatePlaylistButton id={data.id} />}
 								<button>
 									<img src="/icons/AddLibrary/right-arrow.svg" />
 								</button>
