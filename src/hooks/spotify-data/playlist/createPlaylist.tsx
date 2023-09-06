@@ -25,10 +25,6 @@ const createPlaylist = (
 		fetch(url, options)
 			.then((response) => {
 				if (response.ok) {
-					// console.log(response.status);
-					if (callback) {
-						callback();
-					}
 					return response.text();
 				} else {
 					// console.log("puData", response.status, response);
@@ -36,7 +32,11 @@ const createPlaylist = (
 				}
 			})
 			.then((data) => {
-				console.log("putedata", data);
+				// console.log(response.status);
+				if (callback) {
+					callback();
+				}
+				// console.log("putedata", data);
 				return data;
 			})
 			.then((res) => {
