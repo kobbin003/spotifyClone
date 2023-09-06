@@ -1,4 +1,5 @@
 import useFetchData from "../useFetchData";
+import useFetchDataDependent from "../useFetchDataDependent";
 export type PlaylistType = {
 	collaborative: boolean;
 	description: string;
@@ -218,16 +219,17 @@ export type PlaylistError = {
 };
 
 export const getPlaylist = (
-	id: string
+	id: string,
+	dep?: any
 ): {
 	data: PlaylistType | null;
 	error: PlaylistError | null;
 	isLoading: boolean;
 } => {
 	const url = `https://api.spotify.com/v1/playlists/${id}`;
-	const { data, error, isLoading } = useFetchData<PlaylistType, PlaylistError>(
-		url,
-		"GET"
-	);
+	const { data, error, isLoading } = useFetchDataDependent<
+		PlaylistType,
+		PlaylistError
+	>(url, "GET", [dep]);
 	return { data, error, isLoading };
 };
