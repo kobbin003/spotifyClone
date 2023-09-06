@@ -22,6 +22,7 @@ export const ButtonTypes = styled.button<{
 `;
 export const ContainerLibrary = styled.ul`
 	max-height: calc(100vh - 280 * 1px);
+	min-height: 200px;
 	/* width: 100%; */
 	border-radius: 5px;
 	margin: 0.4em;
