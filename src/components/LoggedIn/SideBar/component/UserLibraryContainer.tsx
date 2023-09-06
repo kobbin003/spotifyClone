@@ -3,11 +3,9 @@ import getUserAlbums from "../../../../hooks/spotify-data/getUserAlbums";
 import UserLibrary from "./UserLibrary";
 import { ActionCards, ButtonLink } from "../style";
 import getUserPlaylist from "../../../../hooks/spotify-data/getUserPlaylist";
-import getUserSavedTracks from "../../../../hooks/spotify-data/getUserSavedTracks";
 import { useEffect, useState } from "react";
 
 const UserLibraryContainer = () => {
-	// const [rerender, setRerender] = useState(false);
 	const [refetchArtist, setRefetchArtist] = useState(false);
 	const [refetchAlbum, setRefetchAlbum] = useState(false);
 	const [refetchPlaylist, setRefetchPlaylist] = useState(false);
@@ -16,7 +14,6 @@ const UserLibraryContainer = () => {
 		error: artistsError,
 		isLoading: artistsIsLoading,
 	} = getFollowedArtists(refetchArtist);
-	// console.log(artistsData);
 
 	const {
 		data: albumsData,
@@ -31,7 +28,6 @@ const UserLibraryContainer = () => {
 	} = getUserPlaylist(refetchPlaylist);
 	useEffect(() => {
 		const storageHandler = (e: any) => {
-			// const value = localStorage.getItem("trial");
 			setRefetchAlbum((prev) => !prev);
 			setRefetchArtist((prev) => !prev);
 			setRefetchPlaylist((prev) => !prev);
@@ -50,7 +46,6 @@ const UserLibraryContainer = () => {
 		window.addEventListener("artistLibraryModified", storageHandler);
 		window.addEventListener("playlistLibraryModified", storageHandler);
 		return () => {
-			// localStorage.removeItem("trial");
 			window.removeEventListener("albumLibraryModified", storageHandler);
 			window.removeEventListener("artistLibraryModified", storageHandler);
 			window.removeEventListener("playlistLibraryModified", storageHandler);
@@ -61,25 +56,23 @@ const UserLibraryContainer = () => {
 	}
 	return (
 		<>
-			<>
-				{artistsData && albumsData && playlistsData ? (
-					<UserLibrary
-						artists={artistsData}
-						albums={albumsData}
-						playlists={{
-							playlists: playlistsData,
-						}}
-					/>
-				) : (
-					<ActionCards>
-						<h4>Create your first playlist</h4>
-						<p>It's easy, we'll help you</p>
-						<ButtonLink>
-							<span>CreatePlaylist</span>
-						</ButtonLink>
-					</ActionCards>
-				)}
-			</>
+			{artistsData && albumsData && playlistsData ? (
+				<UserLibrary
+					artists={artistsData}
+					albums={albumsData}
+					playlists={{
+						playlists: playlistsData,
+					}}
+				/>
+			) : (
+				<ActionCards>
+					<h4>Create your first playlist</h4>
+					<p>It's easy, we'll help you</p>
+					<ButtonLink>
+						<span>CreatePlaylist</span>
+					</ButtonLink>
+				</ActionCards>
+			)}
 		</>
 	);
 };

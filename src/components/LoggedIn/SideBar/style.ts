@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { sideBarProps } from "./Sidebar";
 export type DraggableProps = {
 	widthHandleDragger: number;
 	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -31,7 +30,6 @@ export const DraggableHandle = styled.button<DraggableProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* z-index: -5; */
 	div:nth-child(1) {
 		height: 100%;
 		background-color: transparent;
@@ -44,7 +42,6 @@ export const DraggableHandle = styled.button<DraggableProps>`
 	}
 `;
 export const Dragger = styled.div`
-	/* background-color: green; */
 	opacity: 100%;
 	height: 100%;
 	width: 10px;
@@ -125,8 +122,6 @@ export const UnorderedList = styled.ul`
 	list-style: none;
 	font-weight: 700;
 	font-size: 0.8rem;
-	/* padding: 2em; */
-	/* padding-left: 20px;  */
 	li {
 		display: flex;
 		align-content: center;
@@ -151,23 +146,16 @@ export const Home = styled.div`
 	background-color: var(--black-dark);
 	border: 1px solid var(--black-dark);
 	border-radius: 5px;
-	/* width: 100%; */
 	margin: 0.5em;
-	/* padding-right: 30px; */
 
 	color: var(--font-grey);
 `;
 
 export const Library = styled.div`
 	position: relative;
-	/* height: fit-content; */
-	/* height: 5100px; */
 	flex: 1;
 	background-color: var(--black-dark);
-	/* background-color: aqua; */
-	/* width: calc(100% - 1rem); */
 	border: 1px solid var(--black-dark);
-	/* border: 1px solid red; */
 	border-radius: 5px;
 	margin: 0em 0.5em 0.5em;
 `;
@@ -187,14 +175,18 @@ export const CreatePlaylist = styled.div`
 		background: transparent;
 		cursor: pointer;
 		filter: brightness(80%);
-		/* display: inline-flex;
-		justify-content: end;
-		align-items: center; */
+		p {
+			display: none;
+		}
 		&:hover {
 			filter: brightness(150%);
 			background: #4b49492c;
 			img {
 				filter: brightness(100%);
+			}
+			p {
+				filter: brightness(100%);
+				display: block;
 			}
 		}
 	}
@@ -205,7 +197,16 @@ export const CreatePlaylist = styled.div`
 		margin: 0.15em;
 	}
 `;
-
+export const HoverMessageItem = styled.p`
+	position: absolute;
+	top: -100%;
+	left: -100%;
+	font-size: 0.4rem;
+	background-color: var(--data-display-background);
+	white-space: nowrap;
+	border-radius: 0.3em;
+	padding: 0.5em 1em;
+`;
 export const ActionCards = styled.div`
 	background: var(--greyest);
 	border-radius: 15px;
@@ -213,11 +214,7 @@ export const ActionCards = styled.div`
 	margin: 0.4em;
 	padding: 0.5em;
 	margin-bottom: 1em;
-	/* display: flex;
-	flex-direction: column;
-	justify-content: flex-start; */
 	& > * {
-		/* margin-top: 1em; */
 		margin-bottom: 1em;
 		margin-left: 0.5em;
 	}
@@ -243,8 +240,6 @@ export const ButtonLink = styled.a`
 	background: var(--button-white);
 	width: fit-content;
 	margin-bottom: 0.3em;
-	/* padding: 10em; */
-	/* font-size: 0.6em; */
 	span {
 		font-size: 0.8em;
 		margin: 0.5em 1em;

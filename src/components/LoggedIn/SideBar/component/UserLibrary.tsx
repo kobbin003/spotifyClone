@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useReducer, useState } from "react";
+import { MouseEvent, useReducer, useState } from "react";
 import {
 	ButtonTypes,
 	ContainerLibrary,
@@ -7,11 +7,7 @@ import {
 import ItemLibrary from "./LibraryItems/LibraryItem";
 import { FollowedArtistItem } from "../../../../hooks/spotify-data/getFollowedArtists";
 import { UserAlbums } from "../../../../hooks/spotify-data/getUserAlbums";
-import { UserSavedTracks } from "../../../../hooks/spotify-data/getUserSavedTracks";
-import {
-	UserPlaylist,
-	UserPlaylistItem,
-} from "../../../../hooks/spotify-data/getUserPlaylist";
+import { UserPlaylist } from "../../../../hooks/spotify-data/getUserPlaylist";
 import { reducer } from "./reducers/userLibraryReducer";
 import { useLocation } from "react-router-dom";
 import { setUpInitialState } from "./reducers/setUpInitialState";
@@ -83,7 +79,7 @@ const UserLibrary = ({
 	};
 
 	return (
-		<div>
+		<div style={{ position: "relative" }}>
 			<SelectContainer>
 				{state.map((type) => (
 					<ButtonTypes
@@ -106,41 +102,4 @@ const UserLibrary = ({
 		</div>
 	);
 };
-// #bcb8b854
 export default UserLibrary;
-
-//! selectype with setState
-// const [types, setTypes] = useState<{ name: string; active: boolean }[]>([
-// 	{ name: "albums", active: true },
-// 	{ name: "artists", active: false },
-// 	{ name: "playlists", active: false },
-// ]);
-// setTypes((prev) => {
-// 	if (target.innerText == "albums") {
-// 		return prev.map((item) => {
-// 			if (item.name == "albums") {
-// 				return { ...item, active: true };
-// 			} else {
-// 				return { ...item, active: false };
-// 			}
-// 		});
-// 	} else if (target.innerText == "artists") {
-// 		return prev.map((item) => {
-// 			if (item.name == "artists") {
-// 				return { ...item, active: true };
-// 			} else {
-// 				return { ...item, active: false };
-// 			}
-// 		});
-// 	} else if (target.innerText == "playlists") {
-// 		return prev.map((item) => {
-// 			if (item.name == "playlists") {
-// 				return { ...item, active: true };
-// 			} else {
-// 				return { ...item, active: false };
-// 			}
-// 		});
-// 	} else {
-// 		return prev;
-// 	}
-// });

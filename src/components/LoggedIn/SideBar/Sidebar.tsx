@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
-	ActionCards,
-	ButtonLink,
 	Container,
 	CreatePlaylist,
 	DraggableHandle,
@@ -31,50 +29,48 @@ const Sidebar = ({
 }: sideBarProps): JSX.Element => {
 	const { data, error, isLoading } = getUserProfile();
 	return (
-		<>
-			<Container width={width}>
-				<Home>
-					<UnorderedList>
-						<li>
-							<Icon src="/icons/home.svg"></Icon>
-							<Link to="/me/">Home</Link>
-						</li>
-						<li>
-							<Icon src="/icons/search.svg"></Icon>
-							<Link to="/me/search/artist">Search</Link>
-						</li>
-					</UnorderedList>
-				</Home>
-				<Library>
-					<UnorderedList>
-						<li>
-							<Icon src="/icons/library.svg"></Icon>
-							<a href="">Your Library</a>
-							<CreatePlaylist>
-								{data && <CreatePlaylistButton id={data.id} />}
-								<button>
-									<img src="/icons/AddLibrary/right-arrow.svg" />
-								</button>
-							</CreatePlaylist>
-						</li>
-					</UnorderedList>
-					{tokenSet && <UserLibraryContainer />}
-				</Library>
-				<DraggableHandle
-					onClick={handleClick}
-					onMouseMove={handleMouseMove}
-					widthHandleDragger={widthHandleDragger}
-				>
+		<Container width={width}>
+			<Home>
+				<UnorderedList>
+					<li>
+						<Icon src="/icons/home.svg"></Icon>
+						<Link to="/me/">Home</Link>
+					</li>
+					<li>
+						<Icon src="/icons/search.svg"></Icon>
+						<Link to="/me/search/artist">Search</Link>
+					</li>
+				</UnorderedList>
+			</Home>
+			<Library>
+				<UnorderedList>
+					<li>
+						<Icon src="/icons/library.svg"></Icon>
+						<a href="">Your Library</a>
+						<CreatePlaylist>
+							{data && <CreatePlaylistButton id={data.id} />}
+							<button>
+								<img src="/icons/AddLibrary/right-arrow.svg" />
+							</button>
+						</CreatePlaylist>
+					</li>
+				</UnorderedList>
+				{tokenSet && <UserLibraryContainer />}
+			</Library>
+			<DraggableHandle
+				onClick={handleClick}
+				onMouseMove={handleMouseMove}
+				widthHandleDragger={widthHandleDragger}
+			>
+				<div></div>
+				<Dragger>
 					<div></div>
-					<Dragger>
-						<div></div>
-						<div></div>
-						<div></div>
-					</Dragger>
 					<div></div>
-				</DraggableHandle>
-			</Container>
-		</>
+					<div></div>
+				</Dragger>
+				<div></div>
+			</DraggableHandle>
+		</Container>
 	);
 };
 
