@@ -21,8 +21,7 @@ export const ButtonTypes = styled.button<{
 	}
 `;
 export const ContainerLibrary = styled.ul`
-	height: calc(100% - 120px);
-	max-height: calc(100% - 120px);
+	max-height: calc(100vh - 280 * 1px);
 	/* width: 100%; */
 	border-radius: 5px;
 	margin: 0.4em;
@@ -33,15 +32,15 @@ export const ContainerLibrary = styled.ul`
 
 	/* scrollbar-color: var(--greyest); */
 	::-webkit-scrollbar {
-		width: 5px;
+		width: 7px;
 		height: 5px;
 	}
 
 	::-webkit-scrollbar-track {
-		background-color: #bcb8b854;
+		background-color: transparent;
 	}
 
 	::-webkit-scrollbar-thumb {
-		background-color: green;
+		background-color: #c6c3c35f;
 	}
 `;
