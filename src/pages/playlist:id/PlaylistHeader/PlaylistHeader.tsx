@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { msToMin } from "../../../utils/msToMin";
 import { BoldDot, Container } from "./style";
-import { Owner, Tracks } from "../../../hooks/spotify-data/getPlaylist";
+import {
+	Owner,
+	Tracks,
+	getPlaylist,
+} from "../../../hooks/spotify-data/getPlaylist";
 
 const PlaylistHeader = ({
+	playlistId,
 	images,
 	type,
 	name,
@@ -11,6 +16,7 @@ const PlaylistHeader = ({
 	owner,
 	albumDuration,
 }: {
+	playlistId: string;
 	images: { url: string; height: number; width: number }[];
 	type: string;
 	name: string;
@@ -18,12 +24,34 @@ const PlaylistHeader = ({
 	owner: Owner;
 	albumDuration: number;
 }) => {
-	// console.log("albumduration", albumDuration);
+	const [rerender, setRerender] = useState(false);
+
+	const { data, isLoading, error } = getPlaylist(playlistId, rerender);
+	useEffect(() => {
+		const handleEvent = () => {
+			console.log("hello photochange");
+			setRerender((prev) => !prev);
+		};
+		window.addEventListener("PlaylistPageModified", handleEvent);
+		return () =>
+			window.removeEventListener("PlaylistPageModified", handleEvent);
+	}, []);
+
 	return (
 		<Container>
 			<div>
-				{images.length > 1 ? (
-					<img src={images[0].url} />
+				{data?.images && data?.images.length > 0 ? (
+					<img
+						src={data.images[0].url}
+						height={200}
+						width={200}
+					/>
+				) : images.length > 0 ? (
+					<img
+						src={images[0].url}
+						height={200}
+						width={200}
+					/>
 				) : (
 					<img src="/public/icons/defaultCover.svg" />
 				)}
@@ -31,7 +59,7 @@ const PlaylistHeader = ({
 			<div>
 				<p>{type[0].toUpperCase() + type.slice(1)}</p>
 				<div>
-					<h1>{name}</h1>
+					<h1>{data?.name ? data?.name : name}</h1>
 				</div>
 				<div>
 					<span>{/* <img src={artists[0].images[0].url} />{" "} */}</span>
