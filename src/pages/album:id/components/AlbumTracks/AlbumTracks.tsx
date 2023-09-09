@@ -1,9 +1,10 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Container, Header, TrackItem } from "./style";
 import { msToMin } from "../../../../utils/msToMin";
 import { Link } from "react-router-dom";
 import putData from "../../../../hooks/spotify-data/putData/putData";
 import checkUserHasTracks from "../../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
+import MenuHorizontal from "../../../menuHorizontal/MenuHorizontal";
 
 const AlbumTracks = <
 	T extends {
@@ -24,7 +25,10 @@ const AlbumTracks = <
 	// rerender to check "green" or "transparent"
 	const [rerender, setRerender] = useState<boolean>();
 
+	const [liSelected, setLiSelected] = useState<string>("");
+
 	const [userLikedTrackArray, setUserLikedTrackArray] = useState<boolean[]>([]);
+
 	const handleTrackLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 
@@ -40,6 +44,7 @@ const AlbumTracks = <
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
 	const handleTrackUnLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 
@@ -54,6 +59,17 @@ const AlbumTracks = <
 			});
 		});
 		window.dispatchEvent(new Event("libraryModified"));
+	};
+
+	const handleClickMenu = (e: MouseEvent<HTMLButtonElement>) => {
+		const el = e.currentTarget as HTMLElement;
+		const elId = el.getAttribute("id");
+		// toggle
+		if (elId && !liSelected) {
+			setLiSelected(elId);
+		} else {
+			setLiSelected("");
+		}
 	};
 
 	useEffect(() => {
@@ -129,12 +145,12 @@ const AlbumTracks = <
 							</button>
 							<span>{msToMin(track.duration_ms)}</span>
 							<button
-								onClick={() => {
-									console.log("click working");
-								}}
+								onClick={handleClickMenu}
+								id={track.id}
 							>
 								<img src="/icons/threedots.svg" />
 							</button>
+							{liSelected == track.id && <MenuHorizontal />}
 						</div>
 					</TrackItem>
 				))}

@@ -97,11 +97,11 @@ export const TrackItem = styled(Row)`
 		/* background-color: green; */
 	}
 	& > div:nth-of-type(3) {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
 		gap: 10px;
-		/* background-color: blue; */
 		button {
 			background-color: transparent;
 			border: none;
@@ -112,6 +112,7 @@ export const TrackItem = styled(Row)`
 			flex: 1;
 		}
 		img {
+			cursor: pointer;
 			height: 100%;
 		}
 	}
