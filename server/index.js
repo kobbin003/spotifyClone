@@ -10,7 +10,8 @@ import { fileURLToPath } from "node:url";
 import { getTopSearch } from "./utils/getTopSearch.js";
 
 const app = express();
-// app.use(cors());
+app.use(cors());
+app.use(express.json({ limit: "10mb" }));
 // app.use(
 // 	"/api",
 // 	createProxyMiddleware({ target: "http://localhost:7000", changeOrigin: true })
@@ -33,6 +34,26 @@ app.get("/", (req, res) => {
 
 const redirect_uri = "http://localhost:5173/token";
 
+app.post("/spotify-proxy", async (req, res) => {
+	const { url, method, headers, body } = req.body;
+	try {
+		const response = await fetch(url, {
+			method,
+			headers,
+			body,
+		});
+		console.log("status", response.status);
+
+		// Forward the Spotify API response to the client
+		if (response.ok) {
+			res.json({ msg: "SUCCESS", error: null });
+			console.log("status", response.status);
+		}
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ msg: "ERROR", error });
+	}
+});
 app.get("/authorize", function (req, res) {
 	const state = crypto.randomBytes(16).toString("hex");
 	const scope =
