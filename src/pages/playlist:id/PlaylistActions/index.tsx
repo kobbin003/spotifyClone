@@ -20,7 +20,10 @@ const PlayListActions = ({
 		localStorage.getItem("accessToken") || ""
 	);
 	const [playlistIsSaved, setPlaylistIsSaved] = useState(false);
-	const setShowModal = useContext(ShowModalContext)?.setShowModal;
+
+	const setShowModal = useContext(ShowModalContext).setShowModal;
+	const showModal = useContext(ShowModalContext).showModal;
+
 	const kebabRef = useRef<HTMLImageElement>(null);
 
 	const handleDropDownMenu = () => {
@@ -49,7 +52,8 @@ const PlayListActions = ({
 	};
 
 	const handleEditPlaylist = () => {
-		setShowModal && setShowModal({ show: true, playlistId });
+		setShowModal({ show: true, playlistId });
+		console.log("showModal on edit click", showModal, playlistId);
 	};
 
 	// addEventListener - "click" , to find which element was clicked
@@ -76,6 +80,14 @@ const PlayListActions = ({
 			// console.log(data);
 		});
 	}, []);
+
+	// set the playlistId in the showModalContext
+	useEffect(() => {
+		setShowModal((prev) => ({ ...prev, playlistId }));
+	}, []);
+	// useEffect(() => {
+	// 	console.log("playlist:id", showModal, playlistId);
+	// }, [showModal]);
 
 	return (
 		<MidContainer>
@@ -116,7 +128,9 @@ const PlayListActions = ({
 					<button onClick={handleSavePlaylist}>Add To Your Library</button>
 				)}
 				{ownerId == userId && (
-					<button onClick={handleEditPlaylist}>Edit Library</button>
+					<>
+						<button onClick={handleEditPlaylist}>Edit Library</button>
+					</>
 				)}
 			</DropDown>
 		</MidContainer>
