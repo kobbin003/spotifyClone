@@ -13,7 +13,11 @@ import { useNavigate } from "react-router-dom";
 import { useGetAccessToken } from "../hooks/useGetAccessToken";
 import { ErrorBoundary } from "react-error-boundary";
 import { errorBoundaryFallback } from "./errorBoundaryFallback";
-import EditPlaylistModal from "../components/LoggedIn/SideBar/component/editPlaylistModal";
+import EditPlaylistModal from "../components/LoggedIn/SideBar/component/editPlaylistModal/EditPlaylistModal";
+import getUserProfile, {
+	UserProfileType,
+} from "../hooks/spotify-data/getUserProfile";
+
 const widthHandleDragger: number = 2;
 
 interface ShowModalContextType {
@@ -29,8 +33,21 @@ interface ShowModalContextType {
 	>;
 }
 
-export const ShowModalContext = createContext<ShowModalContextType | undefined>(
-	undefined
+interface UserProfileContext {
+	userProfile: UserProfileType | null;
+	setUserProfile: React.Dispatch<React.SetStateAction<UserProfileType | null>>;
+}
+
+export const ShowModalContext = createContext<ShowModalContextType>({
+	showModal: { show: false, playlistId: "" },
+	setShowModal: () => {
+		show: false;
+		playlistId: "";
+	},
+});
+
+export const UserProfileContext = createContext<UserProfileContext | null>(
+	null
 );
 
 const LoggedInLayout: React.FC = () => {
@@ -43,7 +60,7 @@ const LoggedInLayout: React.FC = () => {
 		show: boolean;
 		playlistId: string;
 	}>({ show: false, playlistId: "" });
-
+	const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
 	const { data, error, isLoading } = useGetAccessToken();
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -70,29 +87,31 @@ const LoggedInLayout: React.FC = () => {
 	return (
 		<ErrorBoundary FallbackComponent={errorBoundaryFallback}>
 			<ShowModalContext.Provider value={{ showModal, setShowModal }}>
-				{showModal.show && <EditPlaylistModal />}
-				<Container>
-					<Sidebar
-						width={width}
-						handleClick={handleClick}
-						handleMouseMove={handleMouseMove}
-						widthHandleDragger={widthHandleDragger}
-						tokenSet={tokenSet}
-					></Sidebar>
+				<UserProfileContext.Provider value={{ userProfile, setUserProfile }}>
+					{showModal.show && <EditPlaylistModal />}
+					<Container>
+						<Sidebar
+							width={width}
+							handleClick={handleClick}
+							handleMouseMove={handleMouseMove}
+							widthHandleDragger={widthHandleDragger}
+							tokenSet={tokenSet}
+						></Sidebar>
 
-					{isLoading ? (
-						<LoadingMsg>
-							<h4>Loading....</h4>
-						</LoadingMsg>
-					) : (
-						data?.access_token && (
-							<MainContent
-								left={width}
-								widthHandleDragger={widthHandleDragger}
-							></MainContent>
-						)
-					)}
-				</Container>
+						{isLoading ? (
+							<LoadingMsg>
+								<h4>Loading....</h4>
+							</LoadingMsg>
+						) : (
+							data?.access_token && (
+								<MainContent
+									left={width}
+									widthHandleDragger={widthHandleDragger}
+								></MainContent>
+							)
+						)}
+					</Container>
+				</UserProfileContext.Provider>
 			</ShowModalContext.Provider>
 		</ErrorBoundary>
 	);
