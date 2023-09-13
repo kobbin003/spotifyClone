@@ -1,16 +1,14 @@
-import React, {
+import {
 	ChangeEvent,
 	MouseEvent,
 	useContext,
 	useEffect,
 	useState,
 } from "react";
-import SearchBar from "../../../components/SearchBar/SearchBar";
 import getUserPlaylist, {
 	UserPlaylistItem,
 } from "../../../hooks/spotify-data/getUserPlaylist";
 import { UserProfileContext } from "../../../layout/LoggedInLayout";
-import { isError } from "lodash";
 import { InnerUl } from "../style";
 
 type Props = {};
@@ -21,10 +19,13 @@ const MenuLeftContent = (props: Props) => {
 	const { data, error, isLoading } = getUserPlaylist();
 
 	const [searchValue, setSearchValue] = useState("");
+
 	const [resetButtonVisibile, setResetButtonVisibile] = useState(false);
+
 	const [userOwnedPlaylists, setUserOwnedPlaylists] = useState<
 		UserPlaylistItem[] | null
 	>(null);
+
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
 
