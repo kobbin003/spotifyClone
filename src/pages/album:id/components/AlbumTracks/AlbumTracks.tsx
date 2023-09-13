@@ -7,6 +7,7 @@ import checkUserHasTracks from "../../../../hooks/spotify-data/checkUserHasTrack
 import MenuHorizontal from "../../../menuHorizontal/MenuHorizontal";
 import useOutsideClickContains from "../../../../hooks/useClickOutsideContains";
 import useOutsideClickPropagate from "../../../../hooks/useClickOutsidePropagate";
+import useOutsideClickEquals from "../../../../hooks/useClickOutsideEquals";
 
 const AlbumTracks = <
 	T extends {
@@ -74,17 +75,18 @@ const AlbumTracks = <
 	) => {
 		e.stopPropagation();
 		setSelectedListId(trackId);
+		if (selectedListId) {
+			setSelectedListId("");
+		}
 	};
 
-	// useOutsideClickContains(optionButtonImageRef, () => {
-	// 	console.log("albumtracks: success");
-	// 	setSelectedListId(false);
+	// useOutsideClickEquals(optionButtonImageRef, () => {
+	// 	setSelectedListId("");
 	// });
 
-	/** //*useOutsideClickContains does not work here */
+	/** //* useOutsideClickEquals & useOutsideClickContains also works */
 
-	useOutsideClickPropagate(optionButtonImageRef, () => {
-		console.log("albumtracks: success", selectedListId);
+	useOutsideClickPropagate(() => {
 		setSelectedListId("");
 	});
 

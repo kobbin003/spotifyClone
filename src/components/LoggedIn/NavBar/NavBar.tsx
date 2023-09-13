@@ -60,12 +60,9 @@ const NavBar = ({
 		window.history.forward();
 	};
 
-	// useOutsideClickContains(profileButtonRef, () => {
-	// 	console.log("success");
-	// 	if (dropDownVisibility == "visible") {
-	// 		setDropDownVisibility("hidden");
-	// 	}
-	// });
+	useOutsideClickContains(profileButtonRef, () => {
+		setDropDownVisibility("hidden");
+	});
 
 	return (
 		<>

@@ -50,9 +50,9 @@ const AlbumActions = ({ id }: { id: string | undefined }) => {
 
 	// useOutsideClick- hook, to find which element was clicked
 	useOutsideClickEquals(kebabRef, () => {
-		if (dropDownVisibility == "visible") {
-			setDropDownVisibility("hidden");
-		}
+		// if (dropDownVisibility == "visible") {
+		setDropDownVisibility("hidden");
+		// }
 	});
 
 	// Check if user has the album saved
