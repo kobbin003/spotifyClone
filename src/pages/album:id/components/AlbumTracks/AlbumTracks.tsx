@@ -1,10 +1,12 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { Container, Header, TrackItem } from "./style";
 import { msToMin } from "../../../../utils/msToMin";
 import { Link } from "react-router-dom";
 import putData from "../../../../hooks/spotify-data/putData/putData";
 import checkUserHasTracks from "../../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
 import MenuHorizontal from "../../../menuHorizontal/MenuHorizontal";
+import useOutsideClickContains from "../../../../hooks/useClickOutsideContains";
+import useOutsideClickPropagate from "../../../../hooks/useClickOutsidePropagate";
 
 const AlbumTracks = <
 	T extends {
@@ -22,12 +24,17 @@ const AlbumTracks = <
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
 	);
+
 	// rerender to check "green" or "transparent"
 	const [rerender, setRerender] = useState<boolean>();
 
-	const [liSelected, setLiSelected] = useState<string>("");
-
 	const [userLikedTrackArray, setUserLikedTrackArray] = useState<boolean[]>([]);
+
+	const [selectedListId, setSelectedListId] = useState<string>("");
+
+	const optionContainerRef = useRef<HTMLDivElement>(null);
+
+	const optionButtonImageRef = useRef<HTMLImageElement>(null);
 
 	const handleTrackLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
@@ -61,16 +68,25 @@ const AlbumTracks = <
 		window.dispatchEvent(new Event("libraryModified"));
 	};
 
-	const handleClickMenu = (e: MouseEvent<HTMLButtonElement>) => {
-		const el = e.currentTarget as HTMLElement;
-		const elId = el.getAttribute("id");
-		// toggle
-		if (elId && !liSelected) {
-			setLiSelected(elId);
-		} else {
-			setLiSelected("");
-		}
+	const handleClickMenu = (
+		e: MouseEvent<HTMLImageElement>,
+		trackId: string
+	) => {
+		e.stopPropagation();
+		setSelectedListId(trackId);
 	};
+
+	// useOutsideClickContains(optionButtonImageRef, () => {
+	// 	console.log("albumtracks: success");
+	// 	setSelectedListId(false);
+	// });
+
+	/** //*useOutsideClickContains does not work here */
+
+	useOutsideClickPropagate(optionButtonImageRef, () => {
+		console.log("albumtracks: success", selectedListId);
+		setSelectedListId("");
+	});
 
 	useEffect(() => {
 		const tracksIdArray: string[] = [];
@@ -94,7 +110,7 @@ const AlbumTracks = <
 	}, []);
 
 	return (
-		<Container>
+		<Container ref={optionContainerRef}>
 			<ul>
 				<Header>
 					<div>#</div>
@@ -130,27 +146,31 @@ const AlbumTracks = <
 							</p>
 						</div>
 						<div>
-							<button>
-								{userLikedTrackArray[index] ? (
-									<img
-										src="/public/icons/heartGreen.svg"
-										onClick={() => handleTrackUnLike(track.id)}
-									/>
-								) : (
-									<img
-										src="/icons/heart.svg"
-										onClick={() => handleTrackLike(track.id)}
-									/>
-								)}
-							</button>
+							<div>
+								<button>
+									{userLikedTrackArray[index] ? (
+										<img
+											src="/public/icons/heartGreen.svg"
+											onClick={() => handleTrackUnLike(track.id)}
+										/>
+									) : (
+										<img
+											src="/icons/heart.svg"
+											onClick={() => handleTrackLike(track.id)}
+										/>
+									)}
+								</button>
+							</div>
 							<span>{msToMin(track.duration_ms)}</span>
-							<button
-								onClick={handleClickMenu}
-								id={track.id}
-							>
-								<img src="/icons/threedots.svg" />
+							<button>
+								<img
+									id={track.id}
+									src="/icons/threedots.svg"
+									onClick={(e) => handleClickMenu(e, track.id)}
+									ref={optionButtonImageRef}
+								/>
 							</button>
-							{liSelected == track.id && <MenuHorizontal />}
+							{selectedListId == track.id && <MenuHorizontal />}
 						</div>
 					</TrackItem>
 				))}
