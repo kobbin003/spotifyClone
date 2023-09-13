@@ -1,12 +1,8 @@
 import { RefObject, useEffect } from "react";
 
-const useOutsideClickPropagate = (
-	ref: RefObject<HTMLElement>,
-	callback: () => void
-) => {
+const useOutsideClickPropagate = (callback: () => void) => {
 	const handleClick = (e: any) => {
-		// console.log("propagated");
-		/** do stopPropagation in the click event on the ref element. */
+		/** do stopPropagation in the click event on the clicked element. */
 		callback();
 	};
 
