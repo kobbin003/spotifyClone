@@ -17,6 +17,8 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../../SearchBar/SearchBar";
 import { SearchInputContainerIn } from "../../SearchBar/SearchBar.style";
 import SearchTypesList from "../../searchTypesList/SearchTypesList";
+import useOutsideClickEquals from "../../../hooks/useClickOutsideEquals";
+import useOutsideClickContains from "../../../hooks/useClickOutsideContains";
 type NavbarProp = {
 	left: number;
 	widthHandleDragger: number;
@@ -36,33 +38,34 @@ const NavBar = ({
 	const isInSearchRoute = /^\/me\/search.*/.test(location);
 	const navigate = useNavigate();
 	const profileButtonRef = useRef<HTMLImageElement>(null);
+
 	const handleDropDownMenu = (e: MouseEvent<HTMLImageElement>) => {
+		e.stopPropagation();
 		// set the dropDownVisibility
 		setDropDownVisibility((prev) => (prev === "hidden" ? "visible" : "hidden"));
 	};
+
 	const handleLogOut = () => {
 		// ! remove access_token & refresh_token
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("refreshToken");
 		navigate("/");
 	};
+
 	const handleNavigateBack = () => {
 		window.history.back();
 	};
+
 	const handleNavigateFront = () => {
 		window.history.forward();
 	};
 
-	useEffect(() => {
-		const handleClickOutside = (e: any) => {
-			const currentEl = e.target;
-			if (currentEl !== profileButtonRef.current) {
-				setDropDownVisibility("hidden");
-			}
-		};
-		window.addEventListener("click", handleClickOutside);
-		return () => window.removeEventListener("click", handleClickOutside);
-	}, []);
+	// useOutsideClickContains(profileButtonRef, () => {
+	// 	console.log("success");
+	// 	if (dropDownVisibility == "visible") {
+	// 		setDropDownVisibility("hidden");
+	// 	}
+	// });
 
 	return (
 		<>
@@ -125,7 +128,6 @@ const NavBar = ({
 				</div>
 				{isInSearchRoute && <SearchTypesList />}
 			</FixedContainer>
-
 			<DropDown dropDownVisibility={dropDownVisibility}>
 				<Link to="/me/profile">Profile</Link>
 				<a

@@ -9,6 +9,7 @@ import { Container, DropDown } from "./style";
 import { useOutletContext } from "react-router-dom";
 import checkUserHas from "../../../../hooks/spotify-data/check/checkUserHas";
 import putData from "../../../../hooks/spotify-data/putData/putData";
+import useOutsideClickEquals from "../../../../hooks/useClickOutsideEquals";
 
 const AlbumActions = ({ id }: { id: string | undefined }) => {
 	const [dropDownVisibility, setDropDownVisibility] = useState<
@@ -46,19 +47,13 @@ const AlbumActions = ({ id }: { id: string | undefined }) => {
 			});
 		}
 	};
-	// addEventListener - "click" , to find which element was clicked
-	useEffect(() => {
-		const handleClickedElementFinder = (e: any) => {
-			const el = e.target as HTMLElement;
-			if (el != kebabRef.current) {
-				setDropDownVisibility("hidden");
-				// console.log("not equal");
-			}
-		};
-		window.addEventListener("click", handleClickedElementFinder);
-		return () =>
-			window.removeEventListener("click", handleClickedElementFinder);
-	}, []);
+
+	// useOutsideClick- hook, to find which element was clicked
+	useOutsideClickEquals(kebabRef, () => {
+		if (dropDownVisibility == "visible") {
+			setDropDownVisibility("hidden");
+		}
+	});
 
 	// Check if user has the album saved
 	useEffect(() => {
