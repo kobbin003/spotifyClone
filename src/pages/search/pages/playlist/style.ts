@@ -4,6 +4,11 @@ export const Title = styled.h2`
 	padding-top: 0.5em;
 	/* padding-bottom: 0.5em; */
 `;
+
+export const Message = styled.p`
+	padding-top: 1em;
+`;
+
 export const Container = styled.div`
 	display: grid;
 	grid-gap: 20px 0px;

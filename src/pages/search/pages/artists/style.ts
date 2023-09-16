@@ -1,17 +1,18 @@
-import React from "react";
 import styled from "styled-components";
 export const Title = styled.h2`
 	padding-top: 0.5em;
 	padding-bottom: 0.7em;
 `;
+
+export const Message = styled.p`
+	padding-top: 1em;
+`;
+
 export const CardsContainer = styled.div`
 	display: grid;
 	width: 100%;
 	position: relative;
 	cursor: pointer;
-	/* padding-top: 1em; */
-	/* grid: repeat(2, 1fr) / repeat(4, minmax(150px, 300px)); */
-	/* min-width: 200px; */
 	@media only screen and (max-width: 500px) {
 		/* background-color: pink; */
 		/* grid: auto / minmax(250px, auto); */
@@ -146,7 +147,7 @@ export const ImageContainer = styled.div`
 	@media only screen and (max-width: 500px) {
 		img:nth-of-type(1) {
 			height: 100%;
-			width: auto;
+			width: 100%;
 		}
 		img:nth-of-type(2) {
 			width: 25%;

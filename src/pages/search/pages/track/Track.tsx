@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import { TrackBody, Container, Header, TrackItem, Row, Message } from "./style";
 // import { tracks } from "../data";
 import { Link, useOutletContext } from "react-router-dom";
@@ -8,6 +8,7 @@ import getSearchItem, {
 } from "../../../../hooks/spotify-data/getSearchItem";
 import putData from "../../../../hooks/spotify-data/putData/putData";
 import checkUserHasTracks from "../../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
+import MenuHorizontal from "../../../menuHorizontal/MenuHorizontal";
 const Track = () => {
 	const [queryFromSearchBar, left, widthHandleDragger]: [
 		string,
@@ -16,7 +17,9 @@ const Track = () => {
 	] = useOutletContext();
 	const [rerender, setRerender] = useState<boolean>();
 
-	const [userLikedTrackArray, setUserLikedTrackArray] = useState<string[]>([]);
+	const [userLikedTrackArray, setUserLikedTrackArray] = useState<boolean[]>([]);
+
+	const [selectedListId, setSelectedListId] = useState<string>("");
 
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
@@ -25,6 +28,9 @@ const Track = () => {
 		queryFromSearchBar,
 		"track"
 	);
+
+	const optionButtonImageRef = useRef<HTMLImageElement>(null);
+
 	const handleTrackLike = (trackId: string) => {
 		console.log("click popular track");
 		const url = `https://api.spotify.com/v1/me/tracks`;
@@ -41,6 +47,7 @@ const Track = () => {
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
 	const handleTrackUnLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 
@@ -56,6 +63,18 @@ const Track = () => {
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
+	const handleClickMenu = (
+		e: MouseEvent<HTMLImageElement>,
+		trackId: string
+	) => {
+		e.stopPropagation();
+		setSelectedListId(trackId);
+		if (selectedListId) {
+			setSelectedListId("");
+		}
+	};
+
 	useEffect(() => {
 		const tracksIdArray: string[] = [];
 		// console.log("userLikedTrackArray-data", data);
@@ -67,11 +86,12 @@ const Track = () => {
 		const tracksIdQueries = tracksIdArray.join(",");
 		const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${tracksIdQueries}`;
 		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
-			setUserLikedTrackArray(data);
+			data && setUserLikedTrackArray(data);
 		});
-		console.log("userLikedTrackArray", userLikedTrackArray);
+		// console.log("userLikedTrackArray", userLikedTrackArray);
 	}, [rerender, data?.tracks.items]);
 	// console.log(artistTopTracks);
+
 	useEffect(() => {
 		if (localStorage.getItem("accessToken")) {
 			// console.log("YES-accesstoken-fetchdata");
@@ -80,10 +100,6 @@ const Track = () => {
 			console.log("NO-accesstoken-fetchdata");
 		}
 	}, []);
-
-	useEffect(() => {
-		setRerender((prev) => !prev);
-	}, [userLikedTrackArray]);
 
 	return (
 		<>
@@ -140,17 +156,30 @@ const Track = () => {
 											{userLikedTrackArray && userLikedTrackArray[index] ? (
 												<img
 													src="/public/icons/heartGreen.svg"
+													style={{ visibility: "visible" }}
 													onClick={() => handleTrackUnLike(item.id)}
 												/>
 											) : (
 												<img
 													src="/icons/heart.svg"
+													// style={{ visibility: "hidden" }}
 													onClick={() => handleTrackLike(item.id)}
 												/>
 											)}
 										</div>
 										<span>{msToMin(item.duration_ms)}</span>
-										<img src="/icons/threedots.svg" />
+										{/* <img src="/icons/threedots.svg" /> */}
+										<button>
+											<img
+												id={item.id}
+												src="/icons/threedots.svg"
+												onClick={(e) => handleClickMenu(e, item.id)}
+												ref={optionButtonImageRef}
+											/>
+										</button>
+										{selectedListId == item.id && (
+											<MenuHorizontal trackId={item.id} />
+										)}
 									</div>
 								</TrackItem>
 							))}

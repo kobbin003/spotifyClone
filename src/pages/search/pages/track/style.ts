@@ -3,33 +3,31 @@ import styled from "styled-components";
 export const Container = styled.div`
 	position: relative;
 	width: 100%;
-	/* padding-top: 1em; */
-	/* max-width: inherit; */
 	font-weight: 500;
 	font-size: 0.8rem;
-	/* border: 1px solid goldenrod; */
-	/* margin-top: 50px; */
 `;
+
 export const Message = styled.div`
-	padding-top: 25px;
+	padding-top: 1em;
 	font-size: 1rem;
 `;
+
 export const Row = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
-	overflow: hidden;
+	/* overflow: hidden; */
 	&:hover {
 		a {
 			color: var(--font-white);
-		}
-		div:nth-of-type(4) {
-			& > div {
-				visibility: visible;
-			}
-			& > img {
-				visibility: visible;
+			> div:nth-of-type(4) {
+				& > div {
+					visibility: visible;
+				}
+				& > img {
+					visibility: visible;
+				}
 			}
 		}
 	}
@@ -65,6 +63,7 @@ export const Row = styled.div`
 		height: 20px;
 	}
 `;
+
 export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 	position: fixed;
 	width: calc(100vw - ${(prop) => prop.left + prop.widthHandleDragger + 5.1}em);
@@ -82,13 +81,16 @@ export const Header = styled(Row)<{ left: number; widthHandleDragger: number }>`
 		}
 	}
 `;
+
 export const TrackBody = styled.div`
 	padding-bottom: 1em;
 	padding-top: 50px;
 	/* margin-top: 50px; */
 `;
+
 export const TrackItem = styled(Row)`
 	a {
+		position: relative;
 		display: block;
 		width: 100%;
 		white-space: nowrap;
@@ -106,7 +108,7 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
-	div:nth-of-type(1) {
+	> div:nth-of-type(1) {
 		span {
 			font-size: 1rem;
 		}
@@ -126,7 +128,7 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
-	div:nth-of-type(2) {
+	> div:nth-of-type(2) {
 		display: flex;
 		width: 100%;
 		align-items: center;
@@ -139,6 +141,11 @@ export const TrackItem = styled(Row)`
 		div {
 			width: 100%;
 			overflow: hidden;
+			> a {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 			a:nth-of-type(1) {
 				font-size: 1rem;
 				padding: 0.2em 0;
@@ -146,18 +153,38 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
-	div:nth-of-type(3) {
-		overflow: hidden;
-	}
-	div:nth-of-type(4) {
-		justify-content: space-between;
-		& > div {
-			flex: 1;
-			visibility: hidden;
+	> div:nth-of-type(3) {
+		/* overflow: hidden; */
+		> a {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
-		& > img {
-			padding-left: 0.5em;
-			visibility: hidden;
+	}
+	> div:nth-of-type(4) {
+		position: relative;
+		display: flex;
+		> div:nth-of-type(1) {
+			flex: 1;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			img {
+				cursor: pointer;
+				visibility: hidden;
+			}
+		}
+		& > button {
+			background-color: transparent;
+			border: none;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			> img {
+				cursor: pointer;
+				padding-left: 0.5em;
+				visibility: hidden;
+			}
 		}
 	}
 
@@ -171,6 +198,18 @@ export const TrackItem = styled(Row)`
 			}
 			& > span {
 				display: none;
+			}
+		}
+		div:nth-of-type(4) {
+			& > div:nth-of-type(1) {
+				> img {
+					visibility: visible;
+				}
+			}
+			& > button {
+				> img {
+					visibility: visible;
+				}
 			}
 		}
 	}
