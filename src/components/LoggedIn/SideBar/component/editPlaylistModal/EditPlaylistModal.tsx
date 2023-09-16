@@ -45,21 +45,15 @@ const EditPlaylistModal = () => {
 	const [loading, setLoading] = useState(false);
 
 	const handleCloseModal = () => {
-		// console.log("closing", showModal);
 		setShowModal((prev) => ({ ...prev, show: false }));
 	};
 
-	let debounceTimeOut: NodeJS.Timeout | undefined;
 	const handleOnChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
 		const { name, value } = e.target;
-		//clear the previous timeout
-		clearTimeout(debounceTimeOut);
 
-		// debounceTimeOut = setTimeout(() => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
-		// }, 200);
 	};
 
 	const handleOnChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -113,22 +107,18 @@ const EditPlaylistModal = () => {
 			if (formData.name && formData.description) {
 				// console.log("both");
 				setLoading(true);
-				updatePlaylist(
-					url,
-					"PUT",
-					body,
-					contentType,
-					accessToken,
-					setAccessToken,
-					() => {
-						if (!imgSelected?.file) {
-							setLoading(false);
-							dispatchEvent(new Event("playlistLibraryModified"));
-							dispatchEvent(new Event("PlaylistPageModified"));
-							setShowModal((prev) => ({ ...prev, show: false }));
-						}
+
+				updatePlaylist<{
+					name: string;
+					description: string;
+				}>(url, "PUT", body, contentType, accessToken, setAccessToken, () => {
+					if (!imgSelected?.file) {
+						setLoading(false);
+						dispatchEvent(new Event("playlistLibraryModified"));
+						dispatchEvent(new Event("PlaylistPageModified"));
+						setShowModal((prev) => ({ ...prev, show: false }));
 					}
-				);
+				});
 			} else if (formData.name && !formData.description) {
 				// console.log("only name", !formData.description);
 				setErrorMessage((prev) => ({
@@ -144,7 +134,8 @@ const EditPlaylistModal = () => {
 					showError: true,
 				}));
 			} else {
-				console.log("none: do nothing");
+				// do nothing.
+				// console.log("none: do nothing");
 			}
 		}
 
@@ -238,9 +229,6 @@ const EditPlaylistModal = () => {
 			});
 	}, [accessToken]);
 
-	useEffect(() => {
-		// console.log("modal playlist", showModal);
-	}, []);
 	return (
 		<ModalContainer ref={ModalContainerRef}>
 			<Modal id="modal">
@@ -301,7 +289,12 @@ const EditPlaylistModal = () => {
 						/>
 					</div>
 					<div>
-						<button type="submit">Save</button>
+						<button
+							type="submit"
+							// disabled={disableSubmit}
+						>
+							Save
+						</button>
 					</div>
 					<div>
 						<p>

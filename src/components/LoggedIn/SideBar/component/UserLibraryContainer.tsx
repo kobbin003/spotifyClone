@@ -31,16 +31,6 @@ const UserLibraryContainer = () => {
 			setRefetchAlbum((prev) => !prev);
 			setRefetchArtist((prev) => !prev);
 			setRefetchPlaylist((prev) => !prev);
-
-			if (e.type == "albumLibraryModified") {
-				console.log("albumLibraryModified event triggered");
-			}
-			if (e.type == "artistLibraryModified") {
-				console.log("artistLibraryModified event triggered");
-			}
-			if (e.type == "playlistLibraryModified") {
-				console.log("playlistLibraryModified event triggered");
-			}
 		};
 		window.addEventListener("albumLibraryModified", storageHandler);
 		window.addEventListener("artistLibraryModified", storageHandler);

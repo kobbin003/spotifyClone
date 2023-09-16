@@ -39,7 +39,6 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 		if (data) {
 			userProfileContext?.setUserProfile(data);
 		}
-		console.log(userProfileContext?.userProfile);
 	}, [data]);
 
 	useEffect(() => {
@@ -50,7 +49,6 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 		//soething new
 	}, [location]);
 
-	// console.log("maincontent", localStorage.getItem("accessToken"));
 	useEffect(() => {
 		const el = document.getElementById("container") as HTMLElement;
 		const handleScroll = (e: any) => {
@@ -72,10 +70,6 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 		el.scrollTop = 100;
 	}, []);
 
-	useEffect(() => {
-		// console.log("scrolledY", scrolledY);
-	}, [scrolledY]);
-
 	return (
 		<>
 			<Container
@@ -91,9 +85,6 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 					showSearchTypes={setShowSearchTypes}
 				></NavBar>
 
-				{/* {isInSearchRoute && showSearchTypes && (
-			<SearchTypesList></SearchTypesList>
-		)} */}
 				<Content>
 					<Outlet
 						context={[
@@ -105,7 +96,6 @@ const MainContent = ({ left, widthHandleDragger }: Prop) => {
 							setScrolledY,
 						]}
 					/>
-					{/* <Outlet /> */}
 				</Content>
 			</Container>
 		</>
