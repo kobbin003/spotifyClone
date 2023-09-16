@@ -15,7 +15,7 @@ export const Row = styled.div`
 		);
 	column-gap: 0.5em;
 	row-gap: 0.5em;
-	overflow: hidden;
+	/* overflow: hidden; */
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
 	&:hover {
@@ -53,6 +53,7 @@ export const Row = styled.div`
 		height: 20px;
 	}
 `;
+
 export const Header = styled(Row)`
 	width: 97%;
 
@@ -71,6 +72,7 @@ export const Header = styled(Row)`
 		}
 	}
 `;
+
 export const TrackItem = styled(Row)`
 	/* background-color: aqua;*/
 	width: 97%;
@@ -78,7 +80,7 @@ export const TrackItem = styled(Row)`
 		display: block;
 		width: 100%;
 		white-space: nowrap;
-		overflow: hidden;
+		/* overflow: hidden; */
 		text-overflow: ellipsis;
 		text-decoration: none;
 		color: var(--font-greyer);
@@ -93,6 +95,7 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
+
 	& > div:nth-of-type(1) {
 		/* background-color: aquamarine; */
 		span {
@@ -114,6 +117,7 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
+
 	& > div:nth-of-type(2) {
 		/* background-color: burlywood; */
 		display: flex;
@@ -128,6 +132,11 @@ export const TrackItem = styled(Row)`
 		div {
 			width: 100%;
 			overflow: hidden;
+			> a {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 			a:nth-of-type(1) {
 				font-size: 1rem;
 				padding: 0.2em 0;
@@ -135,16 +144,27 @@ export const TrackItem = styled(Row)`
 			}
 		}
 	}
+
 	& > div:nth-of-type(3) {
 		display: flex;
 		align-items: center;
+		/* background-color: tomato; */
+		/* overflow: hidden; */
+		> a {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	}
+
 	& > div:nth-of-type(4) {
 		display: flex;
 		align-items: center;
 	}
+
 	& > div:nth-of-type(5) {
 		/* background-color: silver; */
+		position: relative;
 		display: grid;
 		grid: auto/minmax(50px, 50px) minmax(50px, 1fr) 50px;
 		justify-content: space-between;
@@ -152,6 +172,9 @@ export const TrackItem = styled(Row)`
 			background-color: transparent;
 			border: none;
 			visibility: hidden;
+			> img {
+				cursor: pointer;
+			}
 		}
 		& > button:nth-of-type(1) {
 			flex: 1;
@@ -167,7 +190,6 @@ export const TrackItem = styled(Row)`
 
 	&:hover {
 		background-color: var(--data-display-background-hover);
-
 		& > div:nth-of-type(1) {
 			button {
 				display: flex;

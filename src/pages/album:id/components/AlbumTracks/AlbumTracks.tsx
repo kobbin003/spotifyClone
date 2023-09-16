@@ -153,6 +153,7 @@ const AlbumTracks = <
 									{userLikedTrackArray[index] ? (
 										<img
 											src="/public/icons/heartGreen.svg"
+											style={{ visibility: "visible" }}
 											onClick={() => handleTrackUnLike(track.id)}
 										/>
 									) : (
@@ -172,7 +173,9 @@ const AlbumTracks = <
 									ref={optionButtonImageRef}
 								/>
 							</button>
-							{selectedListId == track.id && <MenuHorizontal />}
+							{selectedListId == track.id && (
+								<MenuHorizontal trackId={track.id} />
+							)}
 						</div>
 					</TrackItem>
 				))}

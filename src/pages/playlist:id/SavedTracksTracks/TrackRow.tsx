@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import { TrackItem } from "./style";
 import { Link } from "react-router-dom";
 import { msToMin } from "../../../utils/msToMin";
 import { UserSavedTracks } from "../../../hooks/spotify-data/getUserSavedTracks";
 import putData from "../../../hooks/spotify-data/putData/putData";
+import useOutsideClickPropagate from "../../../hooks/useClickOutsidePropagate";
+import MenuHorizontal from "../../menuHorizontal/MenuHorizontal";
 type TrackRowType = {
 	data: UserSavedTracks;
 };
@@ -15,6 +17,11 @@ const TrackRow = ({ data }: TrackRowType) => {
 	const [rerender, setRerender] = useState<boolean>();
 	// const { data, error, isLoading } = getUserSavedTracks(rerender);
 	const [trackItems, setTrackItems] = useState(data.items);
+
+	const [selectedListId, setSelectedListId] = useState<string>("");
+
+	const optionButtonImageRef = useRef<HTMLImageElement>(null);
+
 	const handleTrackUnLike = (trackId: string) => {
 		//* delete from the list in database
 		const url = `https://api.spotify.com/v1/me/tracks`;
@@ -33,6 +40,21 @@ const TrackRow = ({ data }: TrackRowType) => {
 		//* delete from the list in trackItems array
 		setTrackItems((prev) => prev.filter((item) => item.track.id !== trackId));
 	};
+
+	const handleClickMenu = (
+		e: MouseEvent<HTMLImageElement>,
+		trackId: string
+	) => {
+		e.stopPropagation();
+		setSelectedListId(trackId);
+		if (selectedListId) {
+			setSelectedListId("");
+		}
+	};
+
+	useOutsideClickPropagate(() => {
+		setSelectedListId("");
+	});
 
 	useEffect(() => {
 		if (localStorage.getItem("accessToken")) {
@@ -94,8 +116,16 @@ const TrackRow = ({ data }: TrackRowType) => {
 							</button>
 							<span>{msToMin(track.duration_ms)}</span>
 							<button>
-								<img src="/icons/threedots.svg" />
+								<img
+									id={track.id}
+									src="/icons/threedots.svg"
+									onClick={(e) => handleClickMenu(e, track.id)}
+									ref={optionButtonImageRef}
+								/>
 							</button>
+							{selectedListId == track.id && (
+								<MenuHorizontal trackId={track.id} />
+							)}
 						</div>
 					</TrackItem>
 				);

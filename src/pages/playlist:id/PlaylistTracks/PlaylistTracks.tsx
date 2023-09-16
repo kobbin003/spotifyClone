@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { msToMin } from "../../../utils/msToMin";
 import { Container } from "../style";
@@ -7,6 +7,8 @@ import getUserSavedTracks from "../../../hooks/spotify-data/getUserSavedTracks";
 import { getPlaylist } from "../../../hooks/spotify-data/getPlaylist";
 import putData from "../../../hooks/spotify-data/putData/putData";
 import checkUserHasTracks from "../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
+import MenuHorizontal from "../../menuHorizontal/MenuHorizontal";
+import useOutsideClickPropagate from "../../../hooks/useClickOutsidePropagate";
 
 const PlaylistsTracks = () => {
 	const { id } = useParams();
@@ -18,6 +20,11 @@ const PlaylistsTracks = () => {
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
 	);
+
+	const [selectedListId, setSelectedListId] = useState<string>("");
+
+	const optionButtonImageRef = useRef<HTMLImageElement>(null);
+
 	const handleTrackLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 		const body = {
@@ -31,6 +38,7 @@ const PlaylistsTracks = () => {
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
 	const handleTrackUnLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 
@@ -45,6 +53,22 @@ const PlaylistsTracks = () => {
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
+	const handleClickMenu = (
+		e: MouseEvent<HTMLImageElement>,
+		trackId: string
+	) => {
+		e.stopPropagation();
+		setSelectedListId(trackId);
+		if (selectedListId) {
+			setSelectedListId("");
+		}
+	};
+
+	useOutsideClickPropagate(() => {
+		setSelectedListId("");
+	});
+
 	useEffect(() => {
 		const tracksIdArray: string[] = [];
 		data?.tracks.items.forEach((track) => {
@@ -129,6 +153,7 @@ const PlaylistsTracks = () => {
 								{userLikedTrackArray && userLikedTrackArray[index] ? (
 									<img
 										src="/public/icons/heartGreen.svg"
+										style={{ visibility: "visible" }}
 										onClick={() => handleTrackUnLike(track.id)}
 									/>
 								) : (
@@ -140,8 +165,17 @@ const PlaylistsTracks = () => {
 							</button>
 							<span>{msToMin(track.duration_ms)}</span>
 							<button>
-								<img src="/icons/threedots.svg" />
+								<img
+									id={track.id}
+									src="/icons/threedots.svg"
+									onClick={(e) => handleClickMenu(e, track.id)}
+									ref={optionButtonImageRef}
+								/>
 							</button>
+							{selectedListId == track.id && (
+								<MenuHorizontal trackId={track.id} />
+								// <p style={{ position: "absolute", top: "100%" }}>Hello</p>
+							)}
 						</div>
 					</TrackItem>
 				);

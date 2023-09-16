@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import getArtistTopTracks from "../../../../hooks/spotify-data/getArtistTopTracks";
 import { Link, useParams } from "react-router-dom";
 import { msToMin } from "../../../../utils/msToMin";
 import { Container, TrackItem } from "./style";
 import putData from "../../../../hooks/spotify-data/putData/putData";
 import checkUserHasTracks from "../../../../hooks/spotify-data/checkUserHasTracks/checkUserHasTracks";
+import MenuHorizontal from "../../../menuHorizontal/MenuHorizontal";
+import useOutsideClickPropagate from "../../../../hooks/useClickOutsidePropagate";
 
 const PopularTracks = () => {
 	const params = useParams();
@@ -16,7 +18,13 @@ const PopularTracks = () => {
 	const [accessToken, setAccessToken] = useState<string>(
 		localStorage.getItem("accessToken") || ""
 	);
+
+	const [selectedListId, setSelectedListId] = useState<string>("");
+
 	const artistTopTracks = getArtistTopTracks(params.id || "");
+
+	const optionButtonImageRef = useRef<HTMLImageElement>(null);
+
 	const handleTrackLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 		const body = {
@@ -30,6 +38,7 @@ const PopularTracks = () => {
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
 	const handleTrackUnLike = (trackId: string) => {
 		const url = `https://api.spotify.com/v1/me/tracks`;
 
@@ -44,6 +53,23 @@ const PopularTracks = () => {
 		});
 		window.dispatchEvent(new Event("libraryModified"));
 	};
+
+	useOutsideClickPropagate(() => {
+		setSelectedListId("");
+	});
+
+	const handleClickMenu = (
+		e: MouseEvent<HTMLImageElement>,
+		trackId: string
+	) => {
+		e.stopPropagation();
+		console.log("hihi");
+		setSelectedListId(trackId);
+		if (selectedListId) {
+			setSelectedListId("");
+		}
+	};
+
 	useEffect(() => {
 		const tracksIdArray: string[] = [];
 		artistTopTracks.data?.tracks.forEach((track) => {
@@ -53,7 +79,7 @@ const PopularTracks = () => {
 		const tracksIdQueries = tracksIdArray.join(",");
 		const url = `https://api.spotify.com/v1/me/tracks/contains?ids=${tracksIdQueries}`;
 		checkUserHasTracks(url, "GET", accessToken, setAccessToken, (data) => {
-			setUserLikedTrackArray(data);
+			data && setUserLikedTrackArray(data);
 		});
 	}, [rerender, artistTopTracks.data]);
 
@@ -86,25 +112,35 @@ const PopularTracks = () => {
 								</Link>
 							</div>
 						</div>
-
 						<div>
-							<button>
-								{userLikedTrackArray && userLikedTrackArray[index] ? (
-									<img
-										src="/public/icons/heartGreen.svg"
-										onClick={() => handleTrackUnLike(track.id)}
-									/>
-								) : (
-									<img
-										src="/icons/heart.svg"
-										onClick={() => handleTrackLike(track.id)}
-									/>
-								)}
-							</button>
+							<div>
+								<button>
+									{userLikedTrackArray[index] ? (
+										<img
+											src="/public/icons/heartGreen.svg"
+											style={{ visibility: "visible" }}
+											onClick={() => handleTrackUnLike(track.id)}
+										/>
+									) : (
+										<img
+											src="/icons/heart.svg"
+											onClick={() => handleTrackLike(track.id)}
+										/>
+									)}
+								</button>
+							</div>
 							<span>{msToMin(track.duration_ms)}</span>
 							<button>
-								<img src="/icons/threedots.svg" />
+								<img
+									id={track.id}
+									src="/icons/threedots.svg"
+									onClick={(e) => handleClickMenu(e, track.id)}
+									ref={optionButtonImageRef}
+								/>
 							</button>
+							{selectedListId == track.id && (
+								<MenuHorizontal trackId={track.id} />
+							)}
 						</div>
 					</TrackItem>
 				))}

@@ -13,7 +13,7 @@ export const Row = styled.div`
 	grid: auto/30px minmax(200px, 1fr) minmax(100px, 0.35fr);
 	column-gap: 0.5em;
 	row-gap: 0.5em;
-	overflow: hidden;
+	/* overflow: hidden; */
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
 	&:hover {
@@ -112,6 +112,7 @@ export const TrackItem = styled(Row)`
 		}
 	}
 	& > div:nth-of-type(3) {
+		position: relative;
 		display: grid;
 		grid: auto/minmax(50px, 50px) minmax(50px, 1fr) 50px;
 		justify-content: space-between;
@@ -119,6 +120,12 @@ export const TrackItem = styled(Row)`
 			background-color: transparent;
 			border: none;
 			visibility: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			> img {
+				cursor: pointer;
+			}
 		}
 		& > button:nth-of-type(1) {
 			flex: 1;

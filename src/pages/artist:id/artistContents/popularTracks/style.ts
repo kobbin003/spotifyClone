@@ -12,7 +12,7 @@ export const Row = styled.div`
 	grid: auto/30px minmax(200px, 1fr) minmax(100px, 0.35fr);
 	column-gap: 0.5em;
 	row-gap: 0.5em;
-	overflow: hidden;
+	/* overflow: hidden; */
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
 	&:hover {
@@ -48,7 +48,6 @@ export const Row = styled.div`
 	}
 `;
 export const TrackItem = styled(Row)`
-	/* background-color: aqua;*/
 	width: 97%;
 	a {
 		display: block;
@@ -103,22 +102,34 @@ export const TrackItem = styled(Row)`
 		div {
 			width: 100%;
 			overflow: hidden;
-			a:nth-of-type(1) {
+			a {
 				font-size: 1rem;
 				padding: 0.2em 0;
 				color: var(--font-white);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 	}
-	& > div:nth-of-type(3) {
-		/* background-color: silver; */
+	/* & > div:nth-of-type(3) {
+		position: relative;
+		background-color: green;
 		display: grid;
 		grid: auto/minmax(50px, 50px) minmax(50px, 1fr) 50px;
 		justify-content: space-between;
+		align-items: center;
 		& > button {
 			background-color: transparent;
+			background-color: tomato;
 			border: none;
 			visibility: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			img {
+				cursor: pointer;
+			}
 		}
 		& > button:nth-of-type(1) {
 			flex: 1;
@@ -130,8 +141,46 @@ export const TrackItem = styled(Row)`
 			justify-content: flex-end;
 			align-items: center;
 		}
+	} */
+	& > div:nth-of-type(3) {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		gap: 10px;
+		padding-right: 1em;
+		> div {
+			flex: 1;
+			display: flex;
+			justify-content: flex-end;
+			padding-right: 2em;
+			/* background-color: aqua; */
+			> button {
+				background-color: transparent;
+				height: 20px;
+				width: 20px;
+				border: none;
+				visibility: hidden;
+				> img {
+					cursor: pointer;
+					height: 100%;
+				}
+			}
+		}
+		> span {
+			flex: 0.3;
+		}
+		> button {
+			background-color: transparent;
+			border: none;
+			height: 20px;
+			visibility: hidden;
+			img {
+				cursor: pointer;
+				height: 100%;
+			}
+		}
 	}
-
 	&:hover {
 		background-color: var(--data-display-background-hover);
 
